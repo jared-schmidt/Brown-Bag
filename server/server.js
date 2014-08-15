@@ -55,13 +55,23 @@ Accounts.onCreateUser(function(options, user){
 
 
 if (Meteor.isServer) {
-
     Meteor.startup(function (){
+        var yelp = Npm.require('yelp').createClient({
+            consumer_key: 'WDYAKycarqBqWcfxtrwccQ',
+            consumer_secret: '3CtLvBMCISjIlXUQ0MlNyAzvmxg',
+            token: 'Yw_FZ2UJ-yXa_ck5A1zWuRkTW7yn9OaW',
+            token_secret: '2Bxoraz5ZAjVjZ8yMzUkATunDRY'
+        });
         // code to run on server at startup
         if (Places.find().count() === 0){
-            var places_data = [
-                'The Press'
-            ]
+
+            yelp.search({
+                term: 'food',
+                location: '15904'
+            }, function(error, data) {
+                console.log(data);
+            });
+            var places_data = [];
             for(var i=0; i <= places_data.length-1;i++){
                 Places.insert({
                     'username' : 'init',
