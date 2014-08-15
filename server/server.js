@@ -3,24 +3,37 @@ Places = new Meteor.Collection("places");
 
 
 if (Meteor.isServer) {
-
     Meteor.startup(function (){
+        var yelp = Npm.require('yelp').createClient({
+            consumer_key: 'WDYAKycarqBqWcfxtrwccQ',
+            consumer_secret: '3CtLvBMCISjIlXUQ0MlNyAzvmxg',
+            token: 'Yw_FZ2UJ-yXa_ck5A1zWuRkTW7yn9OaW',
+            token_secret: '2Bxoraz5ZAjVjZ8yMzUkATunDRY'
+        });
         // code to run on server at startup
         if (Places.find().count() === 0){
-            var places_data = [
-                {'name':'The Press', 'url':'http://www.pressbistro.com/lunch-menu.html'},
-                {"name":"Pappy's", 'url':""}
-            ]
-            for(var i=0; i <= places_data.length-1;i++){
-                Places.insert({
-                    'username' : 'init',
-                    'name' : places_data[i].name,
-                    'votes': 0,
-                    'upvoters': [],
-                    'menu': places_data[i].url,
-                    'submittedOn' : new Date()
-                });
-            }
+            console.log('No places, querying yelp');
+            yelp.search({
+                term: 'food',
+                location: '15904',
+                sort: 2
+            }, Meteor.bindEnvironment(function(error, data) {
+                if (data.businesses) {
+                    var places_data = data.businesses;
+                    console.log('Found ' + places_data.length + ' places.');
+                    for (var i = 0; i < places_data.length; i++) {
+                        var place = places_data[i];
+                        Places.insert({
+                            username: 'yelp',
+                            name: place.name,
+                            votes: 0,
+                            upvoters: [],
+                            menu: place.url,
+                            submittedOn: new Date()
+                        });
+                    }
+                }
+            }));
         }
     });
 

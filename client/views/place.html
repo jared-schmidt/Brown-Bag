@@ -9,6 +9,7 @@
           {{/unless}}
         </td>
         <td>{{votes}}</td>
+        <td>{{#if menu}}<a href="{{menu}}" class="btn btn-default" target="_blank">Menu</a>{{/if}}</td>
         <!-- <td>{{submittedOn}}</td> -->
         <td>
           {{#if $eq currentUser.profile.name username}}

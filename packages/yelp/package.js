@@ -1,0 +1,1 @@
+Npm.depends({'yelp': '0.1.1'});
