@@ -1,0 +1,25 @@
+<template name='place'>
+    <tr>
+        <td>{{name}}</td>
+        <td>{{votes}}</td>
+        <td>{{menu}}</td>
+        <td>{{submittedOn}}</td>
+        <td>
+          {{#if $eq currentUser.profile.name username}}
+            <button type="button" id='delete' class="btn btn-danger">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          {{/if}}
+          {{#if voted}}
+            {{#if $eq voted _id}}
+              Voted
+            {{/if}}
+          {{/if}}
+          {{#unless voted }}
+            <button type="button" id='upvote' class="btn btn-success {{upvotedClass}}">
+              <span class="glyphicon glyphicon-thumbs-up"></span>
+            </button>
+          {{/unless }}
+        </td>
+    </tr>
+</template>

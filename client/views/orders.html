@@ -1,0 +1,29 @@
+<template name='orders'>
+    <div>
+      <h2 style='float:left;'>All Orders</h2>
+      <div style='float:left; padding-top:1.5em; padding-left:1.5em;'>
+        <input type='text' placeholder="what you want..." id="food" />
+        <input type="button" class='btn btn-success' id='submitOrder' value="Submit" />
+      </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <th>Name</th>
+            <th>Food</th>
+            <th>Time</th>
+            <th>&nbsp;</th>
+        </thead>
+        <tbody>
+            {{#each items}}
+                {{> order}}
+            {{else}}
+              <h3>No orders placed...</h3>
+            {{/each}}
+    </tbody>
+    </table>
+    <!--         {{> clearAll}} -->
+</template>
+
+<template name='clearAll'>
+    <input type='button' class='btn btn-danger' value='Clear all' />
+</template>

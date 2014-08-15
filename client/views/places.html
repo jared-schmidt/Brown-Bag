@@ -1,0 +1,26 @@
+<template name="places">
+
+  <div>
+    <h2 style='float:left;'>Places</h2>
+<!--     <div style='float:left; padding-top:1.5em; padding-left:1.5em;'>
+      <input type='text' placeholder="Where at..." id="place" />
+      <input type="button" class='btn btn-success' id='submitOrder' value="Submit" />
+    </div> -->
+  </div>
+  <table class="table table-striped">
+      <thead>
+          <th>Name</th>
+          <th>Votes</th>
+          <th>Menu URL</th>
+          <th>Time</th>
+          <th>&nbsp;</th>
+      </thead>
+      <tbody>
+          {{#each items}}
+              {{> place}}
+          {{else}}
+            <h3>No places...</h3>
+          {{/each}}
+    </tbody>
+  </table>
+</template>

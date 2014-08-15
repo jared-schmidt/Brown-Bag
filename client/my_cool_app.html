@@ -1,0 +1,22 @@
+<head>
+  <title>Brown Bag (Beta)</title>
+</head>
+
+<body>
+  <header>
+    {{> header}}
+  </header>
+    {{#if currentUser}}
+    {{#if isInRole 'user'}}
+    user
+    {{/if}}
+    {{#if isInRole 'admin'}}
+    admin
+    {{/if}}
+
+      {{> places}}
+      <hr />
+      {{> orders}}
+    Made Especially for {{currentUser.profile.name}}
+    {{/if}}
+</body>
