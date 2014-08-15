@@ -60,15 +60,16 @@ if (Meteor.isServer) {
         // code to run on server at startup
         if (Places.find().count() === 0){
             var places_data = [
-                'The Press'
+                {'name':'The Press', 'url':'http://www.pressbistro.com/lunch-menu.html'},
+                {"name":"Pappy's", 'url':""}
             ]
             for(var i=0; i <= places_data.length-1;i++){
                 Places.insert({
                     'username' : 'init',
-                    'name' : places_data[i],
+                    'name' : places_data[i].name,
                     'votes': 0,
                     'upvoters': [],
-                    'menu': '',
+                    'menu': places_data[i].url,
                     'submittedOn' : new Date()
                 });
             }
