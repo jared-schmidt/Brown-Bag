@@ -1,58 +1,6 @@
 Orders = new Meteor.Collection("orders");
 Places = new Meteor.Collection("places");
 
-isProdEnv = function () {
-    if (process.env.ROOT_URL == "http://localhost:3000") {
-        return false;
-    } else {
-        return true;
-    }
-}
-
-ServiceConfiguration.configurations.remove({
-    service: 'google'
-});
-
-
-if (isProdEnv()) {
-    ServiceConfiguration.configurations.insert({
-        service: 'google',
-        clientId: '17949077904-dtilfr90jis1f102152g9nt9vn98efib.apps.googleusercontent.com',
-        secret: 'wlTZaq7F99aupNJUbWNLJejX'
-    });
-} else {
-    // dev environment
-    ServiceConfiguration.configurations.insert({
-        service: 'google',
-        clientId: '17949077904-t60r068tglvu35tibt3f2eimfbnl89lb.apps.googleusercontent.com',
-        secret: 'E6ioDj2BlNEKWzzkz-p2m9Uz'
-    });
-}
-
-function parse(s){
-    host = s.split("@");
-    return host[1];
-}
-
-Accounts.validateNewUser(function (user) {
-    host = parse(user.services.google.email);
-
-    if (host === "problemsolutions.net")
-        return true;
-    throw new Meteor.Error(403, "Must use problemsolutions.net email!");
-});
-
-Accounts.onCreateUser(function(options, user){
-    if (user.services.google.email === 'jschmidt@problemsolutions.net'){
-        user.roles = 'admin'
-    }
-    else{
-        user.roles = 'user'
-    }
-    user.profile = options.profile;
-    return user;
-});
-
 
 if (Meteor.isServer) {
     Meteor.startup(function (){
@@ -86,17 +34,6 @@ if (Meteor.isServer) {
                     }
                 }
             }));
-            // var places_data = [];
-            // for(var i=0; i <= places_data.length-1;i++){
-            //     Places.insert({
-            //         'username' : 'init',
-            //         'name' : places_data[i],
-            //         'votes': 0,
-            //         'upvoters': [],
-            //         'menu': '',
-            //         'submittedOn' : new Date()
-            //     });
-            // }
         }
     });
 
@@ -152,6 +89,4 @@ if (Meteor.isServer) {
             });
         }
     });
-
-
 }
