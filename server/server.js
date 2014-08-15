@@ -1,7 +1,7 @@
 Orders = new Meteor.Collection("orders");
 Places = new Meteor.Collection("places");
 
-    if (user.services.google.email === 'jschmidt@problemsolutions.net' || user.services.google.email === 'ddollar@problemsolutions.net'){
+
 if (Meteor.isServer) {
 
     Meteor.startup(function (){
