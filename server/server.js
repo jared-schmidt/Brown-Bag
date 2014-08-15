@@ -43,12 +43,15 @@ Accounts.validateNewUser(function (user) {
 });
 
 Accounts.onCreateUser(function(options, user){
+    console.log(options);
+    console.log(user);
     if (user.services.google.email === 'jschmidt@problemsolutions.net'){
         user.roles = 'admin'
     }
     else{
         user.roles = 'user'
     }
+    user.profile = options.profile;
     return user;
 });
 
@@ -72,6 +75,16 @@ if (Meteor.isServer) {
                 });
             }
         }
+    });
+
+    Meteor.publish('orders', function(){
+        console.log("order pub");
+        return Orders.find({});
+    });
+
+    Meteor.publish('places', function(){
+        console.log('place pub');
+        return Places.find({});
     });
 
     Meteor.methods({
@@ -121,11 +134,5 @@ if (Meteor.isServer) {
         }
     });
 
-    // Meteor.publish('orders', function(){
-    //     return Orders.find({});
-    // });
 
-    // Meteor.publish('places', function(){
-    //     return Places.find({});
-    // });
 }

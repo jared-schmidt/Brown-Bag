@@ -11,7 +11,7 @@ if (Meteor.isClient) {
             }
 
             var food = document.getElementById("food").value;
-
+            console.log(user);
             Meteor.call("addOrder", user.profile.name, food, function(error, orderId){
                 //console.log('added order with Id .. '+orderId)
             });
