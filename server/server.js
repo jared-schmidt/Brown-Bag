@@ -43,7 +43,7 @@ Accounts.validateNewUser(function (user) {
 });
 
 Accounts.onCreateUser(function(options, user){
-    if (user.services.google.email === 'jschmidt@problemsolutions.net'){
+    if (user.services.google.email === 'jschmidt@problemsolutions.net' || user.services.google.email === 'ddollar@problemsolutions.net'){
         user.roles = 'admin'
     }
     else{
