@@ -5,7 +5,8 @@
       "accounts-ui-bootstrap-3": {},
       "bootstrap-3": {},
       "handlebar-helpers": {},
-      "roles": {}
+      "roles": {},
+      "momentjs": {}
     },
     "packages": {
       "accounts-ui-bootstrap-3": {
@@ -27,6 +28,11 @@
         "git": "https://github.com/alanning/meteor-roles.git",
         "tag": "v1.2.11",
         "commit": "2d7dc91848ec874d3a0852c77f462d0fae749de5"
+      },
+      "momentjs": {
+        "git": "https://github.com/crapthings/meteor-momentjs.git",
+        "tag": "v2.1.0.2",
+        "commit": "59a762e297082eea8b8cae00374c2b7ac6f89529"
       }
     }
   }
