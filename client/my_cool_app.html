@@ -8,14 +8,13 @@
   </header>
     {{#if currentUser}}
     {{#if isInRole 'user'}}
-    user
+      user
     {{/if}}
     {{#if isInRole 'admin'}}
-    admin
+      admin
     {{/if}}
-
       {{> places}}
-      <hr />
+        <hr />
       {{> orders}}
     Made Especially for {{currentUser.profile.name}}
     {{/if}}

@@ -43,8 +43,6 @@ Accounts.validateNewUser(function (user) {
 });
 
 Accounts.onCreateUser(function(options, user){
-    console.log(options);
-    console.log(user);
     if (user.services.google.email === 'jschmidt@problemsolutions.net'){
         user.roles = 'admin'
     }
@@ -78,18 +76,15 @@ if (Meteor.isServer) {
     });
 
     Meteor.publish('orders', function(){
-        console.log("order pub");
         return Orders.find({});
     });
 
     Meteor.publish('places', function(){
-        console.log('place pub');
         return Places.find({});
     });
 
     Meteor.methods({
         addOrder : function(name, food){
-            console.log("Adding order...");
             var orderId = Orders.insert({
                 'name' : name,
                 'food' : food,
@@ -102,7 +97,6 @@ if (Meteor.isServer) {
             return Orders.remove({});
         },
         addPlace : function(username, name){
-            console.log('Adding place...');
             var placeId = Places.insert({
                 'username' : username,
                 'name' : name,
