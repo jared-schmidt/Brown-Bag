@@ -71,8 +71,13 @@ if (Meteor.isServer) {
                 throw new Meteor.Error(422, 'Already upvoted');
 
             Places.update(place._id, {
-                $addToSet: {upvoters: user._id},
+                $addToSet: {'upvoters': user._id},
                 $inc : {'votes':1}
+            });
+        },
+        resetVotes : function(placeId){
+            Places.update(placeId, {
+                $set:{'votes':0}
             });
         }
     });

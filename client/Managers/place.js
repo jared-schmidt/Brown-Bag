@@ -8,15 +8,18 @@ if (Meteor.isClient) {
     Template.place.events({
         'click #delete': function(event){
             event.preventDefault();
-            console.log("deleteing..." +this['_id'])
             Places.remove(this['_id']);
         },
         'click #upvote': function(event){
             event.preventDefault();
             if(Meteor.userId()){
-                Session.set("selected_place", this._id);
-                console.log(this);
                 Meteor.call("voteUp", this._id);
+            }
+        },
+        'click #resetVotes': function(event){
+            event.preventDefault();
+            if(Meteor.userId()){
+                Meteor.call("resetVotes", this._id);
             }
         }
     });
