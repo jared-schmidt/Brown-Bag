@@ -4,7 +4,7 @@ Places = new Meteor.Collection("places");
 
 if (Meteor.isServer) {
     Meteor.startup(function (){
-        var yelp = Npm.require('yelp').createClient({
+        var yelp = Meteor.require('yelp').createClient({
             consumer_key: 'WDYAKycarqBqWcfxtrwccQ',
             consumer_secret: '3CtLvBMCISjIlXUQ0MlNyAzvmxg',
             token: 'Yw_FZ2UJ-yXa_ck5A1zWuRkTW7yn9OaW',
