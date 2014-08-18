@@ -9,7 +9,7 @@ accounts-google
 accounts-ui-bootstrap-3
 bootstrap-3
 handlebar-helpers
-service-configuration
 roles
 momentjs
 http
+npm
