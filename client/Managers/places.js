@@ -19,6 +19,7 @@ if (Meteor.isClient) {
             });
 
             document.getElementById("place").value = '';
+            document.getElementById("menu").value = '';
         }
     });
 
