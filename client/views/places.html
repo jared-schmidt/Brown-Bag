@@ -2,10 +2,13 @@
 
   <div>
     <h2 style='float:left;'>Places</h2>
-<!--     <div style='float:left; padding-top:1.5em; padding-left:1.5em;'>
+    {{#if isInRole 'admin'}}
+    <div style='float:left; padding-top:1.5em; padding-left:1.5em;'>
       <input type='text' placeholder="Where at..." id="place" />
+      <input type='text' placeholder="What they have..." id="menu" />
       <input type="button" class='btn btn-success' id='submitOrder' value="Submit" />
-    </div> -->
+    </div>
+    {{/if}}
   </div>
   <table class="table table-striped">
       <thead>
