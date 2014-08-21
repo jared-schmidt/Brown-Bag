@@ -12,12 +12,14 @@ if (Meteor.isClient) {
             }
 
             var place = document.getElementById("place").value;
+            var menu = document.getElementById("menu").value;
 
-            Meteor.call("addPlace", user.profile.name, place, function(error, placeId){
+            Meteor.call("addPlace", user.profile.name, place, menu, function(error, placeId){
                 console.log('added place with Id .. '+placeId)
             });
 
             document.getElementById("place").value = '';
+            document.getElementById("menu").value = '';
         }
     });
 

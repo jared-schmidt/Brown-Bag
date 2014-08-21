@@ -58,13 +58,13 @@ if (Meteor.isServer) {
             console.log("clearing....")
             return Orders.remove({});
         },
-        addPlace : function(username, name){
+        addPlace : function(username, name, menu){
             var placeId = Places.insert({
                 'username' : username,
                 'name' : name,
                 'votes': 0,
                 'upvoters': [],
-                'menu':'',
+                'menu': menu,
                 'submittedOn' : new Date()
             });
             return placeId;
