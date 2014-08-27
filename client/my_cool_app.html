@@ -13,6 +13,15 @@
       {{> places}}
         <hr />
       {{> orders}}
-    Made Especially for {{currentUser.profile.name}}
+    {{#if isInRole 'admin'}}
+      {{> clearAll}}
+    {{/if}}
+    <footer>
+      Made Especially for {{currentUser.profile.name}}
+    </footer>
     {{/if}}
 </body>
+
+<template name='clearAll'>
+    <input type='button' class='btn btn-danger' value='Reset' />
+</template>
