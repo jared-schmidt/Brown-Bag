@@ -29,7 +29,8 @@ if (Meteor.isServer) {
                             votes: 0,
                             upvoters: [],
                             menu: place.url,
-                            submittedOn: new Date()
+                            submittedOn: new Date(),
+                            datePicked : []
                         });
                     }
                 }
@@ -55,8 +56,40 @@ if (Meteor.isServer) {
             return orderId;
         },
         clearAll : function() {
-            console.log("clearing....")
-            return Orders.remove({});
+            console.log("clearing all orders....");
+
+            // Picks the one with the highest votes, and adds to a set,
+                // in the object
+            place = Places.findOne({},{sort:{'votes': -1}});
+            date_picked = new Date();
+            // Set the time to this, so duplicates won't be added
+            date_picked.setHours(0,0,0,0)
+            Places.update(place._id,{$addToSet : {'datePicked': date_picked} });
+
+            // Better way to do this?
+
+            Orders.find().forEach(function(order){
+                Meteor.users.find().forEach(function(user){
+                    //console.log(user);
+                    if(order.name = user.profile.name){
+                        Meteor.users.update(user._id,{
+                            $addToSet:{'ordered' : {'place._id' : place._id, 'palce': place.name, 'order' : order.food, 'datePicked' : date_picked}}
+                        });
+                    }
+                });
+            });
+
+            //Clear all votes and orders
+
+            Places.find().forEach(function(place){
+                Places.update(place._id,{
+                    $set:{'votes':0}
+                });
+            });
+
+            Orders.remove({});
+
+            return true;
         },
         addPlace : function(username, name, menu){
             var placeId = Places.insert({
