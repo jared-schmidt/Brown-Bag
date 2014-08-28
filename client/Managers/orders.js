@@ -25,9 +25,12 @@ if (Meteor.isClient) {
     };
 
     Template.clearAll.events({
-        'click input': function(event){
+        'click #saveClear': function(event){
             console.log("Clear");
             Meteor.call("clearAll");
+        },
+        'click #hardClear' : function(event){
+            Meteor.call('hardClear');
         }
     });
 }

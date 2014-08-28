@@ -67,6 +67,13 @@ if (Meteor.isServer) {
             Places.update(place._id,{$addToSet : {'datePicked': date_picked} });
 
             // Better way to do this?
+            Places.find().forEach(function(place){
+                Places.update(place._id, {
+                    $set : {"upvoters" : []}
+                });
+            });
+
+            // Better way to do this?
 
             Orders.find().forEach(function(order){
                 Meteor.users.find().forEach(function(user){
@@ -89,6 +96,24 @@ if (Meteor.isServer) {
 
             Orders.remove({});
 
+            return true;
+        },
+        hardClear : function(){
+            // TODO: same as above, make function
+            Places.find().forEach(function(place){
+                Places.update(place._id, {
+                    $set : {"upvoters" : []}
+                });
+            });
+
+            // TODO: same as above, make function
+            Places.find().forEach(function(place){
+                Places.update(place._id,{
+                    $set:{'votes':0}
+                });
+            });
+
+            Orders.remove({});
             return true;
         },
         addPlace : function(username, name, menu){
