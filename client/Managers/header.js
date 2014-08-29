@@ -1,4 +1,5 @@
 if (Meteor.isClient) {
+    Notification.requestPermission();
     Template.user_loggedout.events({
         'click #login': function(event, tmpl){
             Meteor.loginWithGoogle({
@@ -27,5 +28,32 @@ if (Meteor.isClient) {
                 }
             });
         }
+    });
+
+
+    Template.header.events({
+        'click #send-notification': function(event, template) {
+            //TODO include time for N minutes until food order
+            Meteor.call('publishNotification', {
+                title: 'Orders Being Placed',
+                body: 'The food is being ordered soon, please make sure your order is in.',
+                icon: 'brown-bag.png'
+            });
+            return false;
+        }
+    });
+
+    Meteor.subscribe('desktopNotifications');
+    Meteor.autosubscribe(function() {
+        DesktopNotifications.find({}).observe({
+            added: function(notification){ 
+                new Notification(notification.title, {
+                    dir: 'auto',
+                    lang: 'en-US',
+                    body: notification.body,
+                    icon: notification.icon
+                });
+            }
+        });
     });
 }

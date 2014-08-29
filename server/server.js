@@ -1,6 +1,7 @@
 Orders = new Meteor.Collection("orders");
 Places = new Meteor.Collection("places");
 Urls = new Meteor.Collection("urls");
+DesktopNotifications = new Meteor.Collection("desktopNotifications");   
 
 if (Meteor.isServer) {
     Meteor.startup(function (){
@@ -36,6 +37,10 @@ if (Meteor.isServer) {
                 }
             }));
         }
+    });
+
+    Meteor.publish("desktopNotifications", function(){
+        return DesktopNotifications.find({});
     });
 
     Meteor.publish('orders', function(){
@@ -196,6 +201,13 @@ text: "Here is some text"
                 $addToSet: {'upvoters': user._id},
                 $inc : {'votes':1}
             });
+        },
+        publishNotification: function(notification){
+            DesktopNotifications.remove({});
+            DesktopNotifications.insert(notification);
+            setTimeout(Meteor.bindEnvironment(function() {
+                DesktopNotifications.remove({}); //remove all again so we don't get pop ups when first loading
+            }));
         }
     });
 }
