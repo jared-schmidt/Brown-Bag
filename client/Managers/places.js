@@ -24,6 +24,6 @@ if (Meteor.isClient) {
     });
 
     Template.places.items = function(){
-        return Places.find({}, {sort:{'votes': -1}})
+        return Places.find({}, {sort:{'votes': -1}});
     }
 }
