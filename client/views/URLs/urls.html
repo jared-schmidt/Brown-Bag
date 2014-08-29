@@ -1,0 +1,23 @@
+<template name="urls">
+    <div>
+        <h2 style="float:left;">URLs</h2>
+        <div style='float:left; padding-top:1.5em; padding-left:1.5em;'>
+            <input type='text' placeholder="What to watch..." id="url" />
+            <input type="button" class='btn btn-success' id='submitUrl' value="Submit" />
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <th>URL</th>
+            <th>Votes</th>
+            <th>&nbsp;</th>
+        </thead>
+        <tbody>
+            {{#each items}}
+                {{> url}}
+            {{else}}
+                <h3>No Urls...</h3>
+            {{/each}}
+        </tbody>
+    </table>
+</template>

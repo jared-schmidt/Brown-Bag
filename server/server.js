@@ -1,6 +1,6 @@
 Orders = new Meteor.Collection("orders");
 Places = new Meteor.Collection("places");
-
+Urls = new Meteor.Collection("urls");
 
 if (Meteor.isServer) {
     Meteor.startup(function (){
@@ -44,6 +44,10 @@ if (Meteor.isServer) {
 
     Meteor.publish('places', function(){
         return Places.find({});
+    });
+
+    Meteor.publish('urls', function(){
+        return Urls.find({});
     });
 
     Meteor.methods({
@@ -148,7 +152,41 @@ if (Meteor.isServer) {
         },
         resetVotes : function(placeId){
             Places.update(placeId, {
-                $set:{'votes':0}
+                $set : {"upvoters" : [],'votes':0},
+            });
+        },
+        addUrl : function(username, url){
+            var urlId = Urls.insert({
+                'username' : username,
+                'url' : url,
+                'votes' : 0,
+                'upvoters' : [],
+                'submittedOn' : new Date()
+            });
+            return urlId;
+        },
+        resetUrlVotes:function(urlId){
+            Urls.update(urlId, {
+                $set : {"upvoters" : [],'votes':0},
+            })
+        },
+        upUrlVote : function(urlId){
+            var user = Meteor.user();
+            if (!user){
+                throw new Meteor.Error(401, "You need to login to upvote");
+            }
+
+            var url = Urls.findOne(urlId);
+            if (!url){
+                throw new Meteor.Error(422, 'Url not found');
+            }
+
+            if (_.include(url.upvoters, user._id))
+                throw new Meteor.Error(422, 'Already upvoted');
+
+            Urls.update(url._id, {
+                $addToSet: {'upvoters': user._id},
+                $inc : {'votes':1}
             });
         }
     });
