@@ -33,26 +33,21 @@ if (Meteor.isClient) {
 
     Template.header.events({
         'click #send-notification': function(event, template) {
-            Meteor.call('publishNotification'); //TODO include time for N minutes until food order
-            // return false;
+            //TODO include time for N minutes until food order
+            Meteor.call('publishNotification', {
+                title: 'Orders Being Placed',
+                body: 'The food is being ordered soon, please make sure your order is in.',
+                icon: 'brown-bag.png'
+            });
+            return false;
         }
     });
 
-    Meteor.subscribe('desktopNotifications', {
-        added: function(notification){ 
-            alert('WORKED');
-            var n = new Notification(notification.title, {
-                dir: 'auto',
-                lang: 'en-US',
-                body: notification.body,
-                icon: notification.icon
-            });
-        }
-    });
+    Meteor.subscribe('desktopNotifications');
     Meteor.autosubscribe(function() {
         DesktopNotifications.find({}).observe({
             added: function(notification){ 
-                var n = new Notification(notification.title, {
+                new Notification(notification.title, {
                     dir: 'auto',
                     lang: 'en-US',
                     body: notification.body,

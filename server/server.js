@@ -194,13 +194,9 @@ if (Meteor.isServer) {
                 $inc : {'votes':1}
             });
         },
-        publishNotification: function(){
+        publishNotification: function(notification){
             DesktopNotifications.remove({});
-            DesktopNotifications.insert({
-                title: 'Orders Being Placed',
-                body: 'The food is being ordered soon, please make sure your order is in.',
-                icon: 'brown-bag.png'
-            });
+            DesktopNotifications.insert(notification);
             setTimeout(Meteor.bindEnvironment(function() {
                 DesktopNotifications.remove({}); //remove all again so we don't get pop ups when first loading
             }));
