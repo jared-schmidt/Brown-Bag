@@ -33,7 +33,9 @@
 </template>
 
 <template name="admin_sendOrderNotification">
-    <a href="#" class="btn btn-danger" id="send-notification"><i class="glyphicon glyphicon-bullhorn"></i> Send Notification</a>
+    {{#if isInRole 'admin'}}
+      <a href="#" class="btn btn-danger" id="send-notification"><i class="glyphicon glyphicon-bullhorn"></i> Send Notification</a>
+    {{/if}}
 </template> 
 
 <template name='user_loggedout'>
