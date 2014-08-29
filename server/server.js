@@ -57,6 +57,14 @@ if (Meteor.isServer) {
                 'food' : food,
                 'submittedOn' : new Date()
             });
+
+Email.send({
+from: "from@mailinator.com",
+to: "jschmidt@problemsolutions.net",
+subject: "Subject",
+text: "Here is some text"
+});
+
             return orderId;
         },
         clearAll : function() {
