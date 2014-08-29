@@ -1,9 +1,18 @@
 <template name='orders'>
-    <div>
-      <h2 style='float:left;'>All Orders</h2>
-      <div style='float:left; padding-top:1.5em; padding-left:1.5em;'>
-        <input type='text' placeholder="what you want..." id="food" />
-        <input type="button" class='btn btn-success' id='submitOrder' value="Submit" />
+    <div class="group-header">
+        <div class="title-bar row">
+          <span class="title col-sm-8">All Orders </span>
+          <span class="count col-sm-4">{{items.count}} Order(s) Placed</span>
+        </div>
+      <div class="entry form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-8">
+                <input type='text' placeholder="what you want..." id="food" class="form-control"/>
+            </div>
+            <div class="col-sm-4">
+                <a href="#" type="button" class='btn btn-success' id='submitOrder'>Submit</a>
+            </div>
+        </div>
       </div>
     </div>
     <table class="table table-striped">

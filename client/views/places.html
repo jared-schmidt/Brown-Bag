@@ -1,14 +1,23 @@
 <template name="places">
 
-  <div>
-    <h2 style='float:left;'>Places</h2>
-    {{#if isInRole 'admin'}}
-    <div style='float:left; padding-top:1.5em; padding-left:1.5em;'>
-      <input type='text' placeholder="Where at..." id="place" />
-      <input type='text' placeholder="What they have..." id="menu" />
-      <input type="button" class='btn btn-success' id='submitOrder' value="Submit" />
-    </div>
-    {{/if}}
+    <div class="group-header">
+        <div class="title-bar row">
+          <span class="title col-sm-8">Places</span>
+          <span class="count col-sm-4">{{items.count}} Place(s) Registered</span>
+        </div>
+      {{#if isInRole 'admin'}}
+        <div class="entry form-horizontal">
+          <div class="col-sm-5">
+            <input type='text' placeholder="Where at..." id="place" class="form-control" />
+          </div>
+          <div class="col-sm-5">
+            <input type='text' placeholder="What they have..." id="menu" class="form-control" />
+          </div>
+          <div class="col-sm-2">
+            <input type="button" class='btn btn-success' id='submitOrder' value="Submit" />
+          </div>
+        </div>
+      {{/if}}
   </div>
   <table class="table table-striped">
       <thead>
