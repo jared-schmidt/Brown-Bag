@@ -8,4 +8,8 @@ if (Meteor.isClient) {
     //     Meteor.subscribe('places');
     //     Meteor.subscribe('urls');
     // });
+
+    Meteor.startup(function(){
+
+    });
 }
