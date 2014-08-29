@@ -5,23 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body>
-  <header>
-    {{> header}}
-  </header>
-    {{#if currentUser}}
-      {{> urls}}
-      {{> places}}
-        <hr />
-      {{> orders}}
-    {{#if isInRole 'admin'}}
-      {{> clearAll}}
-    {{/if}}
+
+
+<template name='home'>
+
+</template>
+
+<template name='layout'>
+  {{> header}}
+  {{> yield}}
+      {{#if currentUser}}
     <footer>
       Made Especially for {{currentUser.profile.name}}
     </footer>
     {{/if}}
-</body>
+</template>
 
 <template name='clearAll'>
     <input type='button' id='saveClear' class='btn btn-danger' value='Reset and Save' />
