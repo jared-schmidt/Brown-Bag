@@ -1,1 +1,25 @@
 /* CSS declarations go here */
+.group-header {
+	padding: 10px 40px;
+}
+
+.group-header .title {
+	font-size: 2em;
+}
+
+.group-header .count{
+	float: right;
+	font-size: 1.5em;
+}
+
+.group-header .entry {
+	margin: 10px 0;
+
+}
+
+.group-header .entry input {
+	
+}
+.group-header .entry .btn {
+	
+}
