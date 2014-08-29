@@ -1,7 +1,8 @@
 if (Meteor.isClient) {
 
     Template.orders.events({
-        'click input.btn': function (event) {
+        'click #submitOrder': function (event) {
+            console.log("order");
             event.preventDefault();
 
             var user = Meteor.user();
@@ -19,10 +20,6 @@ if (Meteor.isClient) {
             document.getElementById("food").value = '';
         }
     });
-
-    Template.orders.items = function(){
-        return Orders.find({},{sort:{'submittedOn': -1}})
-    };
 
     Template.clearAll.events({
         'click #saveClear': function(event){
