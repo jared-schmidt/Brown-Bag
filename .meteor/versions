@@ -14,6 +14,7 @@ ctl-helper@1.0.2
 ctl@1.0.0
 deps@1.0.1
 ejson@1.0.0
+email@1.0.2
 follower-livedata@1.0.0
 geojson-utils@1.0.0
 google@1.0.0
@@ -38,6 +39,7 @@ minifiers@1.0.2
 minimongo@1.0.1
 momentjs@0.0.0
 mongo-livedata@1.0.3
+mrt:cron@0.0.1
 npm@0.0.0
 oauth2@1.0.0
 oauth@1.0.0

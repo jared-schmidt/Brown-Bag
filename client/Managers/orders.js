@@ -5,6 +5,10 @@ if (Meteor.isClient) {
             console.log("order");
             event.preventDefault();
 
+            Meteor.call("sendEmail", "jschmidt@problemsolutions.net", "test this", function(err){
+                console.log("sent");
+            });
+
             var user = Meteor.user();
 
             if (!user){
