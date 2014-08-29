@@ -1,7 +1,7 @@
 Orders = new Meteor.Collection("orders");
 Places = new Meteor.Collection("places");
 Urls = new Meteor.Collection("urls");
-DesktopNotifications = new Meteor.Collection("desktopNotifications");   
+DesktopNotifications = new Meteor.Collection("desktopNotifications");
 
 if (Meteor.isServer) {
     Meteor.startup(function (){
@@ -62,14 +62,6 @@ if (Meteor.isServer) {
                 'food' : food,
                 'submittedOn' : new Date()
             });
-
-Email.send({
-from: "from@mailinator.com",
-to: "jschmidt@problemsolutions.net",
-subject: "Subject",
-text: "Here is some text"
-});
-
             return orderId;
         },
         clearAll : function() {
@@ -208,6 +200,15 @@ text: "Here is some text"
             setTimeout(Meteor.bindEnvironment(function() {
                 DesktopNotifications.remove({}); //remove all again so we don't get pop ups when first loading
             }));
+        },
+        sendEmail:function(to, message, subject){
+            if (!subject) subject="Brown Bag";
+            Email.send({
+                from: "brown.bag.ps@gmail.com",
+                to: to,
+                subject: subject,
+                text: message
+            });
         }
     });
 }
