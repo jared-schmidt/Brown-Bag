@@ -49,6 +49,18 @@ Router.map(function(){
             return model;
         }
     });
+
+    this.route('watch', {
+        path: '/watch/:_id',
+        waitOn:function(){
+            return Meteor.subscribe('urls');
+        },
+        action: loading,
+        onBeforeAction:mustLogIn,
+        data: function() {
+            return Urls.findOne(this.params._id);
+        }
+    });
 });
 
 function loading(){

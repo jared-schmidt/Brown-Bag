@@ -23,3 +23,15 @@
 .group-header .entry .btn {
 	
 }
+
+#watch-holder {
+	text-align: center;
+	width: 100%;
+}
+#watch-holder iframe {
+	width: 800px;
+	height: 500px;
+}
+#watch-holder .original-link {
+	margin: 10px;
+}

@@ -55,6 +55,46 @@ if (Meteor.isServer) {
         return Urls.find({});
     });
 
+    //util that will return any url parameters.
+    //in key value pairs (ex. ..?a=b&c=d will be in format of {a: b, c: d})
+    var getUrlParams = function(url) {
+        var params = url.split('?');
+        if (params.length == 2) {
+            params = params[1].split('&');
+            var p = {};
+            for (var i = 0; i < params.length; i++) {
+                var param = params[i].split('=');
+                if(param.length == 2) {
+                    p[param[0]] = param[1];
+                }
+            }
+            return p;
+        } else {
+            return {};
+        }
+    }
+
+    //TODO add additional parsers here; vimeo, etc.
+    var videoUrlParsers = [
+        {
+            name: 'YouTube',
+            canParseUrl: function(url) {
+                return url.indexOf('youtube.com') >= 0;
+            },
+            getEmbedUrl: function(url) {
+                var videoId = getUrlParams(url)['v'];
+                if (videoId) {
+                    return '//youtube.com/embed/' + videoId;
+                } else {
+                    //want to ensure we don't specify protocol
+                    var parts = url.split('youtube.com');
+                    return '//youtube.com/' + parts[parts.length - 1];
+                }
+            }
+        }
+    ];
+
+
     Meteor.methods({
         addOrder : function(name, food){
             var orderId = Orders.insert({
@@ -161,9 +201,30 @@ if (Meteor.isServer) {
             });
         },
         addUrl : function(username, url){
+            var displayUrl = url;
+            var embedUrl = url;
+            var embeddable = false;
+            for (var i = 0; i < videoUrlParsers.length; i++) {
+                var parser = videoUrlParsers[i];
+                if (parser.canParseUrl(url)) {
+                    embedUrl = parser.getEmbedUrl(url);
+                    embeddable = true;
+                    break;
+                }
+            }
+
+            if (!embeddable) {
+                if (url.indexOf('//') < 0) {
+                    url = '//' + url;
+                }
+            }
+
             var urlId = Urls.insert({
                 'username' : username,
+                'displayUrl' : displayUrl,
                 'url' : url,
+                'embedUrl' : embedUrl,
+                'embeddable' : embeddable,
                 'votes' : 0,
                 'upvoters' : [],
                 'submittedOn' : new Date()

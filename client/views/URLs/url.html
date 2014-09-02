@@ -1,7 +1,7 @@
 <template name='url'>
     <tr>
         <td>
-            {{url}}
+            {{displayUrl}}
         </td>
         <td>
             {{votes}}
@@ -26,6 +26,15 @@
             <button type="button" id='resetVotes' class="btn btn-danger">
               <span class="glyphicon glyphicon-refresh"></span>
             </button>
+          {{/if}}
+          {{#if embeddable}}
+            <a id="watch" class="btn btn-default" href="watch/{{_id}}">
+              <span class="glyphicon glyphicon-play"></span>
+            </a>
+          {{else}}
+            <a id="watch" class="btn btn-default" href="{{url}}" target="_blank">
+              <span class="glyphicon glyphicon-new-window"></span>
+            </a>
           {{/if}}
         </td>
     </tr>
