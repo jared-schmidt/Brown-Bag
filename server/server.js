@@ -270,6 +270,11 @@ if (Meteor.isServer) {
                 subject: subject,
                 text: message
             });
+        },
+        removeVote:function(id){
+            var user = Meteor.user();
+
+            Places.update(id, {$inc: {votes: -1}, $pull: {'upvoters': user._id}});
         }
     });
 }
