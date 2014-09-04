@@ -17,11 +17,15 @@ if (isProdEnv()) {
         secret: 'wlTZaq7F99aupNJUbWNLJejX'
     });
 }
-// else {
-//     // dev environment
-//     ServiceConfiguration.configurations.insert({
-//         service: 'google',
-//         clientId: '17949077904-t60r068tglvu35tibt3f2eimfbnl89lb.apps.googleusercontent.com',
-//         secret: 'E6ioDj2BlNEKWzzkz-p2m9Uz'
-//     });
-// }
+else {
+    // dev environment
+    ServiceConfiguration.configurations.insert({
+        service: 'google',
+        clientId: '17949077904-t60r068tglvu35tibt3f2eimfbnl89lb.apps.googleusercontent.com',
+        secret: 'E6ioDj2BlNEKWzzkz-p2m9Uz'
+    });
+}
+
+
+//db.meteor_accounts_loginServiceConfiguration.remove({})
+//db.meteor_accounts_loginServiceConfiguration.insert({"service": "google", "clientId":"17949077904-t60r068tglvu35tibt3f2eimfbnl89lb.apps.googleusercontent.com", "secret":"E6ioDj2BlNEKWzzkz-p2m9Uz"})

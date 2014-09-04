@@ -18,18 +18,27 @@
             </button>
           {{/if}}
           {{#if voted}}
-            {{#if $eq voted _id}}
-              Voted
+            {{#if downVote}}
+              <button type="button" id='downVote' class="decrement btn btn-warning">
+              <span class="glyphicon glyphicon-thumbs-down"></span>
+            </button>
+
             {{/if}}
-          {{/if}}
-          {{#unless voted }}
-            <button type="button" id='upvote' class="btn btn-success {{upvotedClass}}">
+          {{#unless downVote}}
+<!--       <td></td> -->
+        {{/unless}}
+    {{/if}}
+    {{#unless voted }}
+      {{#unless downVote}}
+      <button type="button" id='upvote' class="btn btn-success {{upvotedClass}}">
               <span class="glyphicon glyphicon-thumbs-up"></span>
             </button>
-          {{/unless }}
+      {{/unless}}
+    {{/unless}}
           {{#if isInRole 'admin'}}
             <button type="button" id='resetVotes' class="btn btn-danger">
-              <span class="glyphicon glyphicon-refresh"></span>
+              Reset ALL votes
+              <!-- <span class="glyphicon glyphicon-refresh"></span> -->
             </button>
           {{/if}}
         </td>
