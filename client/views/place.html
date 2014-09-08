@@ -12,7 +12,8 @@
         <!-- <td>{{#if menu}}<a href="{{menu}}" class="btn btn-default" target="_blank">Menu</a>{{/if}}</td> -->
         <!-- <td>{{submittedOn}}</td> -->
         <td>
-          {{#if $eq currentUser.profile.name username}}
+          <!-- {{#if $eq currentUser.profile.name username}} -->
+          {{#if isInRole 'admin'}}
             <button type="button" id='delete' class="btn btn-danger">
               <span class="glyphicon glyphicon-trash"></span>
             </button>

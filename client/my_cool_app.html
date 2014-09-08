@@ -9,9 +9,10 @@
   {{> header}}
   {{> yield}}
       {{#if currentUser}}
-    <footer>
-      Made Especially for {{currentUser.profile.name}}
-    </footer>
+      {{> clearAll}}
+      <footer>
+        Made Especially for {{currentUser.profile.name}}
+      </footer>
     {{/if}}
 </template>
 
@@ -48,8 +49,10 @@
 </template>
 
 <template name='clearAll'>
-    <input type='button' id='saveClear' class='btn btn-danger' value='Reset and Save' />
-    <input type='button' id='hardClear' class='btn btn-danger' value="Reset and NOT save" />
+    {{#if isInRole 'admin'}}
+      <input type='button' id='saveClear' class='btn btn-danger' value='Reset EVERYTING and Save' />
+      <input type='button' id='hardClear' class='btn btn-danger' value="Reset EVERYTING and save NOTHING" />
+    {{/if}}
 </template>
 
 <template name='home'>
