@@ -18,4 +18,5 @@ iron:router
 email
 mrt:cron
 mrt:collection-api
+meteorhacks:kadira
 
