@@ -61,6 +61,31 @@ Router.map(function(){
             return Urls.findOne(this.params._id);
         }
     });
+
+    this.route('settings',{
+        path: '/settings',
+        action: loading,
+        onBeforeAction:mustLogIn,
+        data: function(){
+            Meteor.call('getUserInfo', function(err, user){
+                Session.set('user', user);
+            });
+            var user = Session.get('user');
+            return user;
+        }
+    });
+
+    // this.route('users',{
+    //     path:'/users',
+    //     action: loading,
+    //     onBeforeAction:mustLogIn,
+    //     data: function(){
+    //         console.log(Meteor.users.find({}));
+    //         var model = {}
+    //         model['users'] = Meteor.users.find({});
+    //         return model;
+    //     }
+    // });
 });
 
 function loading(){

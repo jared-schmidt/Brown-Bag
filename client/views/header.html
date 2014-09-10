@@ -15,6 +15,9 @@
               <li><a href="{{pathFor 'places'}}">Places</a></li>
               <li><a href="{{pathFor 'orders'}}" >Orders</a></li>
               <li><a href="{{pathFor 'urls'}}">Urls</a></li>
+<!--               {{#if isInRole 'admin'}}
+                <li><a href="{{pathFor 'users'}}">Users</a></li>
+              {{/if}} -->
           </ul>
           <ul class="nav navbar-nav navbar-right">
           {{#if currentUser}}
@@ -54,7 +57,7 @@
         <b class="caret"></b>
       </a>
       <ul class="dropdown-menu">
-        <li><a href='#' >Account Settings</a></li>
+        <li><a href="{{pathFor 'settings'}}" >Account Settings</a></li>
         <li class="divider"></li>
         <li><a href='#' id="logout">Logout</a></li>
       </ul>

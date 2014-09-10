@@ -26,7 +26,7 @@ if (Meteor.isServer) {
     var sendMail = function(){
         var users_list = Meteor.users.find({}).fetch();
         var email_list = [];
-        var message = "Ready for brown bag? <br /> This is just a test email from a cron job in Meteor."
+        var message = "Ready for brown bag? http://brown-bag.meteor.com <br /> This is just a test email from http://brown-bag.meteor.com."
         for(var i=0;i<=users_list.length-1;i++){
             Meteor.call("sendEmail", users_list[i].profile.email, message, function(err){
                 console.log("sent mail!");
