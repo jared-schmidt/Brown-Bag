@@ -1,0 +1,31 @@
+<template name='settings'>
+    Your Settings...
+    <table class='table'>
+        <tr>
+            <th>Name:</th>
+            <td>{{profile.name}}</td>
+        </tr>
+        <tr>
+            <th>Roles:</th>
+            <td>{{roles}}</td>
+        </tr>
+    </table>
+    <hr />
+    <label>Past Orders:</label>
+    <table class='table'>
+        <thead>
+            <th>Place</th>
+            <th>Food</th>
+            <th>Date</th>
+        </thead>
+        <tbody>
+        {{#each ordered}}
+            <tr>
+                <td>{{place}}</td>
+                <td>{{order}}</td>
+                <td>{{datePicked}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</template>

@@ -36,6 +36,17 @@ if (Meteor.isServer) {
                     }
                 }
             }));
+
+            collectionApi = new CollectionAPI({
+                authToken: '97f0ad9e24ca5e0408a269748d7fe0a0',
+                apiPath: 'api'
+            });
+            collectionApi.addCollection(Places,'places',{
+                methods:['GET']
+            });
+            collectionApi.start();
+            console.log("Started API");
+
         }
     });
 
@@ -105,6 +116,9 @@ if (Meteor.isServer) {
             return orderId;
         },
         clearAll : function() {
+            // Run in mongo to clear everyones orders
+            //  // db.users.update({},{$set:{'ordered': []}})
+
             console.log("clearing all orders....");
 
             // Picks the one with the highest votes, and adds to a set,
@@ -127,9 +141,9 @@ if (Meteor.isServer) {
             Orders.find().forEach(function(order){
                 Meteor.users.find().forEach(function(user){
                     //console.log(user);
-                    if(order.name = user.profile.name){
+                    if(order.name == user.profile.name){
                         Meteor.users.update(user._id,{
-                            $addToSet:{'ordered' : {'place._id' : place._id, 'palce': place.name, 'order' : order.food, 'datePicked' : date_picked}}
+                            $addToSet:{'ordered' : {'place._id' : place._id, 'place': place.name, 'order' : order.food, 'datePicked' : date_picked}}
                         });
                     }
                 });
@@ -275,6 +289,9 @@ if (Meteor.isServer) {
             var user = Meteor.user();
 
             Places.update(id, {$inc: {votes: -1}, $pull: {'upvoters': user._id}});
+        },
+        getUserInfo:function(){
+            return Meteor.user();
         }
     });
 }
