@@ -50,7 +50,7 @@ Router.map(function(){
         }
     });
 
-    this.route('watch', {
+    this.route('watch_video', {
         path: '/watch/:_id',
         waitOn:function(){
             return Meteor.subscribe('urls');
