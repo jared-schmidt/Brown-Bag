@@ -1,15 +1,14 @@
 if (Meteor.isClient) {
     Notification.requestPermission();
     Template.user_loggedout.events({
-        'click #login': function(event, tmpl){
+        'click #login': function(event, tmpl) {
             Meteor.loginWithGoogle({
-                requestPermissions:['email', 'profile']
-            }, function(err){
-                if (err){
-                    alert('error : '+ err);
+                requestPermissions: ['email', 'profile']
+            }, function(err) {
+                if (err) {
+                    alert('error : ' + err);
                     throw new Meteor.Error(Accounts.LoginCancelledError.numericError, 'Error');
-                }
-                else{
+                } else {
                     // something else
                 }
             });
@@ -19,8 +18,8 @@ if (Meteor.isClient) {
     Template.user_loggedin.events({
         "click #logout": function(event, tmpl) {
             Meteor.logout(function(err) {
-                if(err) {
-                    alert('error : '+ err);
+                if (err) {
+                    alert('error : ' + err);
                     throw new Meteor.Error(Accounts.LoginCancelledError.numericError, 'Error');
                 } else {
                     //show alert that says logged out
@@ -40,13 +39,27 @@ if (Meteor.isClient) {
                 icon: 'brown-bag.png'
             });
             return false;
+        },
+        'click #menu-toggle': function(e) {
+            e.preventDefault();
+            console.log("here");
+            $("#wrapper").toggleClass("toggled");
+        },
+        'click #endVoting': function(event) {
+            event.preventDefault();
+            console.log("ending voting...");
+            Meteor.call("endPlaceVoting", function(err, placeId) {
+                if (err)
+                    console.log(err);
+                console.log(placeId);
+            });
         }
     });
 
     Meteor.subscribe('desktopNotifications');
     Meteor.autosubscribe(function() {
         DesktopNotifications.find({}).observe({
-            added: function(notification){ 
+            added: function(notification) {
                 new Notification(notification.title, {
                     dir: 'auto',
                     lang: 'en-US',
@@ -56,4 +69,7 @@ if (Meteor.isClient) {
             }
         });
     });
+
+
+
 }

@@ -130,11 +130,11 @@ if (Meteor.isServer) {
             Places.update(place._id,{$addToSet : {'datePicked': date_picked} });
 
             // Better way to do this?
-            Places.find().forEach(function(place){
-                Places.update(place._id, {
-                    $set : {"upvoters" : []}
-                });
-            });
+            // Places.find().forEach(function(place){
+            //     Places.update(place._id, {
+            //         $set : {"upvoters" : []}
+            //     });
+            // });
 
             // Better way to do this?
 
@@ -153,7 +153,7 @@ if (Meteor.isServer) {
 
             Places.find().forEach(function(place){
                 Places.update(place._id,{
-                    $set:{'votes':0}
+                    $set : {"upvoters" : [],'votes':0, 'winner': 0}
                 });
             });
 
@@ -165,16 +165,16 @@ if (Meteor.isServer) {
             // TODO: same as above, make function
             Places.find().forEach(function(place){
                 Places.update(place._id, {
-                    $set : {"upvoters" : []}
+                    $set : {"upvoters" : [],'votes':0, 'winner': 0}
                 });
             });
 
             // TODO: same as above, make function
-            Places.find().forEach(function(place){
-                Places.update(place._id,{
-                    $set:{'votes':0}
-                });
-            });
+            // Places.find().forEach(function(place){
+            //     Places.update(place._id,{
+            //         $set:{}
+            //     });
+            // });
 
             Orders.remove({});
             return true;
@@ -292,6 +292,11 @@ if (Meteor.isServer) {
         },
         getUserInfo:function(){
             return Meteor.user();
+        },
+        endPlaceVoting:function(){
+            place = Places.findOne({},{sort:{'votes': -1}});
+            Places.update(place._id,{$set: {"winner": 1}});
+            return place._id;
         }
     });
 }

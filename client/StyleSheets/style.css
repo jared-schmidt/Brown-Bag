@@ -18,10 +18,10 @@
 }
 
 .group-header .entry input {
-	
+
 }
 .group-header .entry .btn {
-	
+
 }
 
 #watch-holder {
@@ -34,4 +34,9 @@
 }
 #watch-holder .original-link {
 	margin: 10px;
+}
+
+.table > thead > tr > td.success, .table > tbody > tr > td.success, .table > tfoot > tr > td.success, .table > thead > tr > th.success, .table > tbody > tr > th.success, .table > tfoot > tr > th.success, .table > thead > tr.success > td, .table > tbody > tr.success > td, .table > tfoot > tr.success > td, .table > thead > tr.success > th, .table > tbody > tr.success > th, .table > tfoot > tr.success > th
+{
+  background-color: #48C000 !important;
 }

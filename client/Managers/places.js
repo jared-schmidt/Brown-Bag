@@ -1,7 +1,6 @@
 if (Meteor.isClient) {
-
     Template.places.events({
-        'click input.btn':function(event){
+        'click #submitPlace':function(event){
             console.log('places button');
             event.preventDefault();
 

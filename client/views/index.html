@@ -1,65 +1,53 @@
 <head>
-  <title>Brown Bag (Beta)</title>
+    <title>Brown Bag (Beta)</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <template name='layout'>
-  {{> header}}
-  {{> yield}}
-      {{#if currentUser}}
-      {{> clearAll}}
-      <footer>
-        Made Especially for {{currentUser.profile.name}}
-      </footer>
-    {{/if}}
+<div id="wrapper">
+    {{> header}}
+    <div id="page-content-wrapper">
+        {{> yield}} {{#if currentUser}}
+        <footer>
+            Made Especially for {{currentUser.profile.name}}
+        </footer>
+        {{/if}}
+    </div>
+    </div>
 </template>
 
 <template name='loginLayout'>
-   <div class="navbar navbar-default" role="navigation">
-      <div class="navbar-header">
-          <a class="navbar-brand" href="{{pathFor 'home'}}">Brown Bag (Beta)</a>
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-          </button>
-      </div>
-      <div class="navbar-collapse collapse">
+    <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{pathFor 'home'}}">Brown Bag (Beta)</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
 
-          <ul class="nav navbar-nav navbar-right">
-          {{#if currentUser}}
-            {{> user_loggedin}}
-          {{else}}
-            {{> user_loggedout}}
-          {{/if}}
-          </ul>
-      </div>
-  </div>
-  <br />
-  <br />
-
-  {{> yield}}
+            <ul class="nav navbar-nav navbar-right">
+                {{#if currentUser}} {{> user_loggedin}} {{else}} {{> user_loggedout}} {{/if}}
+            </ul>
+        </div>
+    </div>
+    <br />
+    <br />{{> yield}}
 </template>
 
 <template name='loading'>
-  <h1>Loading...</h1>
-</template>
-
-<template name='clearAll'>
-    {{#if isInRole 'admin'}}
-      <input type='button' id='saveClear' class='btn btn-danger' value='Reset EVERYTING and Save' />
-      <input type='button' id='hardClear' class='btn btn-danger' value="Reset EVERYTING and save NOTHING" />
-    {{/if}}
+    <h1>Loading...</h1>
 </template>
 
 <template name='home'>
-  <h3>Welcome to the Brown-Bag Site.</h3>
+    <h3>Welcome to the Brown-Bag Site.</h3>
 </template>
 
 <template name='login'>
-  <h2>Log-in through Google</h2>
+    <h2>Log-in through Google</h2>
 </template>
-
