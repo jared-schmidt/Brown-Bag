@@ -1,5 +1,4 @@
 if (Meteor.isClient) {
-    Notification.requestPermission();
     Template.user_loggedout.events({
         'click #login': function(event, tmpl) {
             Meteor.loginWithGoogle({
@@ -42,7 +41,6 @@ if (Meteor.isClient) {
         },
         'click #menu-toggle': function(e) {
             e.preventDefault();
-            console.log("here");
             $("#wrapper").toggleClass("toggled");
         },
         'click #endVoting': function(event) {
@@ -55,21 +53,4 @@ if (Meteor.isClient) {
             });
         }
     });
-
-    Meteor.subscribe('desktopNotifications');
-    Meteor.autosubscribe(function() {
-        DesktopNotifications.find({}).observe({
-            added: function(notification) {
-                new Notification(notification.title, {
-                    dir: 'auto',
-                    lang: 'en-US',
-                    body: notification.body,
-                    icon: notification.icon
-                });
-            }
-        });
-    });
-
-
-
 }

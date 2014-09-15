@@ -10,7 +10,24 @@ if (Meteor.isClient) {
     //     Meteor.subscribe('urls');
     // });
 
-    Meteor.startup(function(){
+    Deps.autorun(function() {
+        Notification.requestPermission();
+        Meteor.subscribe('desktopNotifications');
+        Meteor.autosubscribe(function() {
+            DesktopNotifications.find({}).observe({
+                added: function(notification) {
+                    new Notification(notification.title, {
+                        dir: 'auto',
+                        lang: 'en-US',
+                        body: notification.body,
+                        icon: notification.icon
+                    });
+                }
+            });
+        });
+    });
+
+    Meteor.startup(function() {
 
     });
 }
