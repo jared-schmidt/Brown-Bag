@@ -1,5 +1,5 @@
 <template name='place'>
-    <tr>
+    <tr class="{{#if winner}}success{{/if}}">
         <td>
           {{#if menu}}
             <a target="_blank" href='{{menu}}'>{{name}}</a>
@@ -11,6 +11,7 @@
         <td>{{votes}}</td>
         <!-- <td>{{#if menu}}<a href="{{menu}}" class="btn btn-default" target="_blank">Menu</a>{{/if}}</td> -->
         <!-- <td>{{submittedOn}}</td> -->
+        {{#unless isWinner}}
         <td>
           <!-- {{#if $eq currentUser.profile.name username}} -->
           {{#if isInRole 'admin'}}
@@ -18,12 +19,12 @@
               <span class="glyphicon glyphicon-trash"></span>
             </button>
           {{/if}}
+
           {{#if voted}}
             {{#if downVote}}
               <button type="button" id='downVote' class="decrement btn btn-warning">
               <span class="glyphicon glyphicon-thumbs-down"></span>
             </button>
-
             {{/if}}
           {{#unless downVote}}
 <!--       <td></td> -->
@@ -31,10 +32,12 @@
     {{/if}}
     {{#unless voted }}
       {{#unless downVote}}
+
       <button type="button" id='upvote' class="btn btn-success {{upvotedClass}}">
               <span class="glyphicon glyphicon-thumbs-up"></span>
             </button>
-      {{/unless}}
+            {{/unless}}
+
     {{/unless}}
           {{#if isInRole 'admin'}}
             <button type="button" id='resetVotes' class="btn btn-danger">
@@ -43,5 +46,6 @@
             </button>
           {{/if}}
         </td>
+        {{/unless}}
     </tr>
 </template>

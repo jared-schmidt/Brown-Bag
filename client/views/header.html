@@ -1,4 +1,4 @@
-<template name="header">
+<!-- <template name="header">
   <div class="navbar navbar-default" role="navigation">
       <div class="navbar-header">
           <a class="navbar-brand" href="{{pathFor 'home'}}">Brown Bag (Beta)</a>
@@ -10,15 +10,15 @@
           </button>
       </div>
       <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-             <!-- class="active" -->
-              <li><a href="{{pathFor 'places'}}">Places</a></li>
+          <ul class="nav navbar-nav"> -->
+<!-- class="active" -->
+<!--               <li><a href="{{pathFor 'places'}}">Places</a></li>
               <li><a href="{{pathFor 'orders'}}" >Orders</a></li>
-              <li><a href="{{pathFor 'urls'}}">Urls</a></li>
+              <li><a href="{{pathFor 'urls'}}">Urls</a></li> -->
 <!--               {{#if isInRole 'admin'}}
                 <li><a href="{{pathFor 'users'}}">Users</a></li>
               {{/if}} -->
-          </ul>
+<!--           </ul>
           <ul class="nav navbar-nav navbar-right">
           {{#if currentUser}}
             {{> user_loggedin}}
@@ -33,34 +33,87 @@
   </div>
   <br />
   <br />
+</template> -->
+
+
+<template name='header'>
+    <!-- Side Nacv-->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="{{pathFor 'home'}}">Brown Bag (Beta)</a>
+            </li>
+            <li>
+                {{#if currentUser}} {{> user_loggedin}} {{else}} {{> user_loggedout}} {{/if}}
+            </li>
+            <li><a href="{{pathFor 'places'}}">Places</a>
+            </li>
+            <li><a href="{{pathFor 'orders'}}">Orders</a>
+            </li>
+            <li><a href="{{pathFor 'urls'}}">Urls</a>
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- Top Nav -->
+    <div>
+        <div class="navbar navbar-default" role="navigation">
+                <ul class="nav navbar-nav">
+                    {{> admin_sendOrderNotification}}
+                </ul>
+<!--                 <ul class="nav navbar-nav navbar-right">
+                    {{#if currentUser}} {{> user_loggedin}} {{else}} {{> user_loggedout}} {{/if}}
+                </ul> -->
+        </div>
+    </div>
+
 </template>
 
+
 <template name="admin_sendOrderNotification">
+    <li><a id="menu-toggle"><i class='glyphicon glyphicon-th'></i></a>
+    </li>
     {{#if isInRole 'admin'}}
-      <a href="#" class="btn btn-danger" id="send-notification"><i class="glyphicon glyphicon-bullhorn"></i> Ordering Notification</a>
-    {{/if}}
+    <li><a href="#" id="send-notification"><i class="glyphicon glyphicon-bullhorn"></i> Ordering Notification</a>
+    </li>
+    <li><a id='endVoting'>End Voting (This can't be undone until site reset)</a>
+    </li>
+    {{> clearAll}} {{/if}}
 </template>
 
 <template name='user_loggedout'>
-  <li><a id='login'>Login with Google</a></li>
-<!-- {{> loginButtons }} -->
+    <li><a id='login'>Login with Google</a>
+    </li>
+    <!-- {{> loginButtons }} -->
 </template>
 
 <template name="user_loggedin">
-  {{#if loggingIn}}
-    <li><a>Logging in...</a></li>
-  {{else}}
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <img class="img-rounded" style="height: 32px;" src="{{currentUser.profile.picture}}" />
-        {{currentUser.profile.name}}
-        <b class="caret"></b>
-      </a>
-      <ul class="dropdown-menu">
-        <li><a href="{{pathFor 'settings'}}" >Account Settings</a></li>
-        <li class="divider"></li>
-        <li><a href='#' id="logout">Logout</a></li>
-      </ul>
+    {{#if loggingIn}}
+    <li><a>Logging in...</a>
     </li>
-  {{/if}}
+    {{else}}
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <img class="img-rounded" style="height: 32px;" src="{{currentUser.profile.picture}}" />{{currentUser.profile.name}}
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="{{pathFor 'settings'}}">Account Settings</a>
+            </li>
+            <li class="divider"></li>
+            <li><a href='#' id="logout">Logout</a>
+            </li>
+        </ul>
+    </li>
+    {{/if}}
+</template>
+
+<template name='clearAll'>
+    {{#if isInRole 'admin'}}
+    <li><a id='saveClear'>Reset EVERYTING and Save history</a>
+    </li>
+    <li><a id='hardClear'>Reset EVERYTING and save NOTHING</a>
+    </li>
+    {{/if}}
 </template>

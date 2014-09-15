@@ -16,6 +16,9 @@ if (Meteor.isClient) {
         return false;
     }
 
+    Template.place.isWinner = function(){
+        return Places.find({'winner': 1}).count() > 0;
+    }
 
     Template.place.events({
         'click #delete': function(event){
