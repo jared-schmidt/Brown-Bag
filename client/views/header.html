@@ -46,25 +46,37 @@
             <li>
                 {{#if currentUser}} {{> user_loggedin}} {{else}} {{> user_loggedout}} {{/if}}
             </li>
-            <li><a href="{{pathFor 'places'}}">Places</a>
+            <li><hr /></li>
+            <li><a href="{{pathFor 'places'}}">Places</a></li>
+            <li><a href="{{pathFor 'orders'}}">Orders</a></li>
+            <li><a href="{{pathFor 'urls'}}">Urls</a> </li>
+            <li><hr /></li>
+            <li>
+              <h4>Admin Controls</h4>
+              <ul>
+                {{> admin_sendOrderNotification}}
+              </ul>
             </li>
-            <li><a href="{{pathFor 'orders'}}">Orders</a>
-            </li>
-            <li><a href="{{pathFor 'urls'}}">Urls</a>
-            </li>
-
         </ul>
+
     </div>
 
     <!-- Top Nav -->
     <div>
         <div class="navbar navbar-default" role="navigation">
                 <ul class="nav navbar-nav">
-                    {{> admin_sendOrderNotification}}
+                    <li><a id="menu-toggle"><i class='glyphicon glyphicon-th'></i></a></li>
                 </ul>
-<!--                 <ul class="nav navbar-nav navbar-right">
-                    {{#if currentUser}} {{> user_loggedin}} {{else}} {{> user_loggedout}} {{/if}}
-                </ul> -->
+                <ul class="nav navbar-nav navbar-right">
+                    {{#if currentUser}}
+                      <li>
+                        <span>{{currentUser.profile.name}}</span>
+                        <img class="img-rounded" style="height: 32px;margin-right: 25px; margin-top: 10px;" src="{{currentUser.profile.picture}}" />
+                      </li>
+                    {{else}}
+                      {{> user_loggedout}}
+                    {{/if}}
+                </ul>
         </div>
     </div>
 
@@ -72,13 +84,10 @@
 
 
 <template name="admin_sendOrderNotification">
-    <li><a id="menu-toggle"><i class='glyphicon glyphicon-th'></i></a>
-    </li>
     {{#if isInRole 'admin'}}
-    <li><a href="#" id="send-notification"><i class="glyphicon glyphicon-bullhorn"></i> Ordering Notification</a>
-    </li>
-    <li><a id='endVoting'>End Voting (This can't be undone until site reset)</a>
-    </li>
+<!--     <li><a href="#" id="send-notification"><i class="glyphicon glyphicon-bullhorn"></i>Ordering Notification</a></li>-->
+    <li><a href="#" id="send-notification">Ordering Notification</a></li>
+    <li><a href='#' id='endVoting'>End Voting</a></li>
     {{> clearAll}} {{/if}}
 </template>
 
@@ -94,26 +103,21 @@
     </li>
     {{else}}
     <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img class="img-rounded" style="height: 32px;" src="{{currentUser.profile.picture}}" />{{currentUser.profile.name}}
-            <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-            <li><a href="{{pathFor 'settings'}}">Account Settings</a>
+
+            <li>
+              <a style='display:inline-block; padding-right: 37px;' href="{{pathFor 'settings'}}" title='Account Settings'><i class='glyphicon glyphicon-cog'></i></a>
+              <a style='display:inline-block; padding-right: 37px;' href='#' id="logout" title='Logout' ><i class='glyphicon glyphicon-log-out'></i></a>
             </li>
-            <li class="divider"></li>
-            <li><a href='#' id="logout">Logout</a>
-            </li>
-        </ul>
+
     </li>
     {{/if}}
 </template>
 
 <template name='clearAll'>
     {{#if isInRole 'admin'}}
-    <li><a id='saveClear'>Reset EVERYTING and Save history</a>
+    <li><a href='#' id='saveClear'>Reset & save history</a>
     </li>
-    <li><a id='hardClear'>Reset EVERYTING and save NOTHING</a>
+    <li><a href='#' id='hardClear'>Reset & save NOTHING</a>
     </li>
     {{/if}}
 </template>

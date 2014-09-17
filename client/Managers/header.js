@@ -45,11 +45,30 @@ if (Meteor.isClient) {
         },
         'click #endVoting': function(event) {
             event.preventDefault();
-            console.log("ending voting...");
-            Meteor.call("endPlaceVoting", function(err, placeId) {
-                if (err)
-                    console.log(err);
-                console.log(placeId);
+
+            bootbox.dialog({
+                message: "This can not be undone until the whole site is reset.",
+                title : "Are you sure?!?!",
+                buttons:{
+                    danger:{
+                        label: "Yes!",
+                        className:"btn-danger",
+                        callback: function(){
+                            console.log("ending voting...");
+                            Meteor.call("endPlaceVoting", function(err, placeId) {
+                                if (err)
+                                    console.log(err);
+                                console.log(placeId);
+                            });
+                        }
+                    },
+                    main:{
+                        label: "No!",
+                        className: "btn-primary",
+                        callback: function(){
+                        }
+                    }
+                }
             });
         }
     });

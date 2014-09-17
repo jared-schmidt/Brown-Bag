@@ -28,10 +28,49 @@ if (Meteor.isClient) {
     Template.clearAll.events({
         'click #saveClear': function(event){
             console.log("Clear");
-            Meteor.call("clearAll");
+            bootbox.dialog({
+                message: "This will reset the site, clearing votes and orders!",
+                title : "Are you sure?!?!",
+                buttons:{
+                    danger:{
+                        label: "Yes!",
+                        className:"btn-danger",
+                        callback: function(){
+                            Meteor.call("clearAll");
+                        }
+                    },
+                    main:{
+                        label: "No!",
+                        className: "btn-primary",
+                        callback: function(){
+                        }
+                    }
+                }
+            });
+
+
         },
         'click #hardClear' : function(event){
-            Meteor.call('hardClear');
+                        bootbox.dialog({
+                message: "This will reset the site, clearing votes and orders!",
+                title : "Are you sure?!?!",
+                buttons:{
+                    danger:{
+                        label: "Yes!",
+                        className:"btn-danger",
+                        callback: function(){
+                            Meteor.call('hardClear');
+                        }
+                    },
+                    main:{
+                        label: "No!",
+                        className: "btn-primary",
+                        callback: function(){
+                        }
+                    }
+                }
+            });
+
         }
     });
 }
