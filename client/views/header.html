@@ -50,13 +50,15 @@
             <li><a href="{{pathFor 'places'}}">Places</a></li>
             <li><a href="{{pathFor 'orders'}}">Orders</a></li>
             <li><a href="{{pathFor 'urls'}}">Urls</a> </li>
-            <li><hr /></li>
-            <li>
-              <h4>Admin Controls</h4>
-              <ul>
-                {{> admin_sendOrderNotification}}
-              </ul>
-            </li>
+            {{#if isInRole 'admin'}}
+              <li><hr /></li>
+              <li>
+                <h4>Admin Controls</h4>
+                <ul>
+                  {{> admin_sendOrderNotification}}
+                </ul>
+              </li>
+            {{/if}}
         </ul>
 
     </div>
