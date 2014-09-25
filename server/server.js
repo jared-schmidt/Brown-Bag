@@ -5,7 +5,7 @@ DesktopNotifications = new Meteor.Collection("desktopNotifications");
 
 if (Meteor.isServer) {
     Meteor.startup(function (){
-        var yelp = Meteor.require('yelp').createClient({
+        var yelp = Meteor.npmRequire('yelp').createClient({
             consumer_key: 'WDYAKycarqBqWcfxtrwccQ',
             consumer_secret: '3CtLvBMCISjIlXUQ0MlNyAzvmxg',
             token: 'Yw_FZ2UJ-yXa_ck5A1zWuRkTW7yn9OaW',
@@ -297,6 +297,9 @@ if (Meteor.isServer) {
             place = Places.findOne({},{sort:{'votes': -1}});
             Places.update(place._id,{$set: {"winner": 1}});
             return place._id;
+        },
+        did:function(id){
+            Urls.update(id, {$set:{"did":true}});
         }
     });
 }

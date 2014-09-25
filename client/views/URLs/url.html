@@ -6,6 +6,7 @@
         <td>
             {{votes}}
         </td>
+        {{#unless did}}
                 <td>
           {{#if $eq currentUser.profile.name username}}
             <button type="button" id='delete' class="btn btn-danger">
@@ -26,6 +27,9 @@
             <button type="button" id='resetVotes' class="btn btn-danger">
               <span class="glyphicon glyphicon-refresh"></span>
             </button>
+            <button type="button" id="did" class="btn btn-primary">
+              Done With
+            </button>
           {{/if}}
           {{#if embeddable}}
             <a id="watch" class="btn btn-default" href="watch/{{_id}}">
@@ -37,5 +41,6 @@
             </a>
           {{/if}}
         </td>
+        {{/unless}}
     </tr>
 </template>

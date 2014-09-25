@@ -21,6 +21,12 @@ if (Meteor.isClient) {
             if(Meteor.userId()){
                 Meteor.call("resetUrlVotes", this._id);
             }
+        },
+        'click #did' :function(event){
+            event.preventDefault();
+            if(Meteor.userId()){
+                Meteor.call("did", this._id);
+            }
         }
     });
 
