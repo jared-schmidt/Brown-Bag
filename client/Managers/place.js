@@ -1,5 +1,4 @@
 if (Meteor.isClient) {
-
     Template.place.voted = function(){
         var user = Meteor.user();
         if (user){
@@ -28,7 +27,10 @@ if (Meteor.isClient) {
         'click #upvote': function(event){
             event.preventDefault();
             if(Meteor.userId()){
-                Meteor.call("voteUp", this._id);
+                $('#upvote').prop("disabled", true);
+                Meteor.call("voteUp", this._id, function(err, data){
+                    $('#upvote').prop("disabled", false);
+                });
             }
         },
         'click #resetVotes': function(event){
@@ -37,10 +39,14 @@ if (Meteor.isClient) {
                 Meteor.call("resetVotes", this._id);
             }
         },
-        'click .decrement': function () {
+        'click #downVote': function () {
+            event.preventDefault();
+            $('#downVote').prop("disabled", true);
           var user = Meteor.user();
           if (user){
-            Meteor.call("removeVote", this._id)
+            Meteor.call("removeVote", this._id,function(err, data){
+                $('#downVote').prop("disabled", false);
+            });
           }
           return false;
         }

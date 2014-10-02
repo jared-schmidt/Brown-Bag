@@ -3,7 +3,7 @@ if (Meteor.isClient) {
     Template.order.events({
         'click #deleteOrder' :function(event){
             event.preventDefault();
-            Orders.remove(this['_id']);
+            Meteor.call("removeOrder", this['_id']);
         }
     });
 
