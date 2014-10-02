@@ -7,9 +7,9 @@ isProdEnv = function () {
 }
 
 if (isProdEnv()) {
-    ServiceConfiguration.configurations.remove({
-        service: 'google'
-    });
+    // ServiceConfiguration.configurations.remove({
+    //     service: 'google'
+    // });
 
     ServiceConfiguration.configurations.insert({
         service: 'google',
