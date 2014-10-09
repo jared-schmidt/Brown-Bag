@@ -11,20 +11,22 @@ if (Meteor.isClient) {
     // });
 
     Deps.autorun(function() {
-        Notification.requestPermission();
-        Meteor.subscribe('desktopNotifications');
-        Meteor.autosubscribe(function() {
-            DesktopNotifications.find({}).observe({
-                added: function(notification) {
-                    new Notification(notification.title, {
-                        dir: 'auto',
-                        lang: 'en-US',
-                        body: notification.body,
-                        icon: notification.icon
-                    });
-                }
+        if(Meteor.Device.isDesktop()){
+            Notification.requestPermission();
+            Meteor.subscribe('desktopNotifications');
+            Meteor.autosubscribe(function() {
+                DesktopNotifications.find({}).observe({
+                    added: function(notification) {
+                        new Notification(notification.title, {
+                            dir: 'auto',
+                            lang: 'en-US',
+                            body: notification.body,
+                            icon: notification.icon
+                        });
+                    }
+                });
             });
-        });
+        }
     });
 
     Meteor.startup(function() {
