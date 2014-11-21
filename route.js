@@ -2,7 +2,7 @@ Router.configure({
     layoutTemplate: 'layout'
 });
 
-Router.onBeforeAction('loading');
+Router.onBeforeAction('loading', {except: ['api_winning']});
 
 Router.map(function(){
     this.route('home', {
@@ -87,29 +87,44 @@ Router.map(function(){
     //     }
     // });
 
-    // this.route('api',{
-    //     path: '/api',
-    //     action: function(){
-    //         console.log("Here");
-    //         console.log(this.request)
-    //         console.log(this.request.response);
-    //         return "here";
-    //     },
-    //     data: function(){
-    //         return "Here";
-    //     }
-    // });
+
 
 });
 
-Router.route('/restful', {where: 'server'})
+Router.route('api_winning', {
+    where: 'server',
+    path: '/api/v1/winning'
+  })
   .get(function () {
+    console.log("GET Test");
     this.response.end('get request\n');
   })
   .post(function () {
-    this.response.end('post request\n');
-  });
+    console.log("POST Test");
+    var json_data = this.request.body;
 
+    var out_obj = {
+        'text' : 'Hello ' + json_data['user_name'] + '. You said ' + json_data['text']
+    }
+
+    this.response.setHeader("Content-Type", "application/json");
+    this.response.setHeader("Access-Control-Allow-Origin", "*");
+    this.response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    this.response.end(JSON.stringify(out_obj));
+
+
+    // var url = "https://hooks.slack.com/services/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";
+    // var message = "Let's find out who the winner is.... (Comming Soon!)";
+    // var payload = {
+    //     "username": "Brown-Bag",
+    //     "icon_emoji": ":ghost:",
+    //     "text": message
+    // }
+
+    // var result = Meteor.http.post(url,{
+    //     data: payload
+    // });
+  });
 
 
 
@@ -121,21 +136,28 @@ function loading(){
 }
 
 function mustLogIn(pause){
-    var routeName = this.route.name;
-
-    if (_.include(['login'], routeName))
-        return;
-
     if (! Meteor.userId()) {
-        this.setLayout("loginLayout");
+        this.layout("loginLayout");
         this.render('login');
+      } else {
+        this.next();
+      }
 
-        //if you have named yields it the login form
-        //this.render('loginForm', {to:"formRegion"});
+    // var routeName = this.route.name;
 
-        //and finally call the pause() to prevent further actions from running
-        pause();
-    }else{
-        this.setLayout(this.lookupLayoutTemplate());
-    }
+    // if (_.include(['login'], routeName))
+    //     return;
+
+    // if (! Meteor.userId()) {
+    //     this.setLayout("loginLayout");
+    //     this.render('login');
+
+    //     //if you have named yields it the login form
+    //     //this.render('loginForm', {to:"formRegion"});
+
+    //     //and finally call the pause() to prevent further actions from running
+    //     pause();
+    // }else{
+    //     this.setLayout(this.lookupLayoutTemplate());
+    // }
 };

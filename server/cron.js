@@ -18,7 +18,7 @@ if (Meteor.isServer) {
     day of week          0-7 (0 or 7 is Sun, or use names)
  */
 
-    var c = CRON.createNewCronJob('00 */30 * * * *', function () {
+    var c = CRON.createNewCronJob('00 00 9 * * 4', function () {
         var message = "http://brown-bag.meteor.com/";
         message = "Hello from brown-bag.meteor.com."
         slack_message(message);

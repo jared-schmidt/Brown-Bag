@@ -16,7 +16,7 @@ service-configuration
 iron:router
 email
 particle4dev:meteor-cron2
-mrt:collection-api
+#mrt:collection-api
 meteorhacks:kadira
 mizzao:bootboxjs
 georgediab:slack-notify
