@@ -86,7 +86,32 @@ Router.map(function(){
     //         return model;
     //     }
     // });
+
+    // this.route('api',{
+    //     path: '/api',
+    //     action: function(){
+    //         console.log("Here");
+    //         console.log(this.request)
+    //         console.log(this.request.response);
+    //         return "here";
+    //     },
+    //     data: function(){
+    //         return "Here";
+    //     }
+    // });
+
 });
+
+Router.route('/restful', {where: 'server'})
+  .get(function () {
+    this.response.end('get request\n');
+  })
+  .post(function () {
+    this.response.end('post request\n');
+  });
+
+
+
 
 function loading(){
     if (this.ready())

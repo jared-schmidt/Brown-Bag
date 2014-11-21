@@ -5,6 +5,7 @@ DesktopNotifications = new Meteor.Collection("desktopNotifications");
 
 if (Meteor.isServer) {
     Meteor.startup(function (){
+
         var yelp = Meteor.npmRequire('yelp').createClient({
             consumer_key: 'WDYAKycarqBqWcfxtrwccQ',
             consumer_secret: '3CtLvBMCISjIlXUQ0MlNyAzvmxg',
