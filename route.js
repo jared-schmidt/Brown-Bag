@@ -103,8 +103,45 @@ Router.route('api_winning', {
     console.log("POST Test");
     var json_data = this.request.body;
 
+    var trigger = json_data['trigger_word']
+
+
+    var text = json_data['text'].slice(trigger.length);
+    var command = '';
+    if (text.length > 0){
+        var command = String(text.split(' '[0]));
+        command = command.replace(',', '');
+    }
+
+    var message = 'Try using a command like "'+trigger+' commands"';
+    if (command){
+        console.log(command)
+        switch(command){
+            case 'commands':
+                message = 'help, whoami, winning, URL, about, commands';
+                break;
+            case 'help':
+                message = 'Should I call 911?';
+                break;
+            case 'winning':
+                message = "Some day I will be able to tell you, but not now."
+                break;
+            case 'whoami':
+                message = 'You are ' + json_data['user_name']
+                break;
+            case 'about':
+                message = 'This is a message comming from brown-bag.meteor.com';
+                break;
+            case 'URL':
+                message = 'brown-bag.meteor.com';
+                break;
+            default:
+                message = 'Not sure what '+command+' is.';
+        }
+    }
+
     var out_obj = {
-        'text' : 'Hello ' + json_data['user_name'] + '. You said ' + json_data['text']
+        'text' : message
     }
 
     this.response.setHeader("Content-Type", "application/json");
@@ -113,17 +150,7 @@ Router.route('api_winning', {
     this.response.end(JSON.stringify(out_obj));
 
 
-    // var url = "https://hooks.slack.com/services/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";
-    // var message = "Let's find out who the winner is.... (Comming Soon!)";
-    // var payload = {
-    //     "username": "Brown-Bag",
-    //     "icon_emoji": ":ghost:",
-    //     "text": message
-    // }
 
-    // var result = Meteor.http.post(url,{
-    //     data: payload
-    // });
   });
 
 
