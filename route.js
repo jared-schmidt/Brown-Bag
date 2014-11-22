@@ -110,15 +110,17 @@ Router.route('api_winning', {
     var command = '';
     if (text.length > 0){
         var command = String(text.split(' '[0]));
+        console.log("command -> " + command)
         command = command.replace(',', '');
     }
 
     var message = 'Try using a command like "'+trigger+' commands"';
     if (command){
-        console.log(command)
+        text = text.slice(command.length);
+
         switch(command){
             case 'commands':
-                message = 'help, whoami, winning, URL, about, commands';
+                message = 'help, whoami, winning, URL, about, want, orders, commands';
                 break;
             case 'help':
                 message = 'Should I call 911?';
@@ -131,6 +133,20 @@ Router.route('api_winning', {
                 break;
             case 'about':
                 message = 'This is a message comming from brown-bag.meteor.com';
+                break;
+            case 'want':
+                message = 'I under stand that you want ' + text + '(This does not do anything)';
+                break;
+            case 'orders':
+                var orders = Orders.find({}).fetch();
+                console.log(orders);
+                message = '';
+                for (var i=0; i<orders.length;i++){
+                    message += orders[i].name + ' : ' + orders[i].food
+                }
+                if (message == ''){
+                    message = 'Nothing Ordered...'
+                }
                 break;
             case 'URL':
                 message = 'brown-bag.meteor.com';
