@@ -15,11 +15,11 @@ meteorhacks:npm
 service-configuration
 iron:router
 email
-mrt:cron
-mrt:collection-api
+particle4dev:meteor-cron2
+#mrt:collection-api
 meteorhacks:kadira
 mizzao:bootboxjs
-
+georgediab:slack-notify
 
 npm-container
 mystor:device-detection
