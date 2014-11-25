@@ -91,6 +91,16 @@ Router.map(function(){
 
 });
 
+function q_string(obj) {
+  var str = [];
+  for(var p in obj)
+    if (obj.hasOwnProperty(p)) {
+      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    }
+  return str.join("&");
+}
+
+
 Router.route('api_winning', {
     where: 'server',
     path: '/api/v1/winning'
@@ -106,21 +116,23 @@ Router.route('api_winning', {
     var trigger = json_data['trigger_word']
 
 
-    var text = json_data['text'].slice(trigger.length);
+    var text = json_data['text'].replace(trigger, '');
     var command = '';
     if (text.length > 0){
-        var command = String(text.split(' '[0]));
+        console.log(text)
+        var command = String(text.split(' ')[1]);
         console.log("command -> " + command)
         command = command.replace(',', '');
     }
 
     var message = 'Try using a command like "'+trigger+' commands"';
     if (command){
-        text = text.slice(command.length);
+        text = text.replace(trigger, '');
+        text = text.replace(command, '');
 
         switch(command){
             case 'commands':
-                message = 'help, whoami, winning, URL, about, want, orders, commands';
+                message = 'help, whoami, winning, URL, about, want, orders, pirate, number';
                 break;
             case 'help':
                 message = 'Should I call 911?';
@@ -150,6 +162,24 @@ Router.route('api_winning', {
                 break;
             case 'URL':
                 message = 'brown-bag.meteor.com';
+                break;
+            case 'pirate':
+
+
+                console.log(text.trim());
+                var url = "http://isithackday.com/arrpi.php?format=json&" + q_string({'text':text.trim()});
+                console.log(url);
+                var req = Meteor.http.get(url);
+                var j_data =req.data;
+                message = j_data['translation']['pirate'];
+                break;
+            case 'number':
+                var url = 'http://numbersapi.com/random?json';
+                var req = Meteor.http.get(url);
+                var j_data =req.data;
+                console.log(j_data);
+                message = j_data['text'];
+
                 break;
             default:
                 message = 'Not sure what '+command+' is.';

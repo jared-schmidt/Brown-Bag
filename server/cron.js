@@ -30,25 +30,19 @@ if (Meteor.isServer) {
     c.run();
 
 
-    // var world = function () {
-    //   console.log('World!');
-    // }
 
-    // var myBirthDay = function () {
-    //   console.log('My Birth Day!');
-    // }
+    function slack_message(message){
+        var url = Meteor.settings['slack_in_url'];
+        var payload = {
+            "username": "Brown-Bag",
+            "icon_emoji": ":hamburger:",
+            "text": message
+        }
 
-    // var cron = new Meteor.Cron( {
-    //   events:{
-    //     "* * * * *"  : world,
-    //   }
-    // });
-
-    // var cron = new Meteor.Cron( {
-    //   events:{
-    //     "* * * * *" : slack_message
-    //   }
-    // });
+        var result = Meteor.http.post(url,{
+            data: payload
+        });
+    }
 
     // var sendMail = function(){
     //     // "0 10 * * 4" : sendMail
@@ -61,21 +55,4 @@ if (Meteor.isServer) {
     //         });
     //     }
     // };
-
-    function slack_message(message){
-        var url = "https://hooks.slack.com/services/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";
-        var payload = {
-            "username": "Brown-Bag",
-            "icon_emoji": ":ghost:",
-            "text": message
-        }
-
-        var result = Meteor.http.post(url,{
-            data: payload
-        });
-    }
-
-    // var slack_message = function(){
-
-    // }
 }
