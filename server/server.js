@@ -304,6 +304,10 @@ if (Meteor.isServer) {
         },
         did:function(id){
             Urls.update(id, {$set:{"did":true}});
+        },
+        confirmSlack:function(userid){
+            console.log("In server");
+            Meteor.users.update({'_id':userid}, {$set:{'api.confirmed': true}});
         }
     });
 }

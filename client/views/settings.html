@@ -9,6 +9,21 @@
             <th>Roles:</th>
             <td>{{roles}}</td>
         </tr>
+        <tr>
+            {{#if api}}
+                <th>Confirmed: </th>
+                <td>{{api.confirmed}}</td>
+                <th>Connected:</th>
+                <td>{{api.slack_username}}</td>
+                {{#unless api.confirmed}}
+                <th>{{api.slack_username}} is tring to make a connection.</th>
+                <td>To confirm this connection <button id='confirmSlack'>Confirm</button></td>
+                {{/unless}}
+                {{#if api.confirmed}}
+                    <td>Slack should be good to go.</td>
+                {{/if}}
+            {{/if}}
+        </tr>
     </table>
     <hr />
     <label>Past Orders:</label>
