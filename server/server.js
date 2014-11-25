@@ -305,6 +305,9 @@ if (Meteor.isServer) {
         did:function(id){
             Urls.update(id, {$set:{"did":true}});
         },
+        removePlace:function(placeid){
+            Places.remove(placeid);
+        },
         confirmSlack:function(userid){
             console.log("In server");
             Meteor.users.update({'_id':userid}, {$set:{'api.confirmed': true}});

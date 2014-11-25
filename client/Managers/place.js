@@ -22,7 +22,9 @@ if (Meteor.isClient) {
     Template.place.events({
         'click #delete': function(event){
             event.preventDefault();
-            Places.remove(this['_id']);
+            Meteor.call("removePlace", this._id, function(err){
+                console.log("Removed?");
+            });
         },
         'click #upvote': function(event){
             event.preventDefault();
