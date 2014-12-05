@@ -19,7 +19,7 @@ particle4dev:meteor-cron2
 #mrt:collection-api
 meteorhacks:kadira
 mizzao:bootboxjs
-georgediab:slack-notify
+#georgediab:slack-notify
 
 npm-container
 mystor:device-detection

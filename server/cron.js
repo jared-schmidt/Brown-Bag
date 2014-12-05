@@ -18,10 +18,15 @@ if (Meteor.isServer) {
     day of week          0-7 (0 or 7 is Sun, or use names)
  */
 
-    var c = CRON.createNewCronJob('00 00 9 * * 4', function () {
+    var c = CRON.createNewCronJob('00 30 7 * * 4', function () {
+        console.log("Cron Job");
         var message = "http://brown-bag.meteor.com/";
-        message = "Hello from brown-bag.meteor.com."
         slack_message(message);
+        Meteor.call('slack_message', message, function(err){
+            if (err){
+                console.log(err);
+            }
+        });
     }, 'America/New_York');
     // on stop
     c.onStop(function () {
@@ -29,20 +34,6 @@ if (Meteor.isServer) {
     });
     c.run();
 
-
-
-    function slack_message(message){
-        var url = Meteor.settings['slack_in_url'];
-        var payload = {
-            "username": "Brown-Bag",
-            "icon_emoji": ":hamburger:",
-            "text": message
-        }
-
-        var result = Meteor.http.post(url,{
-            data: payload
-        });
-    }
 
     // var sendMail = function(){
     //     // "0 10 * * 4" : sendMail

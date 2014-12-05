@@ -300,6 +300,19 @@ if (Meteor.isServer) {
         endPlaceVoting:function(){
             place = Places.findOne({},{sort:{'votes': -1}});
             Places.update(place._id,{$set: {"winner": 1}});
+
+            var message = "Voting has ended! Place your orders!"
+            var url = Meteor.settings['slack_in_url'];
+            var payload = {
+                "username": "Draco",
+                "icon_emoji": ":dragon:",
+                "text": message
+            }
+
+            var result = Meteor.http.post(url,{
+                data: payload
+            });
+
             return place._id;
         },
         did:function(id){
@@ -311,6 +324,18 @@ if (Meteor.isServer) {
         confirmSlack:function(userid){
             console.log("In server");
             Meteor.users.update({'_id':userid}, {$set:{'api.confirmed': true}});
+        },
+        slack_message:function(message){
+            var url = Meteor.settings['slack_in_url'];
+            var payload = {
+                "username": "Brown-Bag",
+                "icon_emoji": ":hamburger:",
+                "text": draco_language(message)
+            }
+
+            var result = Meteor.http.post(url,{
+                data: payload
+            });
         }
     });
 }

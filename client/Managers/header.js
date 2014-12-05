@@ -32,10 +32,19 @@ if (Meteor.isClient) {
     Template.header.events({
         'click #send-notification': function(event, template) {
             //TODO include time for N minutes until food order
+            var message = "The food is being ordered soon, please make sure your order is in.";
+
             Meteor.call('publishNotification', {
                 title: 'Orders Being Placed',
-                body: 'The food is being ordered soon, please make sure your order is in.',
+                body: message,
                 icon: 'brown-bag.png'
+            });
+
+
+            Meteor.call('slack_message', message,function(err){
+                if(err){
+                    console.log(err);
+                }
             });
             return false;
         },

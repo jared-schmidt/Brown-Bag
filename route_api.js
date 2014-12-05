@@ -1,3 +1,19 @@
+function q_string(obj) {
+  var str = [];
+  for(var p in obj)
+    if (obj.hasOwnProperty(p)) {
+      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    }
+  return str.join("&");
+}
+
+function draco_language(message){
+    var url = "http://isithackday.com/arrpi.php?format=json&" + q_string({'text':message.trim()});
+    var req = Meteor.http.get(url);
+    var j_data =req.data;
+    return j_data['translation']['pirate'];
+}
+
 Router.route('api_winning', {
     where: 'server',
     path: '/api/v1/winning'
@@ -17,11 +33,10 @@ Router.route('api_winning', {
     var text = json_data['text'].replace(trigger, '');
     var command = '';
     if (text.length > 0){
-        console.log(text)
         var command = String(text.split(' ')[1]);
-        console.log("command -> " + command)
         command = command.replace(',', '');
         command = command.trim();
+        command = command.toLowerCase();
     }
 
     var message = 'Try using a command like "'+trigger+' commands"';
@@ -31,8 +46,21 @@ Router.route('api_winning', {
         text = text.trim();
 
         switch(command){
+            case 'help':
             case 'commands':
-                message = 'help, whoami, winning, URL, about, want {text}, orders, pirate {text}, number, connect {email}';
+                message = 'whoami - checks if you are connected to brown-bag site. \n';
+                message += 'winning - Returns the place that is currectly winning in the brown-bag site. \n';
+                message += 'URL - Returns the URL for the brown-bag site. \n';
+                message += 'want {text} - Places your order to the brown-bag site \n';
+                message += 'orders - List all the current orders \n';
+                message += 'number - Gives a random fact about a random number. \n';
+                message += 'connect {email} - Connects slack to the brown-bag site. \n';
+                message += 'chuck - Give a random Chuck Norris fact. \n';
+                message += 'pirate {text} - Converts your text to pirate talk. \n';
+                message += 'cowsay {text} - Places your text in a bubble a cow is saying. \n';
+                message += 'quote - Returns a random quote.\n'
+                message += 'gif {text} - Returns a gif based on your text. \n';
+                message += 'about - about. \n';
                 break;
             case 'connect':
                 console.log(text);
@@ -63,15 +91,11 @@ Router.route('api_winning', {
                     message = "Please include the beginning of your email address (without the '@problemsolutions.net') to connect to.";
                 }
                 break;
-            case 'help':
-                message = 'Should I call 911?';
-                break;
             case 'winning':
                 place = Places.findOne({},{sort:{'votes': -1}});
                 message = place.name + " is currently winning.";
                 break;
             case 'whoami':
-                // message = 'You are ' + json_data['user_name']
                 user = Meteor.users.findOne({'api.slack_id':slack_id});
                 if (user){
                     message = "You are " + user.profile.name;
@@ -103,8 +127,6 @@ Router.route('api_winning', {
                     message = "Use the connect function";
                 }
 
-
-
                 break;
             case 'orders':
                 var orders = Orders.find({}).fetch();
@@ -116,12 +138,11 @@ Router.route('api_winning', {
                     message = 'Nothing Ordered...'
                 }
                 break;
-            case 'URL':
+            case 'url':
                 message = 'brown-bag.meteor.com';
                 break;
             case 'pirate':
                 var url = "http://isithackday.com/arrpi.php?format=json&" + q_string({'text':text.trim()});
-                console.log(url);
                 var req = Meteor.http.get(url);
                 var j_data =req.data;
                 message = j_data['translation']['pirate'];
@@ -131,6 +152,40 @@ Router.route('api_winning', {
                 var req = Meteor.http.get(url);
                 var j_data =req.data;
                 message = j_data['text'];
+                break;
+            case 'cowsay':
+                var url = 'http://cowsay.morecode.org/say?format=text&' + q_string({'message':text.trim()});
+                var req = Meteor.http.get(url);
+                message = req.content;
+                break;
+            case 'catfact':
+                var url = 'http://catfacts-api.appspot.com/api/facts?number=1'
+                var req = Meteor.http.get(url);
+                var j_data = JSON.parse(req.content);
+
+                message = j_data['facts'][0];
+                break;
+            case 'chuck':
+                //?firstName=John&lastName=Doe
+                var url = 'http://api.icndb.com/jokes/random'
+                var req = Meteor.http.get(url);
+                var j_data =req.data;
+                message = j_data['value']['joke'];
+                break;
+            case 'quote':
+                var url = 'http://www.iheartquotes.com/api/v1/random?format=json'
+                var req = Meteor.http.get(url);
+                var j_data =req.data;
+                message = j_data['quote'];
+                break;
+            case 'gif':
+                var offset = Math.floor((Math.random() * 10) + 1); //random number between 1 and 10
+                var url = 'http://api.giphy.com/v1/gifs/translate?'+q_string({'s':text.trim()})+'&api_key=dc6zaTOxFJmzC&limit=1&offset='+offset
+                console.log(url);
+                var req = Meteor.http.get(url);
+                var j_data =req.data;
+                console.log(j_data);
+                message = j_data['data']['images']['original']['url'];
                 break;
             default:
                 message = 'Not sure what '+command+' is.';
@@ -145,7 +200,5 @@ Router.route('api_winning', {
     this.response.setHeader("Access-Control-Allow-Origin", "*");
     this.response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     this.response.end(JSON.stringify(out_obj));
-
-
 
   });
