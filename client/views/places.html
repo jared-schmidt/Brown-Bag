@@ -3,6 +3,7 @@
         <div class="title-bar row">
           <span class="title col-sm-8">Places</span>
           <span class="count col-sm-4">{{items.count}} Place(s) Registered</span>
+          <span class="count col-sm-4">{{currentVoted}} Total Number of Votes</span>
         </div>
       {{#if isInRole 'admin'}}
         <div class="entry form-horizontal">
@@ -21,7 +22,7 @@
   <table class="table">
       <thead>
           <th>Name</th>
-          <th>Votes</th>
+          <!-- <th>Votes</th> -->
           <!-- <th>Time</th> -->
           <th>&nbsp;</th>
       </thead>

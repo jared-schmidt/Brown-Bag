@@ -19,7 +19,7 @@ Router.map(function(){
         onBeforeAction:mustLogIn,
         data: function(){
             var model = {}
-            model['items'] = Places.find({}, {sort:{'votes': -1}});
+            model['items'] = Places.find({}, {sort:{'name': 1}});
             return model;
         }
     });

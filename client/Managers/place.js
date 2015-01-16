@@ -1,23 +1,4 @@
 if (Meteor.isClient) {
-    Template.place.voted = function(){
-        var user = Meteor.user();
-        if (user){
-          return Places.find({'upvoters' : {"$in" : [user._id]}}).count() > 0;
-        }
-        return false;
-    }
-
-    Template.place.downVote = function(){
-        var user = Meteor.user();
-        if (user){
-          return Places.find({ $and : [{'upvoters' : {"$in" : [user._id]}}, {'_id' : this._id}] }).count() > 0;
-        }
-        return false;
-    }
-
-    Template.place.isWinner = function(){
-        return Places.find({'winner': 1}).count() > 0;
-    }
 
     Template.place.events({
         'click #delete': function(event){
@@ -72,6 +53,23 @@ if (Meteor.isClient) {
             else{
                 return 'disabled';
             }
+        },
+        'isWinner': function(){
+            return Places.find({'winner': 1}).count() > 0;
+        },
+        'downVote': function(){
+            var user = Meteor.user();
+            if (user){
+              return Places.find({ $and : [{'upvoters' : {"$in" : [user._id]}}, {'_id' : this._id}] }).count() > 0;
+            }
+            return false;
+        },
+        'voted': function(){
+            var user = Meteor.user();
+            if (user){
+              return Places.find({'upvoters' : {"$in" : [user._id]}}).count() > 0;
+            }
+            return false;
         }
     });
 }

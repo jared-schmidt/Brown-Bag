@@ -18,21 +18,21 @@ if (Meteor.isServer) {
     day of week          0-7 (0 or 7 is Sun, or use names)
  */
 
-    var c = CRON.createNewCronJob('00 30 7 * * 4', function () {
-        console.log("Cron Job");
-        var message = "http://brown-bag.meteor.com/";
-        slack_message(message);
-        Meteor.call('slack_message', message, function(err){
-            if (err){
-                console.log(err);
-            }
-        });
-    }, 'America/New_York');
-    // on stop
-    c.onStop(function () {
-        console.log('stop');
-    });
-    c.run();
+    // var c = CRON.createNewCronJob('00 30 7 * * 4', function () {
+    //     console.log("Cron Job");
+    //     var message = "http://brown-bag.meteor.com/";
+    //     slack_message(message);
+    //     Meteor.call('slack_message', message, function(err){
+    //         if (err){
+    //             console.log(err);
+    //         }
+    //     });
+    // }, 'America/New_York');
+    // // on stop
+    // c.onStop(function () {
+    //     console.log('stop');
+    // });
+    // c.run();
 
 
     // var sendMail = function(){

@@ -58,7 +58,8 @@ Router.route('api_winning', {
                 message += 'chuck - Give a random Chuck Norris fact. \n';
                 message += 'pirate {text} - Converts your text to pirate talk. \n';
                 message += 'cowsay {text} - Places your text in a bubble a cow is saying. \n';
-                message += 'quote - Returns a random quote.\n'
+                message += 'quote - Returns a random quote.\n';
+                message += 'catfact - Returns a random cat fact. \n';
                 message += 'gif {text} - Returns a gif based on your text. \n';
                 message += 'about - about. \n';
                 break;
@@ -168,9 +169,13 @@ Router.route('api_winning', {
             case 'chuck':
                 //?firstName=John&lastName=Doe
                 var url = 'http://api.icndb.com/jokes/random'
-                var req = Meteor.http.get(url);
-                var j_data =req.data;
-                message = j_data['value']['joke'];
+                try{
+                    var req = Meteor.http.get(url);
+                    var j_data =req.data;
+                    message = j_data['value']['joke'];
+                } catch(e){
+                    message = "API is down. Try again later, or don't";
+                }
                 break;
             case 'quote':
                 var url = 'http://www.iheartquotes.com/api/v1/random?format=json'
