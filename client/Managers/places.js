@@ -35,24 +35,10 @@ if (Meteor.isClient) {
     // Prints the places with votes in the console
     var code = Meteor.settings.public['vote_code'];
     Mousetrap.bind(code, function() {
-      places = Places.find({},{sort:{'votes': -1}}).fetch();
-      var vote_message = '<table style="border: 1px black solid">';
-      // Prints this to the web console
-      console.log("----------------VOTES----------------")
-      for(var p in places){
-        var name = places[p].name;
-        var votes = places[p].votes;
-        if (votes > 0){
-            console.log(name + ' - ' + votes);
-            vote_message += '<tr><td style="padding:5px;border: 1px black solid">'+name+'</td><td style="padding:5px;border: 1px black solid">'+votes+'</td></tr>';
-        }
-      }
-      vote_message += '</table>'
-      console.log("----------------END VOTES----------------")
-
-      bootbox.alert(vote_message, function(){
-        console.log("call back....");
+      Meteor.call('get_current_votes', function(error, vote_message){
+        bootbox.alert(vote_message, function(){
+          console.log("call back....");
+        });
       });
     });
-
 }

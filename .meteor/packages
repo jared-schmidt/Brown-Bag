@@ -24,3 +24,7 @@ mizzao:bootboxjs
 npm-container
 mystor:device-detection
 mousetrap:mousetrap
+
+meteorhacks:fast-render
+
+fortawesome:fontawesome

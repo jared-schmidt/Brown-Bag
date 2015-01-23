@@ -9,6 +9,7 @@ Router.map(function(){
         path:'/',
         action: loading,
         onBeforeAction:mustLogIn,
+        fastRender: true
     });
     this.route('places', {
         path:'/places',
@@ -21,7 +22,8 @@ Router.map(function(){
             var model = {}
             model['items'] = Places.find({}, {sort:{'name': 1}});
             return model;
-        }
+        },
+        fastRender: true
     });
     this.route('orders',{
         path:'/orders',
@@ -34,7 +36,8 @@ Router.map(function(){
             var model = {}
             model['items'] = Orders.find({},{sort:{'submittedOn': -1}});
             return model;
-        }
+        },
+        fastRender: true
     });
     this.route('urls',{
         path:'/urls',
@@ -47,7 +50,8 @@ Router.map(function(){
             var model = {}
             model['items'] = Urls.find({},{sort:{'votes': -1}});
             return model;
-        }
+        },
+        fastRender: true
     });
 
     this.route('watch_video', {
@@ -59,7 +63,8 @@ Router.map(function(){
         onBeforeAction:mustLogIn,
         data: function() {
             return Urls.findOne(this.params._id);
-        }
+        },
+        fastRender: true
     });
 
     this.route('settings',{
@@ -72,7 +77,8 @@ Router.map(function(){
             });
             var user = Session.get('user');
             return user;
-        }
+        },
+        fastRender: true
     });
 
     // this.route('users',{
@@ -125,3 +131,4 @@ function mustLogIn(pause){
     //     this.setLayout(this.lookupLayoutTemplate());
     // }
 };
+

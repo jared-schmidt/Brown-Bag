@@ -3,6 +3,7 @@ Places = new Meteor.Collection("places");
 Urls = new Meteor.Collection("urls");
 DesktopNotifications = new Meteor.Collection("desktopNotifications");
 
+
 if (Meteor.isServer) {
     Meteor.startup(function (){
         console.log(Meteor.settings['found_file']);
@@ -318,7 +319,7 @@ if (Meteor.isServer) {
 
 
             console.log("End Voting...");
-            var message = "Voting has ended! The winner is " + place.name + ". Place your orders now!";
+            var message = "Voting has ended! The winner is " + place.name + ". Place your orders now! Here could be the menu " + place['menu'];
 
             var url = 'https://slack.com/api/chat.postMessage';
             var slack_api_token = Meteor.settings['slack_api_token'];
@@ -330,9 +331,7 @@ if (Meteor.isServer) {
                 "username": "Draco (Ghost)",
                 'parse':"full"
             }
-            console.log("Get REQUEST TIME");
             var result = HTTP.call("GET", url, {params: payload});
-
 
             return place._id;
         },
@@ -358,6 +357,42 @@ if (Meteor.isServer) {
                 'parse':"full"
             }
             var result = HTTP.call("GET", url, {params: payload});
+        },
+        get_current_votes:function(){
+            var user = Meteor.user();
+
+            if (user.roles == 'admin'){
+                places = Places.find({},{sort:{'votes': -1}}).fetch();
+                var vote_message = '<table style="border: 1px black solid">';
+                // Prints this to the web console
+                for(var p in places){
+                  var name = places[p].name;
+                  var votes = places[p].votes;
+                  if (votes > 0){
+                      vote_message += '<tr><td style="padding:5px;border: 1px black solid">'+name+'</td><td style="padding:5px;border: 1px black solid">'+votes+'</td></tr>';
+                  }
+                }
+                vote_message += '</table>';
+            } else {
+                vote_message = "No"
+
+                var message = user.profile.name + " tried to cheat on the Brown-Bag site!";
+
+                var url = 'https://slack.com/api/chat.postMessage';
+                var slack_api_token = Meteor.settings['slack_api_token'];
+                var payload = {
+                    "token":slack_api_token,
+                    "channel":'G037P84PQ',
+                    "text": message,
+                    "icon_emoji": ':ghost:',
+                    "username": "Draco (Ghost)",
+                    'parse':"full"
+                }
+                var result = HTTP.call("GET", url, {params: payload});
+
+
+            }
+            return vote_message
         }
     });
 }
