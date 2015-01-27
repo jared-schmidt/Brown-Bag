@@ -41,19 +41,19 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="{{pathFor 'home'}}">Brown Bag (Beta)</a>
+                <a href="{{pathFor 'home'}}"><span style='font-size:24px;'><b>Brown Bag (Beta)</b></span></a>
             </li>
             <li>
                 {{#if currentUser}} {{> user_loggedin}} {{else}} {{> user_loggedout}} {{/if}}
             </li>
             <li><hr /></li>
-            <li><a href="{{pathFor 'places'}}">Places</a></li>
-            <li><a href="{{pathFor 'orders'}}">Orders</a></li>
-            <li><a href="{{pathFor 'urls'}}">Talks</a> </li>
+            <li><a href="{{pathFor 'places'}}"><i class="fa fa-building-o fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Places</span></b></a></li>
+            <li><a href="{{pathFor 'orders'}}"><i class="fa fa-cutlery fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Orders</span></b></a></li>
+            <li><a href="{{pathFor 'urls'}}"><i class="fa fa-video-camera fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Talks</span></b></a> </li>
             {{#if isInRole 'admin'}}
               <li><hr /></li>
               <li>
-                <h4>Admin Controls</h4>
+                <h4 style="color:#fff; cursor:default;"><b>Admin Controls</b></h4>
                 <ul>
                   {{> admin_sendOrderNotification}}
                 </ul>
@@ -67,12 +67,12 @@
     <div>
         <div class="navbar navbar-default" role="navigation">
                 <ul class="nav navbar-nav">
-                    <li><a id="menu-toggle"><i class='glyphicon glyphicon-th'></i></a></li>
+                    <li><a id="menu-toggle"><i class='fa fa-bars'></i></a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {{#if currentUser}}
                       <li>
-                        <span>{{currentUser.profile.name}}</span>
+                        <span style='color:#fff; position:relative; top: 5px;'>{{currentUser.profile.name}}</span>
                         <img class="img-rounded" style="height: 32px;margin-right: 25px; margin-top: 10px;" src="{{currentUser.profile.picture}}" />
                       </li>
                     {{else}}
