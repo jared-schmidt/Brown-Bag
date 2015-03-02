@@ -5,6 +5,9 @@ DesktopNotifications = new Meteor.Collection("desktopNotifications");
 
 
 if (Meteor.isServer) {
+    Houston.add_collection(Meteor.users);
+    Houston.add_collection(Houston._admins);
+
     Meteor.startup(function (){
         console.log(Meteor.settings['found_file']);
         var yelp = Meteor.npmRequire('yelp').createClient({
@@ -294,6 +297,20 @@ if (Meteor.isServer) {
             }
             var result = HTTP.call("GET", url, {params: payload});
 
+        },
+        vote_Notification:function(){
+            var url = 'https://slack.com/api/chat.postMessage';
+            var slack_api_token = Meteor.settings['slack_api_token'];
+            var message = "Did YOU vote?! http://brown-bag.meteor.com/places";
+            var payload = {
+                "token":slack_api_token,
+                "channel":'G037P84PQ',
+                "text": message,
+                "icon_emoji": ':ghost:',
+                "username": "Draco (Ghost)",
+                'parse':"full"
+            }
+            var result = HTTP.call("GET", url, {params: payload});
         },
         sendEmail:function(to, message, subject){
             if (!subject) subject="Brown Bag";

@@ -49,7 +49,7 @@
             <li><hr /></li>
             <li><a href="{{pathFor 'places'}}"><i class="fa fa-building-o fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Places</span></b></a></li>
             <li><a href="{{pathFor 'orders'}}"><i class="fa fa-cutlery fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Orders</span></b></a></li>
-            <li><a href="{{pathFor 'urls'}}"><i class="fa fa-video-camera fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Talks</span></b></a> </li>
+            <li><a href="http://pslinks.meteor.com/category/brown-bag" target="_blank"><i class="fa fa-video-camera fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Talks</span></b></a> </li>
             {{#if isInRole 'admin'}}
               <li><hr /></li>
               <li>
@@ -89,6 +89,7 @@
     {{#if isInRole 'admin'}}
 <!--     <li><a href="#" id="send-notification"><i class="glyphicon glyphicon-bullhorn"></i>Ordering Notification</a></li>-->
     <li><a href="#" id="send-notification">Ordering Notification</a></li>
+    <li><a href="##" id='vote-notify'>Vote Notification</a></li>
     <li><a href='#' id='endVoting'>End Voting</a></li>
     {{> clearAll}} {{/if}}
 </template>

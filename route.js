@@ -4,6 +4,8 @@ Router.configure({
 
 Router.onBeforeAction('loading', {except: ['api_winning']});
 
+// http://stackoverflow.com/questions/13151879/publish-certain-information-for-meteor-users-and-more-information-for-meteor-use
+
 Router.map(function(){
     this.route('home', {
         path:'/',
