@@ -64,7 +64,7 @@ if (Meteor.isServer) {
     });
 
     Meteor.publish('places', function(){
-        return Places.find({});
+        return Places.find({}, {fields: {'votes': 0}});
     });
 
     Meteor.publish('urls', function(){
@@ -109,7 +109,6 @@ if (Meteor.isServer) {
             }
         }
     ];
-
 
     Meteor.methods({
         removeOrder : function(orderId){
@@ -216,6 +215,13 @@ if (Meteor.isServer) {
                 $addToSet: {'upvoters': user._id},
                 $inc : {'votes':1}
             });
+        },
+        getTotalVotes: function(){
+            var totalVotes = 0;
+            Places.find({}).map(function(doc){
+                totalVotes += doc.votes;
+            });
+            return totalVotes;
         },
         resetVotes : function(placeId){
             Places.update(placeId, {

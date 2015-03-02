@@ -22,13 +22,13 @@ if (Meteor.isClient) {
         }
     });
 
+    Meteor.call('getTotalVotes', function(err, result){
+        Session.set('totalVotes', result);
+    });
+
     Template.places.helpers({
         'currentVoted': function(){
-            var totalVotes = 0;
-            Places.find({}).map(function(doc){
-                totalVotes += doc.votes;
-            });
-            return totalVotes;
+            return Session.get('totalVotes');
         }
     });
 
