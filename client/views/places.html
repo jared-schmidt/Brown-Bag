@@ -1,24 +1,26 @@
 <template name="places">
-    <div class="group-header">
-        <div class="title-bar row">
-          <span class="title col-sm-8">Places</span>
-          <span class="count col-sm-4">{{items.count}} Place(s) Registered</span>
-          <span class="count col-sm-4">{{currentVoted}} Total Number of Votes</span>
-        </div>
+  <h3>Places</h3>
+      <div >
+        <div>{{items.count}} Place(s) Registered</div>
+        <div>{{currentVoted}} Total Number of Votes</div>
+      </div>
+
       {{#if isInRole 'admin'}}
-        <div class="entry form-horizontal">
-          <div class="col-sm-5">
-            <input type='text' placeholder="Where at..." id="place" class="form-control" />
-          </div>
-          <div class="col-sm-5">
-            <input type='text' placeholder="What they have..." id="menu" class="form-control" />
-          </div>
-          <div class="col-sm-2">
-            <input type="button" class='btn btn-success' id='submitPlace' value="Submit" />
-          </div>
-        </div>
+        <table>
+          <tr>
+            <td>
+            <paper-input label="Where at..." id="place" ></paper-input>
+            </td>
+            <td>
+            <paper-input label="What they have..." id="menu" ></paper-input>
+            </td>
+            <td>
+            <paper-button  id='submitPlace' >Submit</paper-button>
+            </td>
+          </tr>
+        </table>
       {{/if}}
-  </div>
+<core-header-panel navigation flex mode="seamed">
   <table class="table">
       <thead>
           <th>Name</th>
@@ -27,6 +29,8 @@
           <th>&nbsp;</th>
       </thead>
       <tbody>
+
+
           {{#each items}}
               {{> place}}
           {{else}}
@@ -34,4 +38,5 @@
           {{/each}}
     </tbody>
   </table>
+  </core-header-panel>
 </template>

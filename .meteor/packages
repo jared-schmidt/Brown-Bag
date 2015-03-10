@@ -6,9 +6,9 @@
 standard-app-packages
 accounts-google
 
-ian:accounts-ui-bootstrap-3
-mizzao:bootstrap-3
-fezvrasta:bootstrap-material-design
+#ian:accounts-ui-bootstrap-3
+#mizzao:bootstrap-3
+#fezvrasta:bootstrap-material-design
 raix:handlebar-helpers
 alanning:roles
 mrt:momentjs
@@ -19,8 +19,8 @@ iron:router
 email
 particle4dev:meteor-cron2
 #mrt:collection-api
-meteorhacks:kadira
-mizzao:bootboxjs
+#meteorhacks:kadira
+#mizzao:bootboxjs
 #georgediab:slack-notify
 
 npm-container
@@ -31,3 +31,6 @@ meteorhacks:fast-render
 
 fortawesome:fontawesome
 houston:admin
+
+ecwyne:polymer
+ecwyne:polymer-elements

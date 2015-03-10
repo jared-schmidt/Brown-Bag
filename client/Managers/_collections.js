@@ -10,6 +10,12 @@ if (Meteor.isClient) {
     //     Meteor.subscribe('urls');
     // });
 
+    Template.layout.helpers({
+        getTitle:function(){
+            return Session.get('pageTitle');
+        }
+    });
+
     Deps.autorun(function() {
         if(Meteor.Device.isDesktop()){
             Notification.requestPermission();

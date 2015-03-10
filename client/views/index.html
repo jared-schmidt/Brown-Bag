@@ -4,12 +4,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" sizes="16x16 32x32" href="/brown-bag.png">
+    <link rel="import" href="bower_components/core-scaffold/core-scaffold.html">
+    <link rel="import" href="bower_components/core-drawer-panel/core-drawer-panel.html">
+    <link rel="import" href="bower_components/core-menu/core-menu.html">
+    <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
+    <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+
+
+    <link rel="import" href="bower_components/paper-item/paper-item.html">
+    <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+
+
 </head>
 
 <template name='layout'>
-<div id="wrapper">
-    {{> header}}
-    <div id="page-content-wrapper">
+<core-scaffold>
+  <core-header-panel navigation flex mode="seamed">
+    <core-toolbar>Brown Bag (Beta)</core-toolbar>
+    <core-menu>
+      {{> header}}
+    </core-menu>
+  </core-header-panel>
+  <div tool>{{getTitle}}</div>
+  <!-- <div tool horizontal layout flex center-justified class="middle">Title-middle</div> -->
+  <div tool horizontal layout flex end-justified class="bottom">
+      {{#if currentUser}} {{> user_loggedin}} {{else}} {{> user_loggedout}} {{/if}}
+  </div>
+  <div>{{> yield}}</div>
+</core-scaffold>
+
+
+
+<!-- <div id="wrapper">
+
+    <core-drawer-panel>
+      <div drawer>{{> header}}</div>
+      <div main>
+      <div id="page-content-wrapper">
         {{> yield}} {{#if currentUser}}
         <footer>
             Made Especially for {{currentUser.profile.name}}
@@ -20,6 +53,10 @@
         {{/if}}
     </div>
     </div>
+    </core-drawer-panel>
+
+
+    </div> -->
 </template>
 
 <template name='loginLayout'>

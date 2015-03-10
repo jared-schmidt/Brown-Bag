@@ -2,7 +2,9 @@
     <tr class="{{#if winner}}success{{/if}}">
         <td>
           {{#if menu}}
-            <a target="_blank" href='{{menu}}'>{{name}}</a>
+            <paper-item label="Place">
+              <a target="_blank" href='{{menu}}'>{{name}}</a>
+            </paper-item>
           {{/if}}
           {{#unless menu}}
             {{name}}
@@ -13,37 +15,25 @@
         <!-- <td>{{submittedOn}}</td> -->
         {{#unless isWinner}}
         <td>
-          <!-- {{#if $eq currentUser.profile.name username}} -->
-          {{#if isInRole 'admin'}}
-            <button type="button" id='delete' class="btn btn-danger">
-              <span class="glyphicon glyphicon-trash"></span>
-            </button>
-          {{/if}}
 
           {{#if voted}}
             {{#if downVote}}
-              <button type="button" id='downVote' class="decrement btn btn-warning">
-              <span class="glyphicon glyphicon-thumbs-down"></span>
-            </button>
+              <paper-icon-button id='downVote' icon='thumb-down'></paper-icon-button>
+
             {{/if}}
           {{#unless downVote}}
-<!--       <td></td> -->
         {{/unless}}
     {{/if}}
     {{#unless voted }}
       {{#unless downVote}}
+        <paper-icon-button id='upvote' icon='thumb-up'></paper-icon-button>
 
-      <button type="button" id='upvote' class="btn btn-success {{upvotedClass}}">
-              <span class="glyphicon glyphicon-thumbs-up"></span>
-            </button>
             {{/unless}}
 
     {{/unless}}
           {{#if isInRole 'admin'}}
-            <button type="button" id='resetVotes' class="btn btn-danger">
-              Reset ALL votes
-              <!-- <span class="glyphicon glyphicon-refresh"></span> -->
-            </button>
+            <!-- <paper-icon-button id='resetVotes' icon='refresh'></paper-icon-button> -->
+            <paper-icon-button id='delete' icon='delete'></paper-icon-button>
           {{/if}}
         </td>
         {{/unless}}

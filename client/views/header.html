@@ -37,8 +37,29 @@
 
 
 <template name='header'>
+   <core-menu>
+    <!-- <paper-item> <a href="{{pathFor 'home'}}"><span style='font-size:24px;'><b>Brown Bag (Beta)</b></span></a></paper-item> -->
+
+    <paper-item>
+      <a href="{{pathFor 'places'}}"><b><span style='font-size:22px;'>Places</span></b></a>
+    </paper-item>
+
+    <paper-item>
+      <a href="{{pathFor 'orders'}}"><b><span style='font-size:22px;'>Orders</span></b></a>
+    </paper-item>
+
+    <paper-item>
+      <a href="http://pslinks.meteor.com/category/brown-bag" target="_blank"><b><span style='font-size:22px;'>Talks</span></b></a>
+    </paper-item>
+
+      {{#if isInRole 'admin'}}
+          <h4 style="color:#fff; cursor:default;"><b>Admin Controls</b></h4>
+          {{> admin_sendOrderNotification}}
+      {{/if}}
+
+  </core-menu>
     <!-- Side Nacv-->
-    <div id="sidebar-wrapper">
+<!--     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
                 <a href="{{pathFor 'home'}}"><span style='font-size:24px;'><b>Brown Bag (Beta)</b></span></a>
@@ -61,10 +82,10 @@
             {{/if}}
         </ul>
 
-    </div>
+    </div> -->
 
     <!-- Top Nav -->
-    <div>
+<!--     <div>
         <div class="navbar navbar-default" role="navigation">
                 <ul class="nav navbar-nav">
                     <li><a id="menu-toggle"><i class='fa fa-bars'></i></a></li>
@@ -80,7 +101,7 @@
                     {{/if}}
                 </ul>
         </div>
-    </div>
+    </div> -->
 
 </template>
 
@@ -88,9 +109,9 @@
 <template name="admin_sendOrderNotification">
     {{#if isInRole 'admin'}}
 <!--     <li><a href="#" id="send-notification"><i class="glyphicon glyphicon-bullhorn"></i>Ordering Notification</a></li>-->
-    <li><a href="#" id="send-notification">Ordering Notification</a></li>
-    <li><a href="##" id='vote-notify'>Vote Notification</a></li>
-    <li><a href='#' id='endVoting'>End Voting</a></li>
+    <paper-item><a href="#" id="send-notification">Ordering Notification</a></paper-item>
+    <paper-item><a href="##" id='vote-notify'>Vote Notification</a></paper-item>
+    <paper-item><a href='#' id='endVoting'>End Voting</a></paper-item>
     {{> clearAll}} {{/if}}
 </template>
 
@@ -105,22 +126,17 @@
     <li><a>Logging in...</a>
     </li>
     {{else}}
-    <li class="dropdown">
 
-            <li>
-              <a style='display:inline-block; padding-right: 37px;' href="{{pathFor 'settings'}}" title='Account Settings'><i class='glyphicon glyphicon-cog'></i></a>
-              <a style='display:inline-block; padding-right: 37px;' href='#' id="logout" title='Logout' ><i class='glyphicon glyphicon-log-out'></i></a>
-            </li>
-
-    </li>
+        <a href="{{pathFor 'settings'}}" title='Account Settings'>
+          <paper-icon-button icon='settings'></paper-icon-button>
+        </a>
+        <paper-icon-button icon='exit-to-app' id="logout"></paper-icon-button>
     {{/if}}
 </template>
 
 <template name='clearAll'>
     {{#if isInRole 'admin'}}
-    <li><a href='#' id='saveClear'>Reset & save history</a>
-    </li>
-    <li><a href='#' id='hardClear'>Reset & save NOTHING</a>
-    </li>
+      <paper-item><a href='#' id='saveClear'>Reset & save history</a></paper-item>
+      <paper-item><a href='#' id='hardClear'>Reset & save NOTHING</a></paper-item>
     {{/if}}
 </template>

@@ -4,6 +4,16 @@ Router.configure({
 
 Router.onBeforeAction('loading', {except: ['api_winning']});
 
+Router.onAfterAction(function() {
+        var name = this.route.getName();
+
+        var capitalizedName = name.charAt(0).toUpperCase() + name.substring(1);
+
+        Session.set('pageTitle', capitalizedName);
+        document.title = 'BrownBag - ' + capitalizedName;
+      }
+);
+
 // http://stackoverflow.com/questions/13151879/publish-certain-information-for-meteor-users-and-more-information-for-meteor-use
 
 Router.map(function(){

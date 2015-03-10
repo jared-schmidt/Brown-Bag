@@ -6,7 +6,7 @@
 
 /* Toggle Styles */
 
-#wrapper {
+/*#wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -45,11 +45,11 @@
 #wrapper.toggled #page-content-wrapper {
     position: absolute;
     margin-right: -250px;
-}
+}*/
 
 /* Sidebar Styles */
 
-.sidebar-nav {
+/*.sidebar-nav {
     position: absolute;
     top: 0;
     width: 250px;
@@ -120,4 +120,4 @@
         position: relative;
         margin-right: 0;
     }
-}
+}*/
