@@ -37,7 +37,7 @@
 
 
 <template name='header'>
-   <core-menu>
+   <core-menu id='side_menu' >
     <!-- <paper-item> <a href="{{pathFor 'home'}}"><span style='font-size:24px;'><b>Brown Bag (Beta)</b></span></a></paper-item> -->
 
     <paper-item>
@@ -52,12 +52,16 @@
       <a href="http://pslinks.meteor.com/category/brown-bag" target="_blank"><b><span style='font-size:22px;'>Talks</span></b></a>
     </paper-item>
 
-      {{#if isInRole 'admin'}}
-          <h4 style="color:#fff; cursor:default;"><b>Admin Controls</b></h4>
+  </core-menu>
+
+  <h4 style="cursor:default;"><b>Admin Controls</b></h4>
+
+  <core-menu id='admin_side_menu'>
+    {{#if isInRole 'admin'}}
           {{> admin_sendOrderNotification}}
       {{/if}}
-
   </core-menu>
+
     <!-- Side Nacv-->
 <!--     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
@@ -128,9 +132,9 @@
     {{else}}
 
         <a href="{{pathFor 'settings'}}" title='Account Settings'>
-          <paper-icon-button icon='settings'></paper-icon-button>
+          <paper-icon-button icon='settings' id='settings-btn' class='top_bar_btns'></paper-icon-button>
         </a>
-        <paper-icon-button icon='exit-to-app' id="logout"></paper-icon-button>
+        <paper-icon-button icon='exit-to-app' id="logout" class='top_bar_btns'></paper-icon-button>
     {{/if}}
 </template>
 

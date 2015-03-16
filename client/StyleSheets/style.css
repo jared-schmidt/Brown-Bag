@@ -1,46 +1,29 @@
 /* CSS declarations go here */
-/*.group-header {
-	padding: 10px 40px;
-}
 
-.group-header .title {
-	font-size: 2em;
+#main-content {
+	padding-left: 2em;
+  background: #fff;
 }
-
-.group-header .count{
-	float: right;
-	font-size: 1.5em;
-}
-
-.group-header .entry {
-	margin: 10px 0;
-
-}
-
-.group-header .entry input {
-
-}
-.group-header .entry .btn {
-
-}
-
-#watch-holder {
-	text-align: center;
-	width: 100%;
-}
-#watch-holder iframe {
-	width: 800px;
-	height: 500px;
-}
-#watch-holder .original-link {
-	margin: 10px;
-}
-
-.table > thead > tr > td.success, .table > tbody > tr > td.success, .table > tfoot > tr > td.success, .table > thead > tr > th.success, .table > tbody > tr > th.success, .table > tfoot > tr > th.success, .table > thead > tr.success > td, .table > tbody > tr.success > td, .table > tfoot > tr.success > td, .table > thead > tr.success > th, .table > tbody > tr.success > th, .table > tfoot > tr.success > th
-{
-  background-color: #48C000 !important;
-}*/
 
 a {
-	color: #FF0000;
+	color: #783904;
+  font-weight: bold;
 }
+
+.top_bar_btns{
+  color: white;
+}
+
+
+/* Head Bar */
+#app_name_bar, core-scaffold::shadow core-toolbar {
+  background: #783904 !important;
+  color: #fff;
+  font-weight: bold;
+}
+
+
+#side_menu, #admin_side_menu {
+  background: #fff !important;
+}
+
