@@ -45,9 +45,16 @@ if (Meteor.isClient) {
         Session.set('totalVotes', result);
     });
 
+    Meteor.call('getTotalUsers', function(err, result){
+        Session.set('totalUsers', result);
+    });
+
     Template.places.helpers({
         'currentVoted': function(){
             return Session.get('totalVotes');
+        },
+        'totalUsers': function(){
+            return Session.get('totalUsers');
         }
     });
 

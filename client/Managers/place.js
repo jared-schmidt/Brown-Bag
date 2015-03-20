@@ -13,6 +13,7 @@ if (Meteor.isClient) {
                 $('#upvote').prop("disabled", true);
                 Meteor.call("voteUp", this._id, function(err, data){
                     $('#upvote').prop("disabled", false);
+                    Session.set('totalVotes', Session.get('totalVotes') + 1);
                 });
             }
         },
@@ -29,6 +30,7 @@ if (Meteor.isClient) {
           if (user){
             Meteor.call("removeVote", this._id,function(err, data){
                 $('#downVote').prop("disabled", false);
+                Session.set('totalVotes', Session.get('totalVotes') - 1);
             });
           }
           return false;
