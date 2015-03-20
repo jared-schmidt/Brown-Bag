@@ -19,6 +19,25 @@ if (Meteor.isClient) {
 
             document.getElementById("place").value = '';
             document.getElementById("menu").value = '';
+        },
+        'click #random_place': function(event){
+
+            Meteor.call('randomPlace', function(error, place_id){
+
+                    document.getElementById('random_place').removeAttribute('style');
+
+                    var deg = 500 + Math.round(Math.random() * 500);
+
+                    var css = '-webkit-transform: rotate(' + deg + 'deg);';
+
+                    document.getElementById('random_place').setAttribute(
+                        'style', css
+                    );
+
+                Meteor.call("voteUp", place_id, function(err, data){
+                    $('#upvote').prop("disabled", false);
+                });
+            });
         }
     });
 
