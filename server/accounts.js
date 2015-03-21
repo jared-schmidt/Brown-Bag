@@ -18,10 +18,10 @@ Accounts.onCreateUser(function(options, user){
     console.log(user);
     if(user.services.hasOwnProperty('google')){
         if (user.services.google.email === 'jschmidt@problemsolutions.net' || user.services.google.email === 'ddollar@problemsolutions.net' || user.services.google.email === 'cscott@problemsolutions.net'){
-            user.roles = 'admin'
+            user.roles = 'admin';
         }
         else{
-            user.roles = 'user'
+            user.roles = 'user';
         }
 
         var accessToken = user.services.google.accessToken, result, profile;
@@ -49,6 +49,9 @@ Accounts.onCreateUser(function(options, user){
 
         // console.log(profile);
         user.profile = profile;
+
+        user.profile.active = true;
+
     }
     return user;
 });

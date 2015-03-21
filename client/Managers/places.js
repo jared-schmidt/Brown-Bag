@@ -45,7 +45,7 @@ if (Meteor.isClient) {
         Session.set('totalVotes', result);
     });
 
-    Meteor.call('getTotalUsers', function(err, result){
+    Meteor.call('getTotalActiveUsers', function(err, result){
         Session.set('totalUsers', result);
     });
 

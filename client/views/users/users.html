@@ -1,0 +1,16 @@
+<template name='users'>
+	<table class="table">
+      <thead>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Active</th>
+      </thead>
+      <tbody>
+          {{#each items}}
+              {{> user}}
+          {{else}}
+            <h3>No users...</h3>
+          {{/each}}
+    </tbody>
+  </table>
+</template>

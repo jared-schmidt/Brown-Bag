@@ -111,8 +111,8 @@ if (Meteor.isServer) {
     ];
 
     Meteor.methods({
-        getTotalUsers: function(){
-            var users = Meteor.users.find().fetch();
+        getTotalActiveUsers: function(){
+            var users = Meteor.users.find({'profile.active': true}).fetch();
             return users.length;
         },
         removeOrder : function(orderId){
@@ -461,6 +461,22 @@ if (Meteor.isServer) {
 
             }
             return vote_message
+        },
+        activeUser: function(userid){
+            var user = Meteor.users.findOne(userid);
+            console.log(user.profile.name);
+            console.log("active", user.profile.active);
+
+            if (!user.profile.active){
+                console.log("true active");
+                Meteor.users.update({'_id':userid}, {$set:{'profile.active': true}});
+                return true;
+            } else {
+                console.log("false active");
+                Meteor.users.update({'_id':userid}, {$set:{'profile.active': false}});
+                return false;
+            }
+
         }
     });
 }

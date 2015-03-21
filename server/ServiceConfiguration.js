@@ -6,11 +6,12 @@ isProdEnv = function () {
     }
 }
 
-if (isProdEnv()) {
-    // ServiceConfiguration.configurations.remove({
-    //     service: 'google'
-    // });
+ServiceConfiguration.configurations.remove({
+    service: 'google'
+});
 
+
+if (isProdEnv()) {    
     ServiceConfiguration.configurations.insert({
         service: 'google',
         clientId: Meteor.settings['google_prod_id'],

@@ -9,6 +9,7 @@ accounts-google
 ian:accounts-ui-bootstrap-3
 mizzao:bootstrap-3
 fezvrasta:bootstrap-material-design
+ctjp:meteor-bootstrap-switch
 raix:handlebar-helpers
 alanning:roles
 mrt:momentjs

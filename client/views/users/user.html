@@ -1,0 +1,16 @@
+<template name='user'>
+    <tr>
+  		<td>{{profile.name}}</td>
+  		<td>{{roles}}</td>
+  		<td>
+  			<label class="active-user">
+  			{{#if profile.active}}
+            	<input type="checkbox" name="activeUser" checked>
+            {{/if}}
+            {{#unless profile.active}}
+            	<input type="checkbox" name="activeUser" >
+            {{/unless}}
+            </label>
+  		</td>
+  	</tr>
+</template>

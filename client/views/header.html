@@ -1,41 +1,3 @@
-<!-- <template name="header">
-  <div class="navbar navbar-default" role="navigation">
-      <div class="navbar-header">
-          <a class="navbar-brand" href="{{pathFor 'home'}}">Brown Bag (Beta)</a>
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-          </button>
-      </div>
-      <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav"> -->
-<!-- class="active" -->
-<!--               <li><a href="{{pathFor 'places'}}">Places</a></li>
-              <li><a href="{{pathFor 'orders'}}" >Orders</a></li>
-              <li><a href="{{pathFor 'urls'}}">Urls</a></li> -->
-<!--               {{#if isInRole 'admin'}}
-                <li><a href="{{pathFor 'users'}}">Users</a></li>
-              {{/if}} -->
-<!--           </ul>
-          <ul class="nav navbar-nav navbar-right">
-          {{#if currentUser}}
-            {{> user_loggedin}}
-          {{else}}
-            {{> user_loggedout}}
-          {{/if}}
-          </ul>
-      </div>
-  </div>
-  <div style="float:right;">
-    {{> admin_sendOrderNotification}}
-  </div>
-  <br />
-  <br />
-</template> -->
-
-
 <template name='header'>
     <!-- Side Nacv-->
     <div id="sidebar-wrapper">
@@ -50,7 +12,9 @@
             <li><a href="{{pathFor 'places'}}"><i class="fa fa-building-o fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Places</span></b></a></li>
             <li><a href="{{pathFor 'orders'}}"><i class="fa fa-cutlery fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Orders</span></b></a></li>
             <li><a href="http://pslinks.meteor.com/category/brown-bag" target="_blank"><i class="fa fa-video-camera fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Talks</span></b></a> </li>
+           
             {{#if isInRole 'admin'}}
+            <li><a href="{{pathFor 'users'}}"><i class="fa fa-users fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Users</span></b></a></li>
               <li><hr /></li>
               <li>
                 <h4 style="color:#fff; cursor:default;"><b>Admin Controls</b></h4>
