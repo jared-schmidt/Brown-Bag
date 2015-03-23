@@ -87,6 +87,9 @@ Router.map(function(){
         path:'/users',
         action: loading,
         onBeforeAction:mustLogIn,
+        waitOn:function(){
+            return Meteor.subscribe('userData');
+        },
         data: function(){
             console.log(Meteor.users.find({}).fetch());
             var model = {}

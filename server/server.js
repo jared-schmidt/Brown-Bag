@@ -71,6 +71,10 @@ if (Meteor.isServer) {
         return Urls.find({});
     });
 
+    Meteor.publish("userData", function(){
+        return Meteor.users.find({}, {fields: {'profile': 1, 'roles': 1}});
+    });
+
     //util that will return any url parameters.
     //in key value pairs (ex. ..?a=b&c=d will be in format of {a: b, c: d})
     var getUrlParams = function(url) {
