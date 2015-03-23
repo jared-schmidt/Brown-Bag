@@ -9,7 +9,7 @@ accounts-google
 ian:accounts-ui-bootstrap-3
 mizzao:bootstrap-3
 fezvrasta:bootstrap-material-design
-ctjp:meteor-bootstrap-switch
+
 raix:handlebar-helpers
 alanning:roles
 mrt:momentjs
@@ -18,7 +18,7 @@ meteorhacks:npm
 service-configuration
 iron:router
 email
-particle4dev:meteor-cron2
+#particle4dev:meteor-cron2
 #mrt:collection-api
 meteorhacks:kadira
 mizzao:bootboxjs

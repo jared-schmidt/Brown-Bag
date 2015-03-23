@@ -3,14 +3,20 @@
   		<td>{{profile.name}}</td>
   		<td>{{roles}}</td>
   		<td>
-  			<label class="active-user">
-  			{{#if profile.active}}
+
+        {{#if isInRole 'admin'}}
+            <label class="active-user">
+  			    {{#if profile.active}}
             	<input type="checkbox" name="activeUser" checked>
             {{/if}}
             {{#unless profile.active}}
             	<input type="checkbox" name="activeUser" >
             {{/unless}}
             </label>
+        {{/if}}
+        {{#if isInRole 'user'}}
+          {{profile.active}}
+        {{/if}}
   		</td>
   	</tr>
 </template>

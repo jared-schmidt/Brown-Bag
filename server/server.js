@@ -42,15 +42,15 @@ if (Meteor.isServer) {
                 }
             }));
 
-            collectionApi = new CollectionAPI({
-                authToken: '97f0ad9e24ca5e0408a269748d7fe0a0',
-                apiPath: 'api'
-            });
-            collectionApi.addCollection(Places,'places',{
-                methods:['GET']
-            });
-            collectionApi.start();
-            console.log("Started API");
+            // collectionApi = new CollectionAPI({
+            //     authToken: '97f0ad9e24ca5e0408a269748d7fe0a0',
+            //     apiPath: 'api'
+            // });
+            // collectionApi.addCollection(Places,'places',{
+            //     methods:['GET']
+            // });
+            // collectionApi.start();
+            // console.log("Started API");
 
         }
     });

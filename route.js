@@ -91,9 +91,8 @@ Router.map(function(){
             return Meteor.subscribe('userData');
         },
         data: function(){
-            console.log(Meteor.users.find({}).fetch());
             var model = {}
-            model['items'] = Meteor.users.find({}).fetch();
+            model['items'] = Meteor.users.find({}, {sort:{'roles': 1, 'profile.active': -1, 'profile.family_name': 1}}).fetch();
             return model;
         }
     });
