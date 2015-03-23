@@ -2,12 +2,7 @@ if (Meteor.isClient) {
 
     Template.orders.events({
         'click #submitOrder': function (event) {
-            console.log("order");
             event.preventDefault();
-
-            Meteor.call("sendEmail", "jschmidt@problemsolutions.net", "test this", function(err){
-                console.log("sent");
-            });
 
             var user = Meteor.user();
 
@@ -18,7 +13,7 @@ if (Meteor.isClient) {
             var food = document.getElementById("food").value;
 
             Meteor.call("addOrder", user.profile.name, food, function(error, orderId){
-                //console.log('added order with Id .. '+orderId)
+                toastr.success("Sounds okay-ish... I guess...", "Order Placed");
             });
 
             document.getElementById("food").value = '';

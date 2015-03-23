@@ -14,6 +14,7 @@ if (Meteor.isClient) {
                 Meteor.call("voteUp", this._id, function(err, data){
                     $('#upvote').prop("disabled", false);
                     Session.set('totalVotes', Session.get('totalVotes') + 1);
+                    toastr.success("You make all the unicorns happpy!", "Voted!");
                 });
             }
         },
@@ -31,6 +32,8 @@ if (Meteor.isClient) {
             Meteor.call("removeVote", this._id,function(err, data){
                 $('#downVote').prop("disabled", false);
                 Session.set('totalVotes', Session.get('totalVotes') - 1);
+                toastr.error("You made the chupacabra mad!", "Unvoted!");
+
             });
           }
           return false;

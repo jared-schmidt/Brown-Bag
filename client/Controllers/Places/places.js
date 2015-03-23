@@ -33,9 +33,11 @@ if (Meteor.isClient) {
                     document.getElementById('random_place').setAttribute(
                         'style', css
                     );
+                    toastr.success("The wheel goes round!", "Random!");
 
                 Meteor.call("voteUp", place_id, function(err, data){
                     $('#upvote').prop("disabled", false);
+                    toastr.success("You better like your pick or the lockness monster might get you!", "Voted!");
                 });
             });
         }
@@ -63,7 +65,7 @@ if (Meteor.isClient) {
     Mousetrap.bind(code, function() {
       Meteor.call('get_current_votes', function(error, vote_message){
         bootbox.alert(vote_message, function(){
-          console.log("call back....");
+            toastr.success("You win all!", "WINNER");
         });
       });
     });
