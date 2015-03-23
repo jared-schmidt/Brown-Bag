@@ -9,17 +9,17 @@
                 {{#if currentUser}} {{> user_loggedin}} {{else}} {{> user_loggedout}} {{/if}}
             </li>
             <li><hr /></li>
-            <li><a href="{{pathFor 'places'}}"><i class="fa fa-building-o fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Places</span></b></a></li>
-            <li><a href="{{pathFor 'orders'}}"><i class="fa fa-cutlery fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Orders</span></b></a></li>
-            <li><a href="http://pslinks.meteor.com/category/brown-bag" target="_blank"><i class="fa fa-video-camera fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Talks</span></b></a> </li>
-            <li><a href="{{pathFor 'users'}}"><i class="fa fa-users fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Users</span></b></a></li>
+            <li><a class='btn' style='width:215px;' href="{{pathFor 'places'}}"><i class="fa fa-building-o fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Places</span></b></a></li>
+            <li><a class='btn' style='width:215px;' href="{{pathFor 'orders'}}"><i class="fa fa-cutlery fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Orders</span></b></a></li>
+            <li><a class='btn' style='width:215px;' href="http://pslinks.meteor.com/category/brown-bag" target="_blank"><i class="fa fa-video-camera fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Talks</span></b></a> </li>
+            <li><a class='btn' style='width:215px;' href="{{pathFor 'users'}}"><i class="fa fa-users fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Users</span></b></a></li>
 
 
             {{#if isInRole 'admin'}}
               <li><hr /></li>
               <li>
                 <h4 style="color:#fff; cursor:default;"><b>Admin Controls</b></h4>
-                <ul>
+                <ul style='list-style: none; padding: 0; margin: 0;'>
                   {{> admin_sendOrderNotification}}
                 </ul>
               </li>
@@ -53,9 +53,9 @@
 <template name="admin_sendOrderNotification">
     {{#if isInRole 'admin'}}
 <!--     <li><a href="#" id="send-notification"><i class="glyphicon glyphicon-bullhorn"></i>Ordering Notification</a></li>-->
-    <li><a href="#" id="send-notification">Ordering Notification</a></li>
-    <li><a href="##" id='vote-notify'>Vote Notification</a></li>
-    <li><a href='#' id='endVoting'>End Voting</a></li>
+    <li><a class='btn' style='width:215px;' href="#" id="send-notification">Ordering Notification</a></li>
+    <li><a class='btn' style='width:215px;' href="##" id='vote-notify'>Vote Notification</a></li>
+    <li><a class='btn' style='width:215px;' href='#' id='endVoting'>End Voting</a></li>
     {{> clearAll}} {{/if}}
 </template>
 
@@ -70,22 +70,20 @@
     <li><a>Logging in...</a>
     </li>
     {{else}}
-    <li class="dropdown">
 
             <li>
-              <a style='display:inline-block; padding-right: 37px;' href="{{pathFor 'settings'}}" title='Account Settings'><i class='glyphicon glyphicon-cog'></i></a>
-              <a style='display:inline-block; padding-right: 37px;' href='#' id="logout" title='Logout' ><i class='glyphicon glyphicon-log-out'></i></a>
+              <a class='btn' style='display:inline-block; padding-left: 4px;' href="{{pathFor 'settings'}}" title='Account Settings'><i class='glyphicon glyphicon-cog'></i></a>
+              <a class='btn' style='display:inline-block; padding-left: 4px;' href='#' id="logout" title='Logout' ><i class='glyphicon glyphicon-log-out'></i></a>
             </li>
 
-    </li>
     {{/if}}
 </template>
 
 <template name='clearAll'>
     {{#if isInRole 'admin'}}
-    <li><a href='#' id='saveClear'>Reset & save history</a>
+    <li><a class='btn' style='width:215px;' href='#' id='saveClear'>Reset & save history</a>
     </li>
-    <li><a href='#' id='hardClear'>Reset & save NOTHING</a>
+    <li><a class='btn' style='width:215px;' href='#' id='hardClear'>Reset & save NOTHING</a>
     </li>
     {{/if}}
 </template>
