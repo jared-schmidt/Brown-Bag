@@ -1,7 +1,7 @@
 <template name='header'>
     <!-- Side Nacv-->
     <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
+        <ul class="sidebar-nav navbar-material-brown">
             <li class="sidebar-brand">
                 <a href="{{pathFor 'home'}}"><span style='font-size:24px;'><b>Brown Bag (Beta)</b></span></a>
             </li>
@@ -30,11 +30,11 @@
 
     <!-- Top Nav -->
     <div>
-        <div class="navbar navbar-default" role="navigation">
+        <div class="navbar navbar-default navbar-material-brown" role="navigation">
                 <ul class="nav navbar-nav">
                     <li><a id="menu-toggle"><i class='fa fa-bars'></i></a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right navbar-material-brown">
                     {{#if currentUser}}
                       <li>
                         <span style='color:#fff; position:relative; top: 5px;'>{{currentUser.profile.name}}</span>
