@@ -1,16 +1,19 @@
 isProdEnv = function () {
-    if (process.env.ROOT_URL == "http://localhost:3000") {
+    console.log(process.env.ROOT_URL);
+    if (String(process.env.ROOT_URL).indexOf("localhost") >= 0) {
         return false;
     } else {
         return true;
     }
-}
+};
+
+ServiceConfiguration.configurations.remove({
+    service: 'google'
+});
+
 
 if (isProdEnv()) {
-    // ServiceConfiguration.configurations.remove({
-    //     service: 'google'
-    // });
-
+    console.log("Production");
     ServiceConfiguration.configurations.insert({
         service: 'google',
         clientId: Meteor.settings['google_prod_id'],
@@ -18,6 +21,7 @@ if (isProdEnv()) {
     });
 }
 else {
+    console.log("development");
     // dev environment
     ServiceConfiguration.configurations.insert({
         service: 'google',

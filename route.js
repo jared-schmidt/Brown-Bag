@@ -83,17 +83,20 @@ Router.map(function(){
         fastRender: true
     });
 
-    // this.route('users',{
-    //     path:'/users',
-    //     action: loading,
-    //     onBeforeAction:mustLogIn,
-    //     data: function(){
-    //         console.log(Meteor.users.find({}));
-    //         var model = {}
-    //         model['users'] = Meteor.users.find({});
-    //         return model;
-    //     }
-    // });
+    this.route('users',{
+        path:'/users',
+        action: loading,
+        onBeforeAction:mustLogIn,
+        waitOn:function(){
+            return Meteor.subscribe('userData');
+        },
+        data: function(){
+            console.log(Meteor.users.find({}).fetch());
+            var model = {}
+            model['items'] = Meteor.users.find({}).fetch();
+            return model;
+        }
+    });
 
 
 

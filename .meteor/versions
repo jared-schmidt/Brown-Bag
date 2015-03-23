@@ -15,6 +15,8 @@ callback-hook@1.0.2
 check@1.0.4
 chuangbo:cookie@1.1.0
 coffeescript@1.0.5
+ctjp:meteor-bootstrap-switch@3.3.1_3
+ctjp:meteor-bootstrap-switch-assets@3.3.1_1
 dburles:mongo-collection-instances@0.2.6
 ddp@1.0.14
 deps@1.0.6
@@ -44,6 +46,7 @@ iron:url@1.0.7
 jquery@1.11.3
 json@1.0.2
 launch-screen@1.0.1
+less@1.0.12
 livedata@1.0.12
 localstorage@1.0.2
 logging@1.0.6

@@ -1,4 +1,5 @@
 if (Meteor.isClient) {
+
     Places = new Meteor.Collection("places");
     Orders = new Meteor.Collection("orders");
     Urls = new Meteor.Collection("urls");
@@ -29,6 +30,9 @@ if (Meteor.isClient) {
         }
     });
 
+    $.material.init();
+
     Meteor.startup(function() {
+        $.material.init();
     });
 }
