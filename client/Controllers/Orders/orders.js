@@ -31,13 +31,16 @@ if (Meteor.isClient) {
                         label: "Yes!",
                         className:"btn-danger",
                         callback: function(){
-                            Meteor.call("clearAll");
+                            Meteor.call("clearAll", function(){
+                                toastr.success("...and boom goes the dynamite.", "Reset & Saved!");
+                            });
                         }
                     },
                     main:{
                         label: "No!",
                         className: "btn-primary",
                         callback: function(){
+                            toastr.success("That was a close one", "Reset!");
                         }
                     }
                 }
@@ -54,7 +57,9 @@ if (Meteor.isClient) {
                         label: "Yes!",
                         className:"btn-danger",
                         callback: function(){
-                            Meteor.call('hardClear');
+                            Meteor.call('hardClear', function(){
+                                toastr.success("...and boom goes the dynamite.", "Reset!");
+                            });
                         }
                     },
                     main:{

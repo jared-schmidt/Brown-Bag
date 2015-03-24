@@ -1,7 +1,6 @@
 if (Meteor.isClient) {
     Template.places.events({
         'click #submitPlace':function(event){
-            console.log('places button');
             event.preventDefault();
 
             var user = Meteor.user();
@@ -14,7 +13,7 @@ if (Meteor.isClient) {
             var menu = document.getElementById("menu").value;
 
             Meteor.call("addPlace", user.profile.name, place, menu, function(error, placeId){
-                console.log('added place with Id .. '+placeId)
+                toastr.success("Sounds like the bee's knees", "Place Added!");
             });
 
             document.getElementById("place").value = '';
@@ -37,7 +36,7 @@ if (Meteor.isClient) {
 
                 Meteor.call("voteUp", place_id, function(err, data){
                     $('#upvote').prop("disabled", false);
-                    toastr.success("You better like your pick or the lockness monster might get you!", "Voted!");
+                    toastr.success("You better like your pick or the lockness monster won't be happy!", "Voted!");
                 });
             });
         }

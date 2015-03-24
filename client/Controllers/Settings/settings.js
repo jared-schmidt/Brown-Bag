@@ -10,7 +10,8 @@ if (Meteor.isClient) {
             }
             console.log("Confirm clicked");
             Meteor.call("confirmSlack", user._id, function(error){
-                console.log('confirming slack...')
+                console.log('confirming slack...');
+                toastr.success("Yay! Here's a cookie!", "Confirmed!");
             });
 
         }
