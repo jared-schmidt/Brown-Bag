@@ -19,21 +19,15 @@
         </div>
       {{/if}}
   </div>
-  <table class="table">
-      <thead>
-          <th>Name</th>
-          <!-- <th>Votes</th> -->
-          <!-- <th>Time</th> -->
-          <th>&nbsp;</th>
-      </thead>
-      <tbody>
-          {{#each items}}
-              {{> place}}
-          {{else}}
-            <h3>No places...</h3>
-          {{/each}}
-    </tbody>
-  </table>
+  <div class="row">
+    {{#each items}}
+      <div class="col-xs-6 col-md-4">
+      {{> place}}
+      </div>
+    {{else}}
+      <h3>No places...</h3>
+    {{/each}}
+  </div>
 
   <img width="400" height="400" src="http://upload.wikimedia.org/wikipedia/commons/7/7d/European_roulette_wheel.svg" id='random_place' />
 
