@@ -35,6 +35,10 @@ if (Meteor.isServer) {
                     $addToSet: {'upvoters': user._id},
                     $inc : {'votes':1}
                 });
+                var user = Meteor.user();
+                Meteor.users.update(user._id, {
+                    $set:{'voted': true}
+                });
             } else {
                 throw new Meteor.Error(422, 'Already upvoted');
             }
@@ -43,6 +47,9 @@ if (Meteor.isServer) {
             var user = Meteor.user();
 
             Places.update(id, {$inc: {votes: -1}, $pull: {'upvoters': user._id}});
+            Meteor.users.update(user._id, {
+                $set:{'voted': false}
+            });
         },
         removePlace:function(placeid){
             Places.remove(placeid);

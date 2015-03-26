@@ -49,6 +49,12 @@ if (Meteor.isServer) {
                 });
             });
 
+            Meteor.users.forEach(function(user){
+                Meteor.users.update(user._id, {
+                    $set:{'voted': true}
+                });
+            });
+
             Orders.remove({});
 
             return true;
@@ -58,6 +64,12 @@ if (Meteor.isServer) {
             Places.find().forEach(function(place){
                 Places.update(place._id, {
                     $set : {"upvoters" : [],'votes':0, 'winner': 0}
+                });
+            });
+
+            Meteor.users.forEach(function(user){
+                Meteor.users.update(user._id, {
+                    $set:{'voted': true}
                 });
             });
 

@@ -6,18 +6,18 @@ if (Meteor.isServer) {
             var places = Places.find().fetch();
             var random_num = Math.floor(Math.random() * places.length-1) + 0;
 
-            var url = 'https://slack.com/api/chat.postMessage';
-            var slack_api_token = Meteor.setting.slack_api_token;
-            var message =  user.profile.name + " is randoming it!";
-            var payload = {
-                "token":slack_api_token,
-                "channel":'G037P84PQ',
-                "text": message,
-                "icon_emoji": ':ghost:',
-                "username": "Draco (Ghost)",
-                'parse':"full"
-            };
-            var result = HTTP.call("GET", url, {params: payload});
+            // var url = 'https://slack.com/api/chat.postMessage';
+            // var slack_api_token = Meteor.setting.slack_api_token;
+            // var message =  user.profile.name + " is randoming it!";
+            // var payload = {
+            //     "token":slack_api_token,
+            //     "channel":'G037P84PQ',
+            //     "text": message,
+            //     "icon_emoji": ':ghost:',
+            //     "username": "Draco (Ghost)",
+            //     'parse':"full"
+            // };
+            // var result = HTTP.call("GET", url, {params: payload});
 
             return places[random_num]._id;
         },
