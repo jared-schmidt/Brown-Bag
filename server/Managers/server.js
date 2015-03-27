@@ -88,7 +88,7 @@ if (Meteor.isServer) {
             var message = "Ordering soon-ish...";
             var payload = {
                 "token":slack_api_token,
-                "channel":'G037P84PQ',
+                "channel":'G045PRA4A',
                 "text": message,
                 "icon_emoji": ':ghost:',
                 "username": "Draco (Ghost)",
@@ -103,7 +103,7 @@ if (Meteor.isServer) {
             var message = "Did YOU vote?! http://brown-bag.meteor.com/places";
             var payload = {
                 "token":slack_api_token,
-                "channel":'G037P84PQ',
+                "channel":'G045PRA4A',
                 "text": message,
                 "icon_emoji": ':ghost:',
                 "username": "Draco (Ghost)",

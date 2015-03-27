@@ -11,7 +11,7 @@ if (Meteor.isServer) {
             // var message =  user.profile.name + " is randoming it!";
             // var payload = {
             //     "token":slack_api_token,
-            //     "channel":'G037P84PQ',
+            //     "channel":'G045PRA4A',
             //     "text": message,
             //     "icon_emoji": ':ghost:',
             //     "username": "Draco (Ghost)",
@@ -55,7 +55,7 @@ if (Meteor.isServer) {
             var slack_api_token = Meteor.settings['slack_api_token'];
             var payload = {
                 "token":slack_api_token,
-                "channel":'G037P84PQ',
+                "channel":'G045PRA4A',
                 "text": message,
                 "icon_emoji": ':ghost:',
                 "username": "Draco (Ghost)",
@@ -95,7 +95,7 @@ if (Meteor.isServer) {
                 var slack_api_token = Meteor.settings['slack_api_token'];
                 var payload = {
                     "token":slack_api_token,
-                    "channel":'G037P84PQ',
+                    "channel":'G045PRA4A',
                     "text": message,
                     "icon_emoji": ':ghost:',
                     "username": "Draco (Ghost)",
