@@ -1,11 +1,6 @@
 <template name='order'>
     <tr>
-        {{#if $eq name "Christopher Lombardi"}}
-            <td>SeaLow</td>
-        {{/if}}
-        {{#if $neq name "Christopher Lombardi"}}
-          <td>{{name}}</td>
-        {{/if}}
+        <td>{{name}}</td>
         <td>{{food}}</td>
         <td>{{timeFormat}}</td>
         <td>

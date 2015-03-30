@@ -7,6 +7,9 @@ DesktopNotifications = new Meteor.Collection("desktopNotifications");
 if (Meteor.isServer) {
 
     Meteor.methods({
+        changeLayout: function(userid, layout){
+            Meteor.users.update({'_id':userid}, {$set:{'profile.layout': layout}});
+        },
         clearAll : function() {
             // Run in mongo to clear everyones orders
             //  // db.users.update({},{$set:{'ordered': []}})

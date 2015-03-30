@@ -28,6 +28,16 @@ if (Meteor.isClient) {
         }
     });
 
+    Template.header.helpers({
+        'layout': function(){
+            return Meteor.user().profile.layout;
+        },
+        activeIfTemplateIs: function (template) {
+          var currentRoute = Router.current();
+          return currentRoute &&
+            template === currentRoute.lookupTemplate() ? 'active' : '';
+        }
+    });
 
     Template.header.events({
         'click #send-notification': function(event, template) {

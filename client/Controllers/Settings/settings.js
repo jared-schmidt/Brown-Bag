@@ -14,6 +14,17 @@ if (Meteor.isClient) {
                 toastr.success("Yay! Here's a cookie!", "Confirmed!");
             });
 
+        },
+        "change #side": function (event) {
+          Meteor.call('changeLayout', this['_id'], event.target.value, function(err, isActive){
+            toastr.success("Same old, Same old.", "Changed Layout!");
+          });
+
+        },
+        "change #top": function(event){
+            Meteor.call('changeLayout', this['_id'], event.target.value, function(err, isActive){
+                toastr.success("Changing it up!", "Changed Layout!");
+            });
         }
     });
 

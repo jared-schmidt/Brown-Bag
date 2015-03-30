@@ -10,6 +10,27 @@
             <td>{{roles}}</td>
         </tr>
         <tr>
+            <th>Layout:</th>
+            <td>
+                <label>
+                    SideBar:
+                    {{#if $eq profile.layout "1"}}
+                        <input type='radio' id='side' class='layoutStyle' name='layoutStyle' checked value='1' />
+                    {{else}}
+                        <input type='radio' id='side' class='layoutStyle' name='layoutStyle' value='1' />
+                    {{/if}}
+                </label>
+                <label>
+                    Horizonal:
+                    {{#if $eq profile.layout "0"}}
+                        <input type='radio' id='top' class='layoutStyle' name='layoutStyle' checked value='0' />
+                    {{else}}
+                        <input type='radio' id='top' class='layoutStyle' name='layoutStyle' value='0' />
+                    {{/if}}
+                </label>
+            </td>
+        </tr>
+        <tr>
             <th>API Stuffs</th>
             <td>&nbsp;</td>
         </tr>
