@@ -51,6 +51,7 @@ Accounts.onCreateUser(function(options, user){
         user.profile = profile;
 
         user.profile.active = true;
+        user.profile.layout = "1";
 
     }
     return user;
