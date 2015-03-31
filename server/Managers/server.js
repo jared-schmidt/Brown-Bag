@@ -10,6 +10,9 @@ if (Meteor.isServer) {
         changeLayout: function(userid, layout){
             Meteor.users.update({'_id':userid}, {$set:{'profile.layout': layout}});
         },
+        changeColor: function(userid, color){
+            Meteor.users.update({'_id':userid}, {$set:{'profile.color': color}});
+        },
         clearAll : function() {
             // Run in mongo to clear everyones orders
             //  // db.users.update({},{$set:{'ordered': []}})

@@ -36,6 +36,9 @@ if (Meteor.isClient) {
           var currentRoute = Router.current();
           return currentRoute &&
             template === currentRoute.lookupTemplate() ? 'active' : '';
+        },
+        'layoutColor':function(){
+            return Meteor.user().profile.color.toLowerCase();
         }
     });
 

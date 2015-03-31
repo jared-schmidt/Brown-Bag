@@ -1,11 +1,12 @@
 <template name='place'>
   <div class="panel panel-default {{#if winner}}panel-success{{/if}}">
-    <div class="panel-heading">
-      <h3 class="panel-title">
+    <div class="panel-heading clearfix">
+      <h3 class="panel-title pull-left">
           {{> placeHeader}}
       </h3>
     </div>
     <div class="panel-body">
+
         {{#unless isWinner}}
           {{#if voted}}
             {{#if downVote}}
@@ -22,20 +23,28 @@
             {{/unless}}
           {{/unless}}
         {{/unless}}
+
         {{#if isInRole 'admin'}}
               <button type="button" id='delete' class="btn btn-danger">
                 <span style='font-size: 25px' class="mdi-action-delete"></span>
               </button>
-            {{/if}}
-        {{#if isInRole 'admin'}}
+
           <button type="button" id='resetVotes' class="btn btn-danger">
           <span style='font-size: 25px' class='mdi-action-cached'></span>
           </button>
         {{/if}}
 
     </div>
-<!--     <div class="panel-footer">
+<!--     <div class="panel-footer btn-group btn-group-justified">
+      {{#if isInRole 'admin'}}
+            <button type="button" id='delete' class="btn btn-danger">
+              <span class="mdi-action-delete"></span>
+            </button>
 
+        <button type="button" id='resetVotes' class="btn btn-danger">
+          <span class='mdi-action-cached'></span>
+        </button>
+      {{/if}}
     </div> -->
   </div>
 </template>

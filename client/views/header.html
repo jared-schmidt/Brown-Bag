@@ -3,7 +3,7 @@
 
     <!-- Side Nacv-->
     <div id="sidebar-wrapper">
-        <ul class="sidebar-nav navbar-material-brown">
+        <ul class="sidebar-nav navbar-material-{{layoutColor}}">
             <li class="sidebar-brand">
                 <a href="{{pathFor 'home'}}"><span style='font-size:24px;'><b>Brown Bag (Beta)</b></span></a>
             </li>
@@ -32,11 +32,11 @@
 
     <!-- Top Nav -->
     <div>
-        <div class="navbar navbar-default navbar-material-brown" role="navigation">
+        <div class="navbar navbar-default navbar-material-{{layoutColor}}" role="navigation">
                 <ul class="nav navbar-nav">
                     <li><a id="menu-toggle"><i class='fa fa-bars'></i></a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right navbar-material-brown">
+                <ul class="nav navbar-nav navbar-right navbar-material-{{layoutColor}}">
                     {{#if currentUser}}
                       <li>
                         <span style='color:#fff; position:relative; top: 5px;'>{{currentUser.profile.name}}</span>
@@ -57,8 +57,8 @@
             html, body {
                 height: 100% !important;
                 padding-top: 70px !important;
-                padding-left: 70px !important;
-                padding-right: 70px !important;
+                /*padding-left: 70px !important;*/
+                /*padding-right: 70px !important;*/
                 padding-bottom: 70px;
             }
             #wrapper {
@@ -74,7 +74,7 @@
             }
         </style>
 
-        <nav class="navbar navbar-default navbar-fixed-top navbar-material-brown">
+        <nav class="navbar navbar-default navbar-fixed-top navbar-material-{{layoutColor}}">
           <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
