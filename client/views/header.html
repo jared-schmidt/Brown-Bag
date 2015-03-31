@@ -59,6 +59,7 @@
                 padding-top: 70px !important;
                 padding-left: 70px !important;
                 padding-right: 70px !important;
+                padding-bottom: 70px;
             }
             #wrapper {
                 padding: 0 !important;
@@ -94,6 +95,11 @@
                 <li><a class="{{ activeIfTemplateIs 'orders' }}" href="{{pathFor 'orders'}}">Orders</a></li>
                 <li><a class="{{ activeIfTemplateIs 'talks' }}" href="http://pslinks.meteor.com/category/brown-bag" target="_blank">Talks</a></li>
                 <li><a class="{{ activeIfTemplateIs 'users' }}" href="{{pathFor 'users'}}">Users</a></li>
+                <li>
+                    <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                      Admin Controls
+                    </a>
+                </li>
              </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{pathFor 'settings'}}" title='Account Settings'><i class='glyphicon glyphicon-cog'></i></a></li>
@@ -102,6 +108,18 @@
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
+
+        {{#if isInRole 'admin'}}
+
+        <div class="collapse" id="collapseExample">
+          <div class="well">
+            <ul id='adminList'>
+                  {{> admin_sendOrderNotification}}
+                </ul>
+          </div>
+          </div>
+
+            {{/if}}
     {{/if}}
 
 </template>

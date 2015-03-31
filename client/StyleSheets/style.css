@@ -1,6 +1,21 @@
 /* CSS declarations go here */
 
+#collapseExample{
+	position: relative;
+	bottom: 85px;
+}
 
+#adminList li
+{
+display: inline;
+list-style-type: none;
+
+}
+
+#adminList li a{
+	background: #795548;
+	color: #fff;
+}
 /*FOR WHEEL*/
 img {
     -webkit-transition: -webkit-transform 2s ease-out;
