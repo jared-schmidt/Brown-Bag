@@ -1,5 +1,6 @@
 if (Meteor.isClient) {
-    Template.settings.events({
+
+    Template.Api.events({
         'click #confirmSlack':function(event){
             console.log('confirm Slack');
             event.preventDefault();
@@ -13,8 +14,10 @@ if (Meteor.isClient) {
                 console.log('confirming slack...');
                 toastr.success("Yay! Here's a cookie!", "Confirmed!");
             });
+        }
+    });
 
-        },
+    Template.Layout.events({
         "change #side": function (event) {
           Meteor.call('changeLayout', this['_id'], event.target.value, function(err, isActive){
             toastr.success("Same old, Same old.", "Changed Layout!");
@@ -36,7 +39,7 @@ if (Meteor.isClient) {
         }
     });
 
-    Template.settings.helpers({
+    Template.Layout.helpers({
         selected: function(option){
             var color = Meteor.user().profile.color;
             if(color == option){

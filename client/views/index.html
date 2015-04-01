@@ -19,12 +19,12 @@
         </div>
     <div id="page-content-wrapper">
         {{> yield}} {{#if currentUser}}
-        <footer>
+        <div class='footer'>
             Made Especially for {{currentUser.profile.name}}
             <br />
             <a href='https://github.com/jared-schmidt/Brown-Bag'>Github &nbsp;<i class="fa fa-github-alt fa-lg"></i></a>
 
-        </footer>
+        </div>
         {{/if}}
     </div>
     </div>

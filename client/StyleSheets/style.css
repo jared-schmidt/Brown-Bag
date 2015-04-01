@@ -1,5 +1,10 @@
 /* CSS declarations go here */
 
+.footer {
+    border-top: 1px black solid;
+    float:right;
+}
+
 #collapseExample{
 	position: relative;
 	bottom: 85px;

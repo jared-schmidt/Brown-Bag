@@ -1,6 +1,29 @@
 <template name='settings'>
     Your Settings...
-    <table class='table'>
+    <div role="tabpanel">
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Info</a></li>
+        <li role="presentation"><a href="#Layout" aria-controls="Layout" role="tab" data-toggle="tab">Layout</a></li>
+        <li role="presentation"><a href="#API" aria-controls="API" role="tab" data-toggle="tab">API</a></li>
+        <li role="presentation"><a href="#History" aria-controls="History" role="tab" data-toggle="tab">History</a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="info">{{> Info}}</div>
+        <div role="tabpanel" class="tab-pane" id="Layout">{{> Layout}}</div>
+        <div role="tabpanel" class="tab-pane" id="API">{{> Api}}</div>
+        <div role="tabpanel" class="tab-pane" id="History">{{> History}}</div>
+      </div>
+
+    </div>
+</template>
+
+
+<template name='Info'>
+    <table>
         <tr>
             <th>Name:</th>
             <td>{{profile.name}}</td>
@@ -9,8 +32,16 @@
             <th>Roles:</th>
             <td>{{roles}}</td>
         </tr>
+    </table>
+</template>
+
+<template name='Layout'>
+    <table>
         <tr>
             <th>Layout:</th>
+        </tr>
+        <tr>
+            <td></td>
             <td>
                 <label>
                     SideBar:
@@ -32,6 +63,9 @@
         </tr>
         <tr>
             <th>Color:</th>
+        </tr>
+        <tr>
+            <td></td>
             <td>
                 <select id='colorSelect'>
                     <option {{selected "Black" }}>Black</option>
@@ -53,8 +87,11 @@
                 </select>
             </td>
         </tr>
+    </table>
+</template>
 
-        <tr><td>&nbsp;</td></tr>
+<template name='Api'>
+    <table>
         <tr>
             <th>API Stuffs</th>
             <td>&nbsp;</td>
@@ -79,11 +116,11 @@
             <th>Confirmed: </th>
             <td>{{api.confirmed}}</td>
         </tr>
-
-
         {{/if}}
     </table>
-    <hr />
+</template>
+
+<template name='History'>
     <label>Past Orders:</label>
     <table class='table'>
         <thead>
