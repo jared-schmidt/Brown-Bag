@@ -1,4 +1,20 @@
 if (Meteor.isClient) {
+
+    Template.frontPage.events({
+        'click #login': function(event, tmpl) {
+            Meteor.loginWithGoogle({
+                requestPermissions: ['email', 'profile']
+            }, function(err) {
+                if (err) {
+                    alert('error : ' + err);
+                    throw new Meteor.Error(Accounts.LoginCancelledError.numericError, 'Error');
+                } else {
+                    // something else
+                }
+            });
+        }
+    });
+
     Template.user_loggedout.events({
         'click #login': function(event, tmpl) {
             Meteor.loginWithGoogle({
