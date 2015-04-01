@@ -52,6 +52,7 @@ Accounts.onCreateUser(function(options, user){
 
         user.profile.active = true;
         user.profile.layout = "1";
+        user.profile.color = 'Brown';
 
     }
     return user;
