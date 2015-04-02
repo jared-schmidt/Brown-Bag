@@ -19,6 +19,28 @@
         </div>
       {{/if}}
   </div>
+
+  <!-- Large modal -->
+  <button type="button" class="btn btn-primary" id='openRandom' data-toggle="modal" data-target=".bs-example-modal-lg">Open Random Wheel</button>
+
+  <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel"><b>Click the wheel to spin!</b></h4>
+        </div>
+        <div class="modal-body">
+          <div id="wheel" >
+              <canvas id="canvas" width="1000" height="600"></canvas>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <div class="row">
     {{#each items}}
       <div class="col-xs-6 col-md-4">
@@ -28,7 +50,5 @@
       <h3>No places...</h3>
     {{/each}}
   </div>
-
-  <img width="400" height="400" src="http://upload.wikimedia.org/wikipedia/commons/7/7d/European_roulette_wheel.svg" id='random_place' />
 
 </template>
