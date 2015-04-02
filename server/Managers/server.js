@@ -2,11 +2,29 @@ Orders = new Meteor.Collection("orders");
 Places = new Meteor.Collection("places");
 Urls = new Meteor.Collection("urls");
 DesktopNotifications = new Meteor.Collection("desktopNotifications");
-
+Messages = new Meteor.Collection('messages');
 
 if (Meteor.isServer) {
 
     Meteor.methods({
+        addMessage: function(message){
+            var user = Meteor.user();
+            var messageId = Messages.insert({
+                'message': message,
+                'usersClosed': [],
+                'display': true,
+                'addedBy': user._id,
+                'createdOn': new Date()
+            });
+            return messageId;
+        },
+        userClosed: function(messageId){
+            var user = Meteor.user();
+
+            Messages.update(messageId, {
+                $addToSet: {'usersClosed': user._id}
+            });
+        },
         changeLayout: function(userid, layout){
             Meteor.users.update({'_id':userid}, {$set:{'profile.layout': layout}});
         },

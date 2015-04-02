@@ -4,6 +4,8 @@ if (Meteor.isClient) {
     Orders = new Meteor.Collection("orders");
     Urls = new Meteor.Collection("urls");
     DesktopNotifications = new Meteor.Collection("desktopNotifications");
+    Messages = new Meteor.Collection('messages');
+
 
     // Deps.autorun(function(){
     //     Meteor.subscribe('orders');
@@ -12,6 +14,7 @@ if (Meteor.isClient) {
     // });
 
     Deps.autorun(function() {
+        Meteor.subscribe('messages');
         if(Meteor.Device.isDesktop()){
             Notification.requestPermission();
             Meteor.subscribe('desktopNotifications');
@@ -32,7 +35,7 @@ if (Meteor.isClient) {
 
     $.material.init();
 
-    Meteor.startup(function() {
-        $.material.init();
-    });
+    // Meteor.startup(function() {
+    //     $.material.init();
+    // });
 }

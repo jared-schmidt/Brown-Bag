@@ -9,14 +9,15 @@
 <template name='layout'>
 <div id="wrapper">
     {{> header}}
+
+    {{#each messages}}
         <div class="alert alert-success alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            Try out the horizontal layout by changing your <a href='{{pathFor 'settings'}}'>settings</a>.
+            <button type="button" class="close closeMessage" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{message}}
         </div>
-        <div class="alert alert-success alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            Try changing the colors for something new in your <a href='{{pathFor 'settings'}}'>settings</a>.
-        </div>
+    {{/each}}
+
+
     <div id="page-content-wrapper">
         {{> yield}} {{#if currentUser}}
         <div class='footer'>
