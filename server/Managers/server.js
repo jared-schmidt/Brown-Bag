@@ -18,6 +18,9 @@ if (Meteor.isServer) {
             });
             return messageId;
         },
+        deleteMessage: function(messageId){
+            Messages.remove(messageId);
+        },
         userClosed: function(messageId){
             var user = Meteor.user();
 

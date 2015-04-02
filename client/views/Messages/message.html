@@ -2,10 +2,12 @@
     <tr>
         <td>{{message}}</td>
         <!-- <td>{{display}}</td> -->
-        <!-- <td> -->
-<!--             <button type="button" id='deleteMessage' class="btn btn-danger">
-                <span class="glyphicon glyphicon-trash"></span>
-            </button> -->
-        <!-- </td> -->
+        <td>
+            {{#if isInRole 'admin'}}
+                <button type="button" id='deleteMessage' class="btn btn-danger">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            {{/if}}
+        </td>
     </tr>
 </template>

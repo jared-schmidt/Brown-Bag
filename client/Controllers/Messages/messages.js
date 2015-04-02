@@ -11,6 +11,13 @@ if (Meteor.isClient) {
             });
 
             document.getElementById("message").value = '';
+        },
+        'click #deleteMessage':function(event){
+            event.preventDefault();
+
+            Meteor.call("deleteMessage", this._id, function(error, messageId){
+                toastr.success("Deleted Message", "Message Deleted!");
+            });
         }
     });
 }
