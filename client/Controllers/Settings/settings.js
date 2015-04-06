@@ -12,7 +12,7 @@ if (Meteor.isClient) {
             console.log("Confirm clicked");
             Meteor.call("confirmSlack", user._id, function(error){
                 console.log('confirming slack...');
-                toastr.success("Yay! Here's a cookie!", "Confirmed!");
+                // toastr.success("Yay! Here's a cookie!", "Confirmed!");
             });
         }
     });
@@ -20,20 +20,20 @@ if (Meteor.isClient) {
     Template.Layout.events({
         "change #side": function (event) {
           Meteor.call('changeLayout', this['_id'], event.target.value, function(err, isActive){
-            toastr.success("Same old, Same old.", "Changed Layout!");
+            // toastr.success("Same old, Same old.", "Changed Layout!");
           });
 
         },
         "change #top": function(event){
             Meteor.call('changeLayout', this['_id'], event.target.value, function(err, isActive){
-                toastr.success("Changing it up!", "Changed Layout!");
+                // toastr.success("Changing it up!", "Changed Layout!");
             });
         },
         "change #colorSelect": function(event){
             var newColor = $("#colorSelect option:selected").text();
 
             Meteor.call('changeColor', this['_id'], newColor, function(err){
-                toastr.success("That looks real nice!", "Changed Color!");
+                // toastr.success("That looks real nice!", "Changed Color!");
             });
 
         }

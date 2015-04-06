@@ -81,6 +81,9 @@ if (Meteor.isClient) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         },
+        'click a':function(e){
+            $("#wrapper").removeClass("toggled");
+        },
         'click #vote-notify': function(e){
             e.preventDefault();
             Meteor.call('vote_Notification');

@@ -137,3 +137,31 @@
         </tbody>
     </table>
 </template>
+
+<template name='other'>
+    <table>
+        <tr>
+            <th>Notifications:</th>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    Off:
+                    {{#if $eq profile.toast "1"}}
+                        <input type='radio' id='side'  name='toastSetting' checked value='1' />
+                    {{else}}
+                        <input type='radio' id='side' name='toastSetting' value='1' />
+                    {{/if}}
+                </label>
+                <label>
+                    On:
+                    {{#if $eq profile.toast "0"}}
+                        <input type='radio' id='top'  name='toastSetting' checked value='0' />
+                    {{else}}
+                        <input type='radio' id='top' name='toastSetting' value='0' />
+                    {{/if}}
+                </label>
+            </td>
+        </tr>
+    </table>
+</template>

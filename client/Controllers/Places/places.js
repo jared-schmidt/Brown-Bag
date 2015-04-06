@@ -13,33 +13,12 @@ if (Meteor.isClient) {
             var menu = document.getElementById("menu").value;
 
             Meteor.call("addPlace", user.profile.name, place, menu, function(error, placeId){
-                toastr.success("Sounds like the bee's knees", "Place Added!");
+                // toastr.success("Sounds like the bee's knees", "Place Added!");
             });
 
             document.getElementById("place").value = '';
             document.getElementById("menu").value = '';
         },
-        // 'click #random_place': function(event){
-
-        //     Meteor.call('randomPlace', function(error, place_id){
-
-        //             document.getElementById('random_place').removeAttribute('style');
-
-        //             var deg = 500 + Math.round(Math.random() * 500);
-
-        //             var css = '-webkit-transform: rotate(' + deg + 'deg);';
-
-        //             document.getElementById('random_place').setAttribute(
-        //                 'style', css
-        //             );
-        //             toastr.success("The wheel goes round!", "Random!");
-
-        //         Meteor.call("voteUp", place_id, function(err, data){
-        //             $('#upvote').prop("disabled", false);
-        //             toastr.success("You better like your pick or the lockness monster won't be happy!", "Voted!");
-        //         });
-        //     });
-        // },
         'click #openRandom':function(event){
             // Helpers
             shuffle = function(o) {
@@ -381,7 +360,7 @@ if (Meteor.isClient) {
     Mousetrap.bind(code, function() {
       Meteor.call('get_current_votes', function(error, vote_message){
         bootbox.alert(vote_message, function(){
-            toastr.success("You win all!", "WINNER");
+            // toastr.success("You win all!", "WINNER");
         });
       });
     });

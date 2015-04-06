@@ -8,10 +8,10 @@ Template.user.events({
 
       	if (isActive){
         	Session.set('totalUsers', currUser + 1);
-                toastr.success("They be like, aww yeah!", "User Active!");
+                // toastr.success("They be like, aww yeah!", "User Active!");
       	} else {
         	Session.set('totalUsers', currUser - 1);
-          toastr.error("They be like, aww no!", "User deactive");
+          // toastr.error("They be like, aww no!", "User deactive");
       	}
 
       });

@@ -4,7 +4,7 @@ if (Meteor.isClient) {
         'click #deleteOrder' :function(event){
             event.preventDefault();
             Meteor.call("removeOrder", this['_id']);
-            toastr.success("You didn't want that anyway!", "Order removed!");
+            // toastr.success("You didn't want that anyway!", "Order removed!");
         }
     });
 

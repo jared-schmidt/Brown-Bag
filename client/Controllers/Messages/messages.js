@@ -7,7 +7,7 @@ if (Meteor.isClient) {
             var message = document.getElementById("message").value;
 
             Meteor.call("addMessage", message, function(error, messageId){
-                toastr.success("Roger that!", "Message Added!");
+                // toastr.success("Roger that!", "Message Added!");
             });
 
             document.getElementById("message").value = '';
@@ -16,7 +16,7 @@ if (Meteor.isClient) {
             event.preventDefault();
 
             Meteor.call("deleteMessage", this._id, function(error, messageId){
-                toastr.success("Deleted Message", "Message Deleted!");
+                // toastr.success("Deleted Message", "Message Deleted!");
             });
         }
     });

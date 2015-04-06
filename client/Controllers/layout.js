@@ -4,7 +4,7 @@ if (Meteor.isClient) {
         'click .closeMessage': function(){
             console.log(this._id);
             Meteor.call('userClosed', this._id, function(){
-                toastr.success("Message go bye-bye", "Closed message!");
+                // toastr.success("Message go bye-bye", "Closed message!");
             });
         }
     });

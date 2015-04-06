@@ -14,7 +14,7 @@ if (Meteor.isClient) {
                 Meteor.call("voteUp", this._id, function(err, data){
                     $('#upvote').prop("disabled", false);
                     Session.set('totalVotes', Session.get('totalVotes') + 1);
-                    toastr.success("You make all the unicorns happy!", "Voted!");
+                    // toastr.success("You make all the unicorns happy!", "Voted!");
                 });
             }
         },
@@ -22,7 +22,7 @@ if (Meteor.isClient) {
             event.preventDefault();
             if(Meteor.userId()){
                 Meteor.call("resetVotes", this._id, function(){
-                    toastr.success("bye-bye birdie!", "Reset votes!");
+                    // toastr.success("bye-bye birdie!", "Reset votes!");
                 });
             }
         },
@@ -34,7 +34,7 @@ if (Meteor.isClient) {
             Meteor.call("removeVote", this._id,function(err, data){
                 $('#downVote').prop("disabled", false);
                 Session.set('totalVotes', Session.get('totalVotes') - 1);
-                toastr.error("You made the chupacabra mad!", "Unvoted!");
+                // toastr.error("You made the chupacabra mad!", "Unvoted!");
             });
           }
           return false;

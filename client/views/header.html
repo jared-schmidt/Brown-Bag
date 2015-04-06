@@ -32,20 +32,19 @@
 
     <!-- Top Nav -->
     <div>
-        <div class="navbar navbar-default navbar-material-{{layoutColor}}" role="navigation">
-                <ul class="nav navbar-nav">
-                    <li><a id="menu-toggle"><i class='fa fa-bars'></i></a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right navbar-material-{{layoutColor}}">
-                    {{#if currentUser}}
-                      <li>
-                        <span style='color:#fff; position:relative; top: 5px;'>{{currentUser.profile.name}}</span>
-                        <img class="img-rounded" style="height: 32px;margin-right: 25px; margin-top: 10px;" src="{{currentUser.profile.picture}}" />
-                      </li>
-                    {{else}}
-                      {{> user_loggedout}}
-                    {{/if}}
-                </ul>
+        <div class="navbar navbar-material-{{layoutColor}}" role="navigation">
+            <div class="navbar-header">
+            <a class="navbar-brand" href="{{pathFor 'home'}}">
+              <img alt="Brand" height="32" width="32" src="/brown-bag.png">
+            </a>
+              <button type="button" id="menu-toggle" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+            </div>
         </div>
     </div>
 

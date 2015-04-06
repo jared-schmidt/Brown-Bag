@@ -13,7 +13,7 @@ if (Meteor.isClient) {
             var food = document.getElementById("food").value;
 
             Meteor.call("addOrder", user.profile.name, food, function(error, orderId){
-                toastr.success("Sounds okay-ish... I guess...", "Order Placed");
+                // toastr.success("Sounds okay-ish... I guess...", "Order Placed");
             });
 
             document.getElementById("food").value = '';
@@ -32,7 +32,7 @@ if (Meteor.isClient) {
                         className:"btn-danger",
                         callback: function(){
                             Meteor.call("clearAll", function(){
-                                toastr.success("...and boom goes the dynamite.", "Reset & Saved!");
+                                // toastr.success("...and boom goes the dynamite.", "Reset & Saved!");
                             });
                         }
                     },
@@ -40,7 +40,7 @@ if (Meteor.isClient) {
                         label: "No!",
                         className: "btn-primary",
                         callback: function(){
-                            toastr.success("That was a close one", "Reset!");
+                            // toastr.success("That was a close one", "Reset!");
                         }
                     }
                 }
@@ -58,7 +58,7 @@ if (Meteor.isClient) {
                         className:"btn-danger",
                         callback: function(){
                             Meteor.call('hardClear', function(){
-                                toastr.success("...and boom goes the dynamite.", "Reset!");
+                                // toastr.success("...and boom goes the dynamite.", "Reset!");
                             });
                         }
                     },
