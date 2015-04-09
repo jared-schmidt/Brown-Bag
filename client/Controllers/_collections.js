@@ -5,7 +5,7 @@ if (Meteor.isClient) {
     Urls = new Meteor.Collection("urls");
     DesktopNotifications = new Meteor.Collection("desktopNotifications");
     Messages = new Meteor.Collection('messages');
-
+    PastOrders = new Meteor.Collection('pastOrders');
 
     // Deps.autorun(function(){
     //     Meteor.subscribe('orders');

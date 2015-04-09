@@ -74,9 +74,9 @@ if (Meteor.isServer) {
                 }
                 vote_message += '</table>';
             } else {
-                vote_message = "No";
+                vote_message = "YouShallNotPass.gif";
 
-                var message = user.profile.name + " tried to cheat on the Brown-Bag site!";
+                var message = user.profile.name + " tried to cheat on the Brown-Bag site! \n YouShallNotPass.gif";
 
                 var url = 'https://slack.com/api/chat.postMessage';
                 var slack_api_token = Meteor.settings['slack_api_token'];

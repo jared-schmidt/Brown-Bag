@@ -47,30 +47,6 @@ if (Meteor.isClient) {
             });
 
 
-        },
-        'click #hardClear' : function(event){
-                        bootbox.dialog({
-                message: "This will reset the site, clearing votes and orders!",
-                title : "Are you sure?!?!",
-                buttons:{
-                    danger:{
-                        label: "Yes!",
-                        className:"btn-danger",
-                        callback: function(){
-                            Meteor.call('hardClear', function(){
-                                // toastr.success("...and boom goes the dynamite.", "Reset!");
-                            });
-                        }
-                    },
-                    main:{
-                        label: "No!",
-                        className: "btn-primary",
-                        callback: function(){
-                        }
-                    }
-                }
-            });
-
         }
     });
 }

@@ -3,6 +3,8 @@ Places = new Meteor.Collection("places");
 Urls = new Meteor.Collection("urls");
 DesktopNotifications = new Meteor.Collection("desktopNotifications");
 Messages = new Meteor.Collection('messages');
+PastOrders = new Meteor.Collection('pastOrders');
+
 
 if (Meteor.isServer) {
 
@@ -46,7 +48,7 @@ if (Meteor.isServer) {
             date_picked = new Date();
             // Set the time to this, so duplicates won't be added
             date_picked.setHours(0,0,0,0)
-            Places.update(place._id,{$addToSet : {'datePicked': date_picked} });
+            Places.update({'_id':place._id},{$addToSet : {'datePicked': date_picked} });
 
             // Better way to do this?
             // Places.find().forEach(function(place){
@@ -57,14 +59,35 @@ if (Meteor.isServer) {
 
             // Better way to do this?
 
+            // Orders.find().forEach(function(order){
+            //     Meteor.users.find().forEach(function(user){
+            //         //console.log(user);
+            //         if(order.name == user.profile.name){
+            //             Meteor.users.update({'_id': user._id},{
+            //                 $set:{'voted': false}
+            //                 // $addToSet:{'ordered' : {'place_id' : place._id, 'place': place.name, 'order' : order.food, 'datePicked' : date_picked}}
+            //             });
+            //         }
+            //     });
+            // });
+
+
+
             Orders.find().forEach(function(order){
                 Meteor.users.find().forEach(function(user){
-                    //console.log(user);
-                    if(order.name == user.profile.name){
-                        Meteor.users.update(user._id,{
-                            $addToSet:{'ordered' : {'place._id' : place._id, 'place': place.name, 'order' : order.food, 'datePicked' : date_picked}}
+                    // TODO: Change to use user ids
+                    if (order.name === user.profile.name){
+                        PastOrders.insert({
+                            'userID': user._id,
+                            'placeID': place._id,
+                            'placeName': place.name,
+                            'foodOrdered': order.food.toLowerCase(),
+                            'datePlaced': date_picked
                         });
                     }
+                    Meteor.users.update({'_id': user._id},{
+                        $set:{'voted': false}
+                    });
                 });
             });
 
@@ -76,31 +99,16 @@ if (Meteor.isServer) {
                 });
             });
 
-            Meteor.users.forEach(function(user){
-                Meteor.users.update(user._id, {
-                    $set:{'voted': true}
-                });
-            });
-
             Orders.remove({});
 
-            return true;
-        },
-        hardClear : function(){
-            // TODO: same as above, make function
-            Places.find().forEach(function(place){
-                Places.update(place._id, {
-                    $set : {"upvoters" : [],'votes':0, 'winner': 0}
-                });
-            });
+            // Meteor.users.forEach(function(user){
+            //     Meteor.users.update(user._id, {
+            //         $set:{'voted': false}
+            //     });
+            // });
 
-            Meteor.users.forEach(function(user){
-                Meteor.users.update(user._id, {
-                    $set:{'voted': true}
-                });
-            });
 
-            Orders.remove({});
+
             return true;
         },
         publishNotification: function(notification){

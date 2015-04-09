@@ -26,4 +26,8 @@ if (Meteor.isServer) {
     Meteor.publish('messages', function(){
         return Messages.find({});
     });
+
+    Meteor.publish('pastOrders', function(){
+        return PastOrders.find({});
+    });
 }
