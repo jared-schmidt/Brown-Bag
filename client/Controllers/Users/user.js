@@ -15,6 +15,5 @@ Template.user.events({
       	}
 
       });
-
     }
 });

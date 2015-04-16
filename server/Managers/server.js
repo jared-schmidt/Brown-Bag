@@ -85,9 +85,7 @@ if (Meteor.isServer) {
                             'datePlaced': date_picked
                         });
                     }
-                    Meteor.users.update({'_id': user._id},{
-                        $set:{'voted': false}
-                    });
+
                 });
             });
 
@@ -101,11 +99,13 @@ if (Meteor.isServer) {
 
             Orders.remove({});
 
-            // Meteor.users.forEach(function(user){
-            //     Meteor.users.update(user._id, {
-            //         $set:{'voted': false}
-            //     });
-            // });
+            // Set user to not voted and not ordered
+            Meteor.users.find().forEach(function(user){
+                console.log("user");
+                Meteor.users.update(user._id, {
+                    $set:{'voted': false, 'ordered':false}
+                });
+            });
 
 
 

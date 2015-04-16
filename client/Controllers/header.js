@@ -88,6 +88,9 @@ if (Meteor.isClient) {
             e.preventDefault();
             Meteor.call('vote_Notification');
         },
+        // 'click #endOrdering':function(event){
+        //     Meteor.call('endOrdering');
+        // },
         'click #endVoting': function(event) {
             event.preventDefault();
 

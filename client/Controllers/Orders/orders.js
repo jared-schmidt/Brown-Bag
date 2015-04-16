@@ -1,5 +1,15 @@
 if (Meteor.isClient) {
 
+    Meteor.call('getTotalActiveUsers', function(err, result){
+        Session.set('totalUsers', result);
+    });
+
+    Template.orders.helpers({
+        'totalUsers': function(){
+            return Session.get('totalUsers');
+        }
+    });
+
     Template.orders.events({
         'click #submitOrder': function (event) {
             event.preventDefault();
