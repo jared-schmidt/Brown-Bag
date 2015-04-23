@@ -36,19 +36,19 @@ if (Meteor.isServer) {
             Places.update(place._id,{$set: {"winner": 1}});
 
             console.log("End Voting...");
-            var message = "Voting has ended! The winner is " + place.name + ". Place your orders now! Here could be the menu " + place['menu'];
+            // var message = "Voting has ended! The winner is " + place.name + ". Place your orders now! Here could be the menu " + place['menu'];
 
-            var url = 'https://slack.com/api/chat.postMessage';
-            var slack_api_token = Meteor.settings['slack_api_token'];
-            var payload = {
-                "token":slack_api_token,
-                "channel":'G045PRA4A',
-                "text": message,
-                "icon_emoji": ':ghost:',
-                "username": "Draco (Ghost)",
-                'parse':"full"
-            };
-            var result = HTTP.call("GET", url, {params: payload});
+            // var url = 'https://slack.com/api/chat.postMessage';
+            // var slack_api_token = Meteor.settings['slack_api_token'];
+            // var payload = {
+            //     "token":slack_api_token,
+            //     "channel":'G045PRA4A',
+            //     "text": message,
+            //     "icon_emoji": ':ghost:',
+            //     "username": "Draco (Ghost)",
+            //     'parse':"full"
+            // };
+            // var result = HTTP.call("GET", url, {params: payload});
 
             return place._id;
         },

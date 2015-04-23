@@ -1,5 +1,25 @@
 /* CSS declarations go here */
 
+.example-enter {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+}
+
+.example-leave {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+}
+
+/* CSS declarations go here */
+
 body{
     width: auto;
     padding:0;
@@ -12,8 +32,8 @@ body{
 }
 
 #collapseExample{
-	position: relative;
-	bottom: 85px;
+    position: relative;
+    bottom: 85px;
 }
 
 #adminList li
@@ -24,8 +44,8 @@ list-style-type: none;
 }
 
 #adminList li a{
-	background: #795548;
-	color: #fff;
+    background: #795548;
+    color: #fff;
 }
 /*FOR WHEEL*/
 img {
@@ -34,20 +54,20 @@ img {
 
 
 .group-header {
-	padding: 10px 40px;
+    padding: 10px 40px;
 }
 
 .group-header .title {
-	font-size: 2em;
+    font-size: 2em;
 }
 
 .group-header .count{
-	float: right;
-	font-size: 1.5em;
+    float: right;
+    font-size: 1.5em;
 }
 
 .group-header .entry {
-	margin: 10px 0;
+    margin: 10px 0;
 
 }
 
@@ -59,15 +79,15 @@ img {
 }
 
 #watch-holder {
-	text-align: center;
-	width: 100%;
+    text-align: center;
+    width: 100%;
 }
 #watch-holder iframe {
-	width: 800px;
-	height: 500px;
+    width: 800px;
+    height: 500px;
 }
 #watch-holder .original-link {
-	margin: 10px;
+    margin: 10px;
 }
 
 .table > thead > tr > td.success, .table > tbody > tr > td.success, .table > tfoot > tr > td.success, .table > thead > tr > th.success, .table > tbody > tr > th.success, .table > tfoot > tr > th.success, .table > thead > tr.success > td, .table > tbody > tr.success > td, .table > tfoot > tr.success > td, .table > thead > tr.success > th, .table > tbody > tr.success > th, .table > tfoot > tr.success > th
