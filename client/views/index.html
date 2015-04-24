@@ -6,6 +6,7 @@
     <link rel="icon" sizes="16x16 32x32" href="/brown-bag.png">
 </head>
 
+
 <template name='layout'>
 <div id="wrapper">
     {{> header}}
@@ -19,7 +20,12 @@
 
 
     <div id="page-content-wrapper">
-        {{> yield}} {{#if currentUser}}
+        {{> yield}}
+
+        <!-- Used for react component -->
+        <div id='yield'></div>
+
+        {{#if currentUser}}
         <div class='footer'>
             Made Especially for {{currentUser.profile.name}}
             <br />

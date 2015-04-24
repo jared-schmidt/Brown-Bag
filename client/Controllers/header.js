@@ -46,7 +46,10 @@ if (Meteor.isClient) {
 
     Template.header.helpers({
         'layout': function(){
-            return Meteor.user().profile.layout;
+            if (Meteor.userId()) {
+                return Meteor.user().profile.layout;
+            }
+            return 0;
         },
         activeIfTemplateIs: function (template) {
           var currentRoute = Router.current();
@@ -54,7 +57,10 @@ if (Meteor.isClient) {
             template === currentRoute.lookupTemplate() ? 'active' : '';
         },
         'layoutColor':function(){
-            return Meteor.user().profile.color.toLowerCase();
+            if (Meteor.userId()) {
+                return Meteor.user().profile.color.toLowerCase();
+            }
+            return 'brown';
         }
     });
 

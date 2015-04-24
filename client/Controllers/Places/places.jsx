@@ -2,7 +2,8 @@ var cx = React.addons.classSet;
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 var PlacesList = ReactMeteor.createClass({
-    templateName: "places",
+    // Can't use this with iron router
+    // templateName: "places",
 
     getMeteorState: function(){
         return {
@@ -152,3 +153,38 @@ var Place = React.createClass({
                 </div>
     }
 });
+
+Router.map(function(){
+    this.route('places', {
+        path:'/places',
+        waitOn:function(){
+            return Meteor.subscribe('places');
+        },
+        onBeforeAction:mustLogIn,
+        action: loading,
+        onAfterAction: function(){
+            if (Meteor.userId()) {
+                React.render(<PlacesList />, document.getElementById('yield'));
+            }
+        },
+        onStop: function(){
+            React.unmountComponentAtNode(document.getElementById('yield'));
+        }
+    });
+});
+
+function loading(){
+    if (this.ready())
+      this.render();
+    else
+      this.render('loading');
+}
+
+function mustLogIn(pause){
+    if (! Meteor.userId()) {
+        this.layout("loginLayout");
+        this.render('login');
+      } else {
+        this.next();
+      }
+};
