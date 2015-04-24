@@ -1,9 +1,19 @@
 var cx = React.addons.classSet;
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
+Template.places.rendered = function(){
+    if (Meteor.userId()) {
+        React.render(React.createElement(PlacesList), document.getElementById('yield'));
+    }
+}
+
 PlacesList = ReactMeteor.createClass({
     // Can't use this with iron router
     // templateName: "places",
+
+    startMeteorSubscriptions: function() {
+       Meteor.subscribe('places');
+     },
 
     getMeteorState: function(){
         console.log("get Meteor state");
@@ -56,7 +66,6 @@ PlacesList = ReactMeteor.createClass({
     },
     render: function(){
         return <div> {this.renderHeader(this.state)}
-
                     <div className="inner">
                         <div className='container-fluid'>
                             <ReactCSSTransitionGroup transitionName="example">
@@ -138,14 +147,18 @@ PlacesHeader = ReactMeteor.createClass({
         var place = document.getElementById("place").value;
         var menu = document.getElementById("menu").value;
 
-        Meteor.call("addPlace", user.profile.name, place, menu, function(err, placeId){
-            if(err){
-                console.error(err);
-            }
-        });
+        if (place && menu){
+            Meteor.call("addPlace", user.profile.name, place, menu, function(err, placeId){
+                if(err){
+                    console.error(err);
+                }
+            });
 
-        document.getElementById("place").value = '';
-        document.getElementById("menu").value = '';
+            document.getElementById("place").value = '';
+            document.getElementById("menu").value = '';
+        } else {
+            toastr.error("Need to have a name and a menu", "Error!");
+        }
     },
     render: function(){
         return <div className="group-header">
