@@ -1,16 +1,20 @@
 var cx = React.addons.classSet;
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
-var PlacesList = ReactMeteor.createClass({
+PlacesList = ReactMeteor.createClass({
     // Can't use this with iron router
     // templateName: "places",
 
     getMeteorState: function(){
+        console.log("get Meteor state");
         return {
             places: Places.find({}, {sort: {name: 1}}).fetch(),
-            placesCount: Places.find().count(),
             didVote: Places.findOne({'upvoters' : {"$in" : [Meteor.user()._id]}})
         }
+    },
+    shouldComponentUpdate: function(){
+        console.log('shouldComponentUpdate Places list');
+        return true;
     },
     renderPlace: function(model, index){
         var didVote = this.state.didVote;
@@ -25,10 +29,10 @@ var PlacesList = ReactMeteor.createClass({
             />
     },
     componentDidMount: function(){
-        console.log('didMount');
+        console.log('didMount List');
     },
     componentWillMount: function(){
-        console.log("willMount")
+        console.log("willMount List");
     },
     componentWillUnmount: function(){
         console.log("will unmount");
@@ -36,12 +40,23 @@ var PlacesList = ReactMeteor.createClass({
     componentDidUnmount: function(){
         console.log("did unmount");
     },
+    componentWillUpdate: function(){
+        console.log('componentWillUpdate list');
+    },
+    componentDidUpdate: function(){
+        console.log('componentDidUpdate list');
+    },
     getInitialState: function(){
-        console.log("init places");
+        // console.log("init places");
         return {places: []};
     },
+    renderHeader: function(model){
+        return <PlacesHeader
+                />
+    },
     render: function(){
-        return <div> {this.state.   placesCount}
+        return <div> {this.renderHeader(this.state)}
+
                     <div className="inner">
                         <div className='container-fluid'>
                             <ReactCSSTransitionGroup transitionName="example">
@@ -55,27 +70,177 @@ var PlacesList = ReactMeteor.createClass({
 
 
 
-
-
-
-
-var Place = React.createClass({
-    // getInitialState: function(){
-    //     console.log("here");
-    //     return <div>Loading...</div>;
-    // },
+PlacesHeader = ReactMeteor.createClass({
+    getMeteorState: function(){
+        return {
+            placesCount: Places.find().count(),
+            totalUsers: Session.get('totalUsers'),
+            totalVoted: Session.get('totalVotes')
+        }
+    },
     componentDidMount: function(){
-        console.log('did Mount place');
+        console.log('didMount PlacesHeader');
     },
     componentWillMount: function(){
-        console.log("will Mount palce")
+        console.log("willMount PlacesHeader");
+
+        Meteor.call('getTotalActiveUsers', function(err, result){
+            if (err){
+                console.error(err);
+            }
+            Session.set('totalUsers', result);
+        });
+
+        Meteor.call('getTotalVotes', function(err, result){
+            if (err){
+                console.error(err);
+            }
+            Session.set('totalVotes', result);
+        });
     },
     componentWillUnmount: function(){
-        console.log("will unmount place");
+        console.log("will unmount PlacesHeader");
     },
     componentDidUnmount: function(){
-        console.log("did unmount place");
+        console.log("did unmount PlacesHeader");
     },
+    componentWillReceiveProps: function(){
+        console.log('WillReceiveProps PlacesHeader')
+    },
+    // shouldComponentUpdate: function(){
+    //     console.log('shouldComponentUpdate PlacesHeader');
+    // },
+    componentWillUpdate: function(){
+        console.log('componentWillUpdate PlacesHeader');
+
+        // Meteor.call('getTotalActiveUsers', function(err, result){
+        //     Session.set('totalUsers', result);
+        // });
+
+        // Meteor.call('getTotalVotes', function(err, result){
+        //     Session.set('totalVotes', result);
+        // });
+    },
+    componentDidUpdate: function(){
+        console.log('componentDidUpdate PlacesHeader');
+    },
+    getInitialState: function(){
+        console.log("init PlacesHeader");
+        return {placesCount: 0};
+    },
+    addNewPlace: function(){
+
+        var user = Meteor.user();
+        if (!user){
+            return;
+        }
+
+        var place = document.getElementById("place").value;
+        var menu = document.getElementById("menu").value;
+
+        Meteor.call("addPlace", user.profile.name, place, menu, function(err, placeId){
+            if(err){
+                console.error(err);
+            }
+        });
+
+        document.getElementById("place").value = '';
+        document.getElementById("menu").value = '';
+    },
+    render: function(){
+        return <div className="group-header">
+                    <div className="title-bar row">
+                        <span className="count col-sm-4">{this.state.placesCount} Place(s) Registered</span>
+                        <span className="count col-sm-4"> {this.state.totalVoted} of {this.state.totalUsers} Vote(s) </span>
+                    </div>
+                    <div className="entry form-horizontal">
+                        <div className="col-sm-5">
+                            <input type='text' placeholder="Where at..." id="place" className="form-control" />
+                        </div>
+                        <div className="col-sm-5">
+                            <input type='text' placeholder="What they have..." id="menu" className="form-control" />
+                        </div>
+                        <div className="col-sm-2">
+                            <input onClick={this.addNewPlace} type="button" className='btn btn-success' id='submitPlace' value="Submit" />
+                        </div>
+                    </div>
+                <RandomWheel />
+                </div>
+    }
+});
+
+
+RandomWheel = React.createClass({
+    onRandomBtnClick: function(){
+        wheel.init();
+
+        // var segments = new Array();
+        var places = Places.find({}, {fields: {'name': 1}}).fetch();
+        var segments = [];
+
+        $.each(places, function(index, obj) {
+            segments.push(obj.name);
+        });
+
+        wheel.segments = segments;
+        wheel.update();
+
+        // Hide the address bar (for mobile devices)!
+        // setTimeout(function() {
+        //     window.scrollTo(0, 1);
+        // }, 0);
+    },
+    renderModal: function(){
+        return <div className="modal fade bs-example-modal-lg" id='wheelModal' tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-lg">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 className="modal-title" id="myModalLabel"><b>Click the wheel to spin!</b></h4>
+                            </div>
+                            <div className="modal-body">
+                                <div id="wheel" >
+                                    <canvas id="canvas" width="1000" height="600"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    },
+    render: function(){
+        return <div>
+                    <button onClick={this.onRandomBtnClick} className="btn btn-primary" id='openRandom' data-toggle="modal" data-target=".bs-example-modal-lg">Open Random Wheel</button>
+                    {this.renderModal()}
+               </div>
+    }
+});
+
+
+Place = React.createClass({
+    // getInitialState: function(){
+    //     console.log("here");
+    //     return {
+    //         placeid: 0,
+    //         name: 'Loading...',
+    //         isWinner: false,
+    //         didVote: false,
+    //         votedFor: 0
+    //     }
+    // },
+    // componentDidMount: function(){
+    //     console.log('did Mount place');
+    // },
+    // componentWillMount: function(){
+    //     console.log("will Mount palce")
+    // },
+    // componentWillUnmount: function(){
+    //     console.log("will unmount place");
+    // },
+    // componentDidUnmount: function(){
+    //     console.log("did unmount place");
+    // },
     votePlace: function(id, didVote){
         if(Meteor.userId()){
             if (!didVote)
@@ -153,38 +318,3 @@ var Place = React.createClass({
                 </div>
     }
 });
-
-Router.map(function(){
-    this.route('places', {
-        path:'/places',
-        waitOn:function(){
-            return Meteor.subscribe('places');
-        },
-        onBeforeAction:mustLogIn,
-        action: loading,
-        onAfterAction: function(){
-            if (Meteor.userId()) {
-                React.render(<PlacesList />, document.getElementById('yield'));
-            }
-        },
-        onStop: function(){
-            React.unmountComponentAtNode(document.getElementById('yield'));
-        }
-    });
-});
-
-function loading(){
-    if (this.ready())
-      this.render();
-    else
-      this.render('loading');
-}
-
-function mustLogIn(pause){
-    if (! Meteor.userId()) {
-        this.layout("loginLayout");
-        this.render('login');
-      } else {
-        this.next();
-      }
-};
