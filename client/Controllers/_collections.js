@@ -35,7 +35,7 @@ if (Meteor.isClient) {
 
     $.material.init();
 
-    // Meteor.startup(function() {
-    //     $.material.init();
-    // });
+    Meteor.startup(function() {
+        $.material.init();
+    });
 }
