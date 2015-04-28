@@ -12,7 +12,6 @@ Place = React.createClass({
                     } else {
                         Session.set('totalVotes', Session.get('totalVotes') + 1);
                         console.log("voted");
-
                     }
                 });
             else {

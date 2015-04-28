@@ -24,10 +24,11 @@ PlacesHeader = ReactMeteor.createClass({
             Session.set('totalVotes', result);
         });
     },
-
     getInitialState: function(){
         return {
-            placesCount: 0
+            placesCount: 0,
+            totalVoted: 0,
+            totalUsers: 0
         };
     },
     addNewPlace: function(){

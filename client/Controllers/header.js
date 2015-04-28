@@ -126,4 +126,34 @@ if (Meteor.isClient) {
             });
         }
     });
+
+    Template.clearAll.events({
+        'click #saveClear': function(event){
+            console.log("Clear");
+            bootbox.dialog({
+                message: "This will reset the site, clearing votes and orders!",
+                title : "Are you sure?!?!",
+                buttons:{
+                    danger:{
+                        label: "Yes!",
+                        className:"btn-danger",
+                        callback: function(){
+                            Meteor.call("clearAll", function(err){
+                                if (err){
+                                    console.error(err);
+                                    toastr.error(err.reason, "Error!");
+                                }
+                            });
+                        }
+                    },
+                    main:{
+                        label: "No!",
+                        className: "btn-primary",
+                        callback: function(){
+                        }
+                    }
+                }
+            });
+        }
+    });
 }

@@ -1,7 +1,7 @@
-Template.places.rendered = function(){
+Template.orders.rendered = function(){
     if (Meteor.userId()) {
         React.render(
-          <PlacesList />,
+          <OrdersList />,
           document.getElementById('yield')
         );
     }
