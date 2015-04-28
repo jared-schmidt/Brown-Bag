@@ -20,6 +20,9 @@ OrdersHeader = ReactMeteor.createClass({
             Session.set('totalOrders', result);
         });
     },
+    componentDidMount: function () {
+        $.material.input();
+    },
     addNewOrder: function(){
         var user = Meteor.user();
 
@@ -57,7 +60,7 @@ OrdersHeader = ReactMeteor.createClass({
             <div className="entry form-horizontal">
                 <div className="form-group">
                     <div className="col-sm-8">
-                        <input type='text' placeholder="what you want..." id="food" className="form-control"/>
+                        <input data-hint="" type='text' placeholder="what you want..." id="food" className="form-control floating-label"/>
                     </div>
                     <div className="col-sm-4">
                         <input onClick={this.addNewOrder} type="button" className='btn btn-success' value="Submit" />

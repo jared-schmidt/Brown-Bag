@@ -24,6 +24,9 @@ PlacesHeader = ReactMeteor.createClass({
             Session.set('totalVotes', result);
         });
     },
+    componentDidMount: function () {
+        $.material.input();
+    },
     getInitialState: function(){
         return {
             placesCount: 0,
@@ -62,10 +65,10 @@ PlacesHeader = ReactMeteor.createClass({
                     </div>
                     <div className="entry form-horizontal">
                         <div className="col-sm-5">
-                            <input type='text' placeholder="Where at..." id="place" className="form-control" />
+                            <input data-hint="some hint" type='text' placeholder="Where at..." id="place" className="form-control floating-label" />
                         </div>
                         <div className="col-sm-5">
-                            <input type='text' placeholder="What they have..." id="menu" className="form-control" />
+                            <input data-hint="some hint" type='text' placeholder="What they have..." id="menu" className="form-control floating-label" />
                         </div>
                         <div className="col-sm-2">
                             <input onClick={this.addNewPlace} type="button" className='btn btn-success' id='submitPlace' value="Submit" />
