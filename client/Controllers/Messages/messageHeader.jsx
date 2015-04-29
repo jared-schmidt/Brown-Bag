@@ -33,7 +33,7 @@ MessagesHeader = ReactMeteor.createClass({
     getInitialState: function () {
         return {
             messageCount: 0,
-            isAdmin: Meteor.user().roles === 'admin'
+            isAdmin: Meteor.user().roles === Meteor.settings.adminTitle
         };
     },
     renderInput: function(){

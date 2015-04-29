@@ -1,7 +1,7 @@
 MessageRow = React.createClass({
     getInitialState: function () {
         return {
-            isAdmin: Meteor.user().roles === 'admin'
+            isAdmin: Meteor.user().roles === Meteor.settings.adminTitle
         };
     },
     deleteMessage: function(id){

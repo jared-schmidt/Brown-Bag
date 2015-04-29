@@ -1,21 +1,8 @@
 UserHeader = ReactMeteor.createClass({
     getMeteorState: function(){
         return {
-            totalUsers: Session.get('totalUsers'),
+            totalUsers: Meteor.users.find({'profile.active': true}).count()
         }
-    },
-    componentWillMount: function(){
-        Meteor.call('getTotalActiveUsers', function(err, result){
-            if (err){
-                console.error(err);
-            }
-            Session.set('totalUsers', result);
-        });
-    },
-    getInitialState: function () {
-        return {
-            totalUsers: 0
-        };
     },
     render: function(){
         return <div className="group-header">

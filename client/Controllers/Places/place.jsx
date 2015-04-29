@@ -1,5 +1,4 @@
 var cx = React.addons.classSet;
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 Place = React.createClass({
     votePlace: function(id, didVote){

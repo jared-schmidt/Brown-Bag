@@ -3,8 +3,10 @@ if (Meteor.isClient) {
     Template.layout.events({
         'click .closeMessage': function(){
             console.log(this._id);
-            Meteor.call('userClosed', this._id, function(){
-                // toastr.success("Message go bye-bye", "Closed message!");
+            Meteor.call('userClosed', this._id, function(err){
+                if (err){
+                    toastr.error(err.reason, "Error!");
+                }
             });
         }
     });
