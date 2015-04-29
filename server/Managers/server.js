@@ -107,8 +107,6 @@ if (Meteor.isServer) {
                 });
             });
 
-
-
             return true;
         },
         publishNotification: function(notification){
@@ -118,6 +116,7 @@ if (Meteor.isServer) {
                 DesktopNotifications.remove({}); //remove all again so we don't get pop ups when first loading
             }));
 
+            // TODO: changed to slack_message
             var url = 'https://slack.com/api/chat.postMessage';
             var slack_api_token = Meteor.settings['slack_api_token'];
             var message = "Ordering soon-ish...";
@@ -133,6 +132,7 @@ if (Meteor.isServer) {
 
         },
         vote_Notification:function(){
+            // TODO: changed to slack_message
             var url = 'https://slack.com/api/chat.postMessage';
             var slack_api_token = Meteor.settings['slack_api_token'];
             var message = "Did YOU vote?! http://brown-bag.meteor.com/places";

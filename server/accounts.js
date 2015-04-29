@@ -3,13 +3,17 @@ function parse(s){
     return host[1];
 }
 
+function inArray(value, array) {
+  return array.indexOf(value) > -1;
+}
+
 Accounts.validateNewUser(function (user) {
     if(user.services.hasOwnProperty('google')){
         host = parse(user.services.google.email);
 
-        if (host === "problemsolutions.net")
+        if (host === Meteor.settings.emailDomin)
             return true;
-        throw new Meteor.Error(403, "Must use problemsolutions.net email!");
+        throw new Meteor.Error(403, "Must use " + Meteor.settings.emailDomin + " email!");
     }
     return true;
 });
@@ -17,7 +21,8 @@ Accounts.validateNewUser(function (user) {
 Accounts.onCreateUser(function(options, user){
     console.log(user);
     if(user.services.hasOwnProperty('google')){
-        if (user.services.google.email === 'jschmidt@problemsolutions.net' || user.services.google.email === 'ddollar@problemsolutions.net' || user.services.google.email === 'cscott@problemsolutions.net'){
+
+        if (inArray(user.services.google.email, Meteor.settings.adminEmails)){
             user.roles = 'admin';
         }
         else{
@@ -47,12 +52,11 @@ Accounts.onCreateUser(function(options, user){
         "locale",
         "hd");
 
-        // console.log(profile);
         user.profile = profile;
 
         user.profile.active = true;
-        user.profile.layout = "1";
-        user.profile.color = 'Brown';
+        user.profile.layout = Meteor.settings.defaultLayout;
+        user.profile.color = Meteor.settings.defaultColor;
 
     }
     return user;
