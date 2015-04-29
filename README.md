@@ -1,6 +1,9 @@
 Brown-Bag
 =========
 
+This is a website used for voting on the place to eat at, and to take orders
+
+
 Installation
 -----------
 
@@ -21,3 +24,7 @@ Usage
   To run server: 
   
     meteor --settings [path/to/settings/file.json]
+
+Built With
+-----------
+- Meteorjs + Iron Routing + Reactjs
