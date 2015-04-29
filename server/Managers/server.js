@@ -9,27 +9,6 @@ PastOrders = new Meteor.Collection('pastOrders');
 if (Meteor.isServer) {
 
     Meteor.methods({
-        addMessage: function(message){
-            var user = Meteor.user();
-            var messageId = Messages.insert({
-                'message': message,
-                'usersClosed': [],
-                'display': true,
-                'addedBy': user._id,
-                'createdOn': new Date()
-            });
-            return messageId;
-        },
-        deleteMessage: function(messageId){
-            Messages.remove(messageId);
-        },
-        userClosed: function(messageId){
-            var user = Meteor.user();
-
-            Messages.update(messageId, {
-                $addToSet: {'usersClosed': user._id}
-            });
-        },
         changeLayout: function(userid, layout){
             Meteor.users.update({'_id':userid}, {$set:{'profile.layout': layout}});
         },

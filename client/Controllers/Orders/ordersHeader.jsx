@@ -2,7 +2,7 @@ OrdersHeader = ReactMeteor.createClass({
     getMeteorState: function(){
         return {
             totalUsers: Session.get('totalUsers'),
-            totalOrders: Session.get('totalOrders')
+            totalOrders: Orders.find({}).count()
         }
     },
     componentWillMount: function(){
@@ -11,13 +11,6 @@ OrdersHeader = ReactMeteor.createClass({
                 console.error(err);
             }
             Session.set('totalUsers', result);
-        });
-
-        Meteor.call('getTotalOrders', function(err, result){
-            if (err){
-                console.error(err);
-            }
-            Session.set('totalOrders', result);
         });
     },
     componentDidMount: function () {
@@ -37,7 +30,6 @@ OrdersHeader = ReactMeteor.createClass({
                 console.error(err);
                 toastr.error(err.reason, "Error!");
             } else {
-                Session.set('totalOrders', Session.get('totalOrders') + 1);
                 document.getElementById("food").value = '';
                 if (order.alreadyOrdered){
                     toastr.warning("You placed more then 1 order!", "Warning!");
