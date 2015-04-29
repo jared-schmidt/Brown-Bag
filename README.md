@@ -1,17 +1,26 @@
 Brown-Bag
 =========
 
-For meteor/meteorite(mrt) packages: http://atmospherejs.com/
+Installation
+-----------
 
-MongoDB Operations: http://docs.mongodb.org/manual/reference/operator/
+Install Meteor:
 
-Meteor CookBook : https://github.com/awatson1978/meteor-cookbook
+    curl https://install.meteor.com | /bin/sh
 
-~~To install yelp npm package type 'npm install yelp' in terminal.~~ Should just work thank to https://github.com/arunoda/meteor-npm/
+Usage
+-----
 
-Deployed to http://brown-bag.meteor.com/
+  To get files:
+  
+    git clone git://github.com/meteor/meteor.git
+    
+  Change Directory:
+  
+    cd meteor
 
-Kdaira: https://kadira.io/academy/getting-started-with-kadira/
+  To run server: 
+  
+    meteor --settings [path/to/settings/file.json]
 
-
-settings: https://docs.google.com/a/problemsolutions.net/document/d/19Atsdb0n8Tn-RvF_Rbq7Bo6Yq6zApe6O72fUnPNxbrY/edit
+Example of settings file: https://github.com/jared-schmidt/Brown-Bag/wiki/Settings-File-Example
