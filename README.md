@@ -11,16 +11,13 @@ Install Meteor:
 Usage
 -----
 
-  To get files:
+  Setup
   
-    git clone git://github.com/meteor/meteor.git
-    
-  Change Directory:
-  
-    cd meteor
+    1. Clone repo
+    2. Change to directory
+    3. Create settings file (https://github.com/jared-schmidt/Brown-Bag/wiki/Settings-File-Example)
+    3. Run server
 
   To run server: 
   
     meteor --settings [path/to/settings/file.json]
-
-Example of settings file: https://github.com/jared-schmidt/Brown-Bag/wiki/Settings-File-Example
