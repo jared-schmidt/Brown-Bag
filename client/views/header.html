@@ -11,11 +11,18 @@
                 {{#if currentUser}} {{> user_loggedin}} {{else}} {{> user_loggedout}} {{/if}}
             </li>
             <li><hr /></li>
-            <li><a class='btn' style='width:215px;' href="{{pathFor 'places'}}"><i class="fa fa-building-o fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Places</span></b></a></li>
-            <li><a class='btn' style='width:215px;' href="{{pathFor 'orders'}}"><i class="fa fa-cutlery fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Orders</span></b></a></li>
-            <li><a class='btn' style='width:215px;' href="http://pslinks.meteor.com/category/brown-bag" target="_blank"><i class="fa fa-video-camera fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Talks</span></b></a> </li>
-            <li><a class='btn' style='width:215px;' href="{{pathFor 'users'}}"><i class="fa fa-users fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Users</span></b></a></li>
-            <li><a class='btn' style='width:215px;' href="{{pathFor 'messages'}}"><i class="fa fa-bell fa-2x">&nbsp;&nbsp;&nbsp;</i><b><span style='font-size:22px;'>Alerts</span></b></a></li>
+            <li>
+                <a class='btn' style='width:215px;' href="{{pathFor 'places'}}">
+                    <i class="fa fa-building-o fa-2x side-menu-icon">&nbsp;&nbsp;&nbsp;</i>
+                    <b>
+                        <span class='side-menu-text'>Places</span>
+                    </b>
+                </a>
+            </li>
+            <li><a class='btn' style='width:215px;' href="{{pathFor 'orders'}}"><i class="fa fa-cutlery fa-2x side-menu-icon">&nbsp;&nbsp;&nbsp;</i><b><span class='side-menu-text'>Orders</span></b></a></li>
+            <li><a class='btn' style='width:215px;' href="http://pslinks.meteor.com/category/brown-bag" target="_blank"><i class="fa fa-video-camera fa-2x side-menu-icon">&nbsp;&nbsp;&nbsp;</i><b><span class='side-menu-text'>Talks</span></b></a> </li>
+            <li><a class='btn' style='width:215px;' href="{{pathFor 'users'}}"><i class="fa fa-users fa-2x side-menu-icon">&nbsp;&nbsp;&nbsp;</i><b><span class='side-menu-text'>Users</span></b></a></li>
+            <li><a class='btn' style='width:215px;' href="{{pathFor 'messages'}}"><i class="fa fa-bell fa-2x side-menu-icon">&nbsp;&nbsp;&nbsp;</i><b><span class='side-menu-text'>Alerts</span></b></a></li>
 
             {{#if isInRole 'admin'}}
               <li><hr /></li>
@@ -123,11 +130,9 @@
 
 <template name="admin_sendOrderNotification">
     {{#if isInRole 'admin'}}
-<!--     <li><a href="#" id="send-notification"><i class="glyphicon glyphicon-bullhorn"></i>Ordering Notification</a></li>-->
-    <li><a class='btn' style='width:215px;' href="#" id="send-notification">Ordering Notification</a></li>
-    <li><a class='btn' style='width:215px;' href="##" id='vote-notify'>Vote Notification</a></li>
-    <li><a class='btn' style='width:215px;' href='#' id='endVoting'>End Voting</a></li>
-    <!-- <li><a class='btn' style='width:215px;' href='#' id='endOrdering'>End Ordering</a></li> -->
+        <li><a class='btn' style='width:215px; color: white;' href="#" id="send-notification">Ordering Notification</a></li>
+        <li><a class='btn' style='width:215px; color: white;' href="##" id='vote-notify'>Vote Notification</a></li>
+        <li><a class='btn' style='width:215px; color: white;' href='#' id='endVoting'>End Voting</a></li>
     {{> clearAll}} {{/if}}
 </template>
 
@@ -153,7 +158,7 @@
 
 <template name='clearAll'>
     {{#if isInRole 'admin'}}
-    <li><a class='btn' style='width:215px;' href='#' id='saveClear'>Reset Votes & Orders</a>
+    <li><a class='btn' style='width:215px; color: white;' href='#' id='saveClear'>Reset Votes & Orders</a>
     </li>
     {{/if}}
 </template>

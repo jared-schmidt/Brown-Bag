@@ -39,6 +39,15 @@
   float: right;
 }
 
+.side-menu-icon{
+  color: white;
+}
+
+.side-menu-text{
+  color:white;
+  font-size:22px;
+}
+
 /* CSS declarations go here */
 
 body{

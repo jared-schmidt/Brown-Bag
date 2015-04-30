@@ -23,10 +23,10 @@ Accounts.onCreateUser(function(options, user){
     if(user.services.hasOwnProperty('google')){
 
         if (inArray(user.services.google.email, Meteor.settings.adminEmails)){
-            user.roles = Meteor.settings.adminTitle;
+            user.roles = 'admin';
         }
         else{
-            user.roles = Meteor.settings.userTitle;
+            user.roles = 'user';
         }
 
         var accessToken = user.services.google.accessToken, result, profile;
