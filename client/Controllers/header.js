@@ -58,7 +58,11 @@ if (Meteor.isClient) {
         },
         'layoutColor':function(){
             if (Meteor.userId()) {
-                return Meteor.user().profile.color.toLowerCase();
+                if (Meteor.user().profile.color){
+                    return Meteor.user().profile.color.toLowerCase();
+                } else {
+                    return 'brown';
+                }
             }
             return 'brown';
         }
