@@ -1,6 +1,6 @@
 var cx = React.addons.classSet;
 
-Place = React.createClass({
+Place = ReactMeteor.createClass({
     votePlace: function(id, didVote){
         if(Meteor.userId()){
             if (!didVote)

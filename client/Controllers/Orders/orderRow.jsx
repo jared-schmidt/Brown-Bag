@@ -1,4 +1,4 @@
-OrderRow = React.createClass({
+OrderRow = ReactMeteor.createClass({
     deleteOrder: function(id, userName){
         if (Meteor.user().profile.name === userName){
             Meteor.call("removeOrder", id, function(err){
@@ -11,7 +11,7 @@ OrderRow = React.createClass({
             });
         }
     },
-    getInitialState: function () {
+    getMeteorState: function () {
         var userName = this.props.personName;
         return {
             showDeleteBtn: Meteor.user().profile.name === userName

@@ -1,4 +1,4 @@
-UserRow = React.createClass({
+UserRow = ReactMeteor.createClass({
     toggleActiveUser: function(id){
         Meteor.call('activeUser', id, function(err, isActive){
             if (err){
