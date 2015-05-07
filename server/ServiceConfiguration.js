@@ -1,24 +1,36 @@
 isDevEnv = function () {
+    var rv = false
     if (String(process.env.ROOT_URL).indexOf("localhost") >= 0) {
-        return true;
-    } else {
-        return false;
+        rv = true;
     }
+    console.log("isDev -> ", rv);
+    return rv
 };
 
 isTestEnv = function(){
-    if (String(process.env.ROOT_URL).indexOf(Meteor.settings.test_host_url) >= 0){
-        return true;
+    var rv = false
+    if (String(process.env.ROOT_URL).indexOf("http://bag.meteor.com") >= 0){
+        rv = true;
     }
-    return false;
+    console.log("isTest -> ", rv);
+    return rv;
 };
+
+isProdEnv = function(){
+    var rv = false
+    if (String(process.env.ROOT_URL).indexOf("http://brown-bag.meteor.com") >= 0){
+        rv = true;
+    }
+    console.log("isProd -> ", rv);
+    return rv;
+}
 
 ServiceConfiguration.configurations.remove({
     service: 'google'
 });
 
 
-if (!isDevEnv() && !isTestEnv()) {
+if (isProdEnv()) {
     console.log("ENV -> Production");
     ServiceConfiguration.configurations.insert({
         service: 'google',
@@ -26,7 +38,7 @@ if (!isDevEnv() && !isTestEnv()) {
         secret: Meteor.settings['google_prod_secret']
     });
 }
-else if (!isDevEnv() && isTestEnv()){
+else if (isTestEnv()){
     console.log("ENV -> Test");
     ServiceConfiguration.configurations.insert({
         service: 'google',
@@ -34,7 +46,7 @@ else if (!isDevEnv() && isTestEnv()){
         secret: Meteor.settings['google_test_secret']
     });
 }
-else if(isDevEnv() && !isTestEnv()) {
+else if(isDevEnv()) {
     console.log("ENV -> Development (local)");
     ServiceConfiguration.configurations.insert({
         service: 'google',
