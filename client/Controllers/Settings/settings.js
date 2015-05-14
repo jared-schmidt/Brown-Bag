@@ -50,7 +50,7 @@ if (Meteor.isClient) {
 
     Template.History.helpers({
         dateFormat:function(){
-            return moment(Date(this.datePlaced)).format('LL');
+            return moment(this.datePlaced).format('LL');
         }
     });
 
