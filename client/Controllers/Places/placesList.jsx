@@ -29,9 +29,6 @@ PlacesList = ReactMeteor.createClass({
             votedFor = {didVote && didVote._id === model._id}
             />
     },
-    getInitialState: function(){
-        return {places: []};
-    },
     renderHeader: function(model){
         return <PlacesHeader />
     },

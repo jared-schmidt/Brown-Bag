@@ -15,6 +15,10 @@ if (Meteor.isServer) {
         return Places.find({}, {fields: {'votes': 0}});
     });
 
+    Meteor.publish('winnerPlace', function(){
+        return Places.find({'winner': 1}, {fields: {'votes': 0}});
+    });
+
     Meteor.publish('urls', function(){
         return Urls.find({});
     });

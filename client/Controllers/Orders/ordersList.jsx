@@ -3,6 +3,7 @@ var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 OrdersList = ReactMeteor.createClass({
     startMeteorSubscriptions: function(){
         Meteor.subscribe('orders');
+        Meteor.subscribe('winnerPlace');
     },
     getMeteorState: function(){
         return {

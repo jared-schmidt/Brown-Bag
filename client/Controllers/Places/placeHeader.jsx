@@ -27,13 +27,6 @@ PlacesHeader = ReactMeteor.createClass({
     componentDidMount: function () {
         $.material.input();
     },
-    getInitialState: function(){
-        return {
-            placesCount: 0,
-            totalVoted: 0,
-            totalUsers: 0
-        };
-    },
     addNewPlace: function(){
 
         var user = Meteor.user();
