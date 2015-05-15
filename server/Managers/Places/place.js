@@ -35,9 +35,8 @@ if (Meteor.isServer) {
                     $addToSet: {'upvoters': user._id},
                     $inc : {'votes':1}
                 });
-                var user = Meteor.user();
                 Meteor.users.update(user._id, {
-                    $set:{'voted': true}
+                    $set:{'voted': true, 'profile.active': true}
                 });
             } else {
                 throw new Meteor.Error(422, 'Already upvoted');

@@ -21,13 +21,12 @@ PlacesList = ReactMeteor.createClass({
         var didVote = this.state.didVote;
 
         return <Place
-            key={index}
+            key={model._id}
             placeid = {model._id}
             name = {model.name}
             isWinner = {model.winner ? true : false}
             didVote = {didVote ? true : false}
-            votedFor = {didVote && didVote._id === model._id}
-            />
+            votedFor = {didVote && didVote._id === model._id} />
     },
     renderHeader: function(model){
         return <PlacesHeader />

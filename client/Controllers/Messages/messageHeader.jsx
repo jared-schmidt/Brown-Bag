@@ -1,7 +1,8 @@
 MessagesHeader = ReactMeteor.createClass({
     getMeteorState: function(){
         return {
-            messageCount: Messages.find({}).count()
+            messageCount: Messages.find({}).count(),
+            isAdmin: Meteor.user().roles === 'admin'
         }
     },
     componentDidMount: function () {
@@ -29,12 +30,6 @@ MessagesHeader = ReactMeteor.createClass({
         } else {
             toastr.error("No message text entered", "Error!");
         }
-    },
-    getInitialState: function () {
-        return {
-            messageCount: 0,
-            isAdmin: Meteor.user().roles === 'admin'
-        };
     },
     renderInput: function(){
         return <div className="entry form-horizontal">

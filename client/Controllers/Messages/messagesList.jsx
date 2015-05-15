@@ -11,10 +11,9 @@ MessagesList = ReactMeteor.createClass({
     },
     renderMessage: function(model, index){
         return <MessageRow
-            key={index}
+            key={model._id}
             messageid={model._id}
-            message={model.message}
-        />
+            message={model.message} />
     },
     renderHeader: function(model){
         return <MessagesHeader />

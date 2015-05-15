@@ -12,11 +12,10 @@ OrdersList = ReactMeteor.createClass({
     },
     renderOrder: function(model, index){
         return <OrderRow
-            key={index}
+            key={model._id}
             orderid={model._id}
             personName={model.name}
-            foodOrder={model.food}
-        />
+            foodOrder={model.food} />
     },
     renderHeader: function(model){
         return <OrdersHeader />

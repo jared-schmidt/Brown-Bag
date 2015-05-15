@@ -1,5 +1,9 @@
 if (Meteor.isServer) {
     Meteor.methods({
+        changeOrderedFilter: function(state){
+          var me = Meteor.user();
+          Meteor.users.update({'_id': me._id}, {$set:{'profile.order_filter': !state }});
+        },
         activeUser: function(userid){
             var me = Meteor.user();
             var user = Meteor.users.findOne(userid);

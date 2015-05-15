@@ -2,10 +2,25 @@ if (Meteor.isServer) {
     Meteor.methods({
         removeOrder : function(orderId){
             var user = Meteor.user();
-            Meteor.users.update(user._id,{
-                $set:{'ordered':false}
-            });
+
             Orders.remove(orderId);
+
+            // Check if already Ordered
+            var ordered = false;
+            var orders = Orders.find({}).fetch();
+            for (var i=0;i<=orders.length-1;i++){
+                var o = orders[i];
+                if (o.name === Meteor.user().profile.name){
+                    ordered = true;
+                    break;
+                }
+            }
+
+            if (!ordered){
+              Meteor.users.update(user._id,{
+                  $set:{'ordered':false}
+              });
+            }
         },
         addOrder : function(name, food){
             if (!name){
@@ -34,7 +49,7 @@ if (Meteor.isServer) {
 
             var user = Meteor.user();
             Meteor.users.update(user._id, {
-                $set:{'ordered': true}
+                $set:{'ordered': true, 'profile.active': true}
             });
 
             return {

@@ -80,10 +80,21 @@ if (Meteor.isServer) {
 
             // Set user to not voted and not ordered
             Meteor.users.find().forEach(function(user){
-                console.log("user");
+
+                var isActive = false;
+
+                if (user.voted || user.ordered){
+                  isActive = true;
+                }
+
                 Meteor.users.update(user._id, {
-                    $set:{'voted': false, 'ordered':false}
+                    $set:{
+                      'voted': false,
+                      'ordered': false,
+                      'profile.active': isActive
+                    }
                 });
+
             });
 
             return true;

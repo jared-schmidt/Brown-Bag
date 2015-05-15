@@ -1,6 +1,11 @@
 var cx = React.addons.classSet;
 
 Place = ReactMeteor.createClass({
+    getMeteorState: function(){
+      return {
+        hasWinner: Places.findOne({'winner': 1}) ? true : false
+      }
+    },
     votePlace: function(id, didVote){
         if(Meteor.userId()){
             if (!didVote)
@@ -46,12 +51,12 @@ Place = ReactMeteor.createClass({
         });
 
         var upVoteDisabled = {};
-        if (didVote){
+        if (didVote || this.state.hasWinner){
             upVoteDisabled['disabled'] = 'disabled';
         }
 
         var downVoteDisabled = {}
-        if (isWinner){
+        if (this.state.hasWinner){
             downVoteDisabled['disabled'] = 'disabled';
         }
 
