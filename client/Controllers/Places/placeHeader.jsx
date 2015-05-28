@@ -6,7 +6,8 @@ PlacesHeader = ReactMeteor.createClass({
         return {
             placesCount: Places.find().count(),
             totalUsers: Session.get('totalUsers'),
-            totalVoted: Session.get('totalVotes')
+            totalVoted: Session.get('totalVotes'),
+            isAdmin: Meteor.user().roles === 'admin'
         }
     },
     componentWillMount: function(){
@@ -50,23 +51,26 @@ PlacesHeader = ReactMeteor.createClass({
             toastr.error("Need to have a name and a menu", "Error!");
         }
     },
+    renderNewPlace: function(){
+        return <div className="entry form-horizontal">
+            <div className="col-sm-5">
+                <input data-hint="some hint" type='text' placeholder="Where at..." id="place" className="form-control floating-label" />
+            </div>
+            <div className="col-sm-5">
+                <input data-hint="some hint" type='text' placeholder="What they have..." id="menu" className="form-control floating-label" />
+            </div>
+            <div className="col-sm-2">
+                <input onClick={this.addNewPlace} type="button" className='btn btn-success' id='submitPlace' value="Submit" />
+            </div>
+        </div>
+    },
     render: function(){
         return <div className="group-header">
                     <div className="title-bar row">
                         <span className="count col-sm-4">{this.state.placesCount} Place(s) Registered</span>
                         <span className="count col-sm-4"> {this.state.totalVoted} of {this.state.totalUsers} Vote(s) </span>
                     </div>
-                    <div className="entry form-horizontal">
-                        <div className="col-sm-5">
-                            <input data-hint="some hint" type='text' placeholder="Where at..." id="place" className="form-control floating-label" />
-                        </div>
-                        <div className="col-sm-5">
-                            <input data-hint="some hint" type='text' placeholder="What they have..." id="menu" className="form-control floating-label" />
-                        </div>
-                        <div className="col-sm-2">
-                            <input onClick={this.addNewPlace} type="button" className='btn btn-success' id='submitPlace' value="Submit" />
-                        </div>
-                    </div>
+                    {this.state.isAdmin ? this.renderNewPlace() : null}
                 <RandomWheel />
                 </div>
     }
