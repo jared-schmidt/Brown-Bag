@@ -1,0 +1,21 @@
+<template name="History">
+    <label>Past Orders:</label>
+    <br />
+    <br />
+    <table class="table">
+        <thead>
+            <th>Place</th>
+            <th>Food</th>
+            <th>Date</th>
+        </thead>
+        <tbody>
+        {{#each orders}}
+            <tr>
+                <td>{{placeName}}</td>
+                <td>{{foodOrdered}}</td>
+                <td>{{dateFormat}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</template>

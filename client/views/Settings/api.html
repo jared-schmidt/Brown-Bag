@@ -1,0 +1,29 @@
+<template name="Api">
+    <table>
+        <tr>
+            <th>API Stuffs</th>
+            <td>&nbsp;</td>
+        </tr>
+        {{#if user.api}}
+        <tr>
+            {{#unless user.api.confirmed}}
+                <td>&nbsp;</td>
+                <th>{{user.api.api_id}} is tring to make a connection.</th>
+                <td>To confirm this connection <button id="confirmSlack">Confirm</button></td>
+            {{/unless}}
+            {{#if user.api.confirmed}}
+                <td>&nbsp;</td>
+                <td>API should be good to go.</td>
+            {{/if}}
+        </tr>
+        <tr>
+            <th>Connected:</th>
+            <td>{{user.api.api_id}}</td>
+        </tr>
+        <tr>
+            <th>Confirmed: </th>
+            <td>{{user.api.confirmed}}</td>
+        </tr>
+        {{/if}}
+    </table>
+</template>

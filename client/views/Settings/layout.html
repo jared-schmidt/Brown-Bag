@@ -1,0 +1,52 @@
+<template name="Layout">
+    <table>
+        <tr>
+            <th>Layout:</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <label>
+                    SideBar:
+                    {{#if $eq user.profile.layout "1"}}
+                        <input type="radio" id="side" class="layoutStyle" name="layoutStyle" checked value="1" />
+                    {{else}}
+                        <input type='radio' id='side' class='layoutStyle' name='layoutStyle' value='1' />
+                    {{/if}}
+                </label>
+                <label>
+                    Horizonal:
+                    {{#if $eq user.profile.layout "0"}}
+                        <input type='radio' id='top' class='layoutStyle' name='layoutStyle' checked value='0' />
+                    {{else}}
+                        <input type='radio' id='top' class='layoutStyle' name='layoutStyle' value='0' />
+                    {{/if}}
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <th>Color:</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <select id="colorSelect">
+                    <option {{selected "Red" }}>Red</option>
+                    <option {{selected "Pink" }}>Pink</option>
+                    <option {{selected "Purple" }}>Purple</option>
+                    <option {{selected "Indigo" }}>Indigo</option>
+                    <option {{selected "Cyan" }}>Cyan</option>
+                    <option {{selected "Teal" }}>Teal</option>
+                    <option {{selected "Green" }}>Green</option>
+                    <option {{selected "Lime" }}>Lime</option>
+                    <option {{selected "Yellow" }}>Yellow</option>
+                    <option {{selected "Amber" }}>Amber</option>
+                    <option {{selected "Orange" }}>Orange</option>
+                    <option {{selected "Brown" }}>Brown</option>
+                    <option {{selected "Grey" }}>Grey</option>
+                    <option {{selected "Blue" }}>Blue</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+</template>
