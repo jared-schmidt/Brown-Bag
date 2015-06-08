@@ -20,6 +20,16 @@ if (Meteor.isServer) {
                 }
             }
             throw new Meteor.Error(422, 'Must be an admin');
+        },
+        toggleVoting: function(userid){
+            var me = Meteor.user();
+            var user = Meteor.users.findOne(userid);
+
+            if (me.roles === 'admin'){
+                Meteor.users.update({'_id': user._id}, {$set:{'canVote': !user.canVote }});
+            } else {
+                throw new Meteor.Error(422, 'Must be an admin');
+            }
         }
     });
 }

@@ -1,4 +1,9 @@
 UserRow = ReactMeteor.createClass({
+    getMeteorState: function(){
+        return {
+            isAdmin: Meteor.user().roles === 'admin'
+        }
+    },
     toggleActiveUser: function(id){
         Meteor.call('activeUser', id, function(err, isActive){
             if (err){
@@ -12,6 +17,14 @@ UserRow = ReactMeteor.createClass({
                 } else {
                     Session.set('totalUsers', currUser - 1);
                 }
+            }
+        });
+    },
+    toggleVoting: function(id){
+        Meteor.call('toggleVoting', id, function(err){
+            if (err){
+                console.error(err);
+                toastr.error(err.reason, "Error!");
             }
         });
     },
@@ -56,6 +69,23 @@ UserRow = ReactMeteor.createClass({
                         <div className="col-md-1"><b>Voted:</b><br/>{voted ? 'Yes' : 'No'}</div>
                         <div className="col-md-1"><b>Ordered:</b><br/>{ordered ? 'Yes' : 'No'}</div>
                         <div className="col-md-4"> {this.renderCheckbox('Active', active, userid)}</div>
+                        {
+                            this.state.isAdmin
+                        ?
+                            <div className="checkbox no-space floatRight">
+                                <label>
+                                    <b>Vote Counts:</b>
+                                    <br/>
+                                    <input
+                                        type="checkbox"
+                                        checked={checked}
+                                        onChange={this.toggleVoting.bind(this, userid)}
+                                    />
+                                </label>
+                            </div>
+                        :
+                            null
+                        }
                     </div>
                 </div>
         </div>

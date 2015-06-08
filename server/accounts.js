@@ -7,6 +7,15 @@ function inArray(value, array) {
   return array.indexOf(value) > -1;
 }
 
+Accounts.onLogin(function(user){
+    user = user.user;
+
+    if(!user.hasOwnProperty('canVote')){
+        console.log("Added canVote field");
+        Meteor.users.update({'_id': user._id}, {$set: {'canVote': true}}, {'upsert': true});
+    }
+});
+
 Accounts.validateNewUser(function (user) {
     if(user.services.hasOwnProperty('google')){
         host = parse(user.services.google.email);
