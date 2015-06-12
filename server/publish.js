@@ -20,7 +20,13 @@ if (Meteor.isServer) {
     });
 
     Meteor.publish("userData", function(){
-        return Meteor.users.find({}, {fields: {'profile': 1, 'roles': 1, 'voted': 1, 'ordered': 1}});
+        return Meteor.users.find({}, {fields: {
+          'profile': 1,
+          'roles': 1,
+          'voted': 1,
+          'ordered': 1,
+          'status.online': 1
+        }});
     });
 
     Meteor.publish('messages', function(){
