@@ -21,8 +21,7 @@ UserRow = ReactMeteor.createClass({
     renderCheckbox: function(label, checked, id){
         return <div className="checkbox no-space floatRight">
         <label>
-          <b>{label}:</b>
-          <br/>
+          <b>{label}:&nbsp;</b>
           <input
                 type="checkbox"
                 checked={checked}
@@ -41,21 +40,25 @@ UserRow = ReactMeteor.createClass({
     render: function(){
         var {userid, avatar, personName, role, active, voted, ordered} = this.props;
         return <div className="panel panel-default">
+                <div className='panel-heading clearfix'>
+                    <h3 className='panel-title pull-left'>
+                        <img
+                            src={avatar}
+                            height="24"
+                            width="24"
+                            className='no-space'
+                        />
+                        &nbsp;&mdash;&nbsp; {personName}
+                    </h3>
+                    <div className='pull-right'>
+                        {role}
+                    </div>
+                </div>
                 <div className="panel-body container-fluid">
                     <div className='row'>
-                        <div className="col-md-1">
-                            <img
-                                src={avatar}
-                                height="64"
-                                width="64"
-                                className='no-space'
-                             />
-                        </div>
-                        <div className="col-md-4"><b>Name:</b><br/>{personName}</div>
-                        <div className="col-md-1"><b>Role:</b><br/>{role}</div>
-                        <div className="col-md-1"><b>Voted:</b><br/>{voted ? 'Yes' : 'No'}</div>
-                        <div className="col-md-1"><b>Ordered:</b><br/>{ordered ? 'Yes' : 'No'}</div>
-                        <div className="col-md-4"> {this.renderCheckbox('Active', active, userid)}</div>
+                        <div className="col-md-1"><b>Voted:&nbsp;</b>{voted ? 'Yes' : 'No'}</div>
+                        <div className="col-md-1"><b>Ordered:&nbsp;</b>{ordered ? 'Yes' : 'No'}</div>
+                        <div className="col-md-2"> {this.renderCheckbox('Active', active, userid)}</div>
                     </div>
                 </div>
         </div>

@@ -5,8 +5,17 @@ UserList = ReactMeteor.createClass({
        Meteor.subscribe('userData');
      },
     getMeteorState: function(){
+        var users = Meteor.users.find({}, {sort: {'profile.family_name': 1}}).fetch();
+        // var userRoles = _.groupBy(users, 'roles')
+        // users: Meteor.users.find({}, {sort:{'roles': 1, 'profile.active': -1, 'profile.family_name': 1}}).fetch()
+
+        var activeUsers = _.groupBy(users, function(user){
+          return user.profile.active;
+        });
+
         return {
-            users: Meteor.users.find({}, {sort:{'roles': 1, 'profile.active': -1, 'profile.family_name': 1}}).fetch()
+          activeUsers: activeUsers.true,
+          unActiveUser: activeUsers.false
         }
     },
     componentDidMount: function () {
@@ -61,15 +70,31 @@ UserList = ReactMeteor.createClass({
         </label>
       </div>
     },
+    renderList: function(arr, title){
+      return <div>
+        <h4>{title}</h4>
+        {
+          arr
+        ?
+          <ReactCSSTransitionGroup transitionName="example">
+            {arr.map(this.renderUser)}
+          </ReactCSSTransitionGroup>
+        :
+          "List is empty"
+        }
+      </div>
+    },
     render: function(){
         return <div>
             {this.renderCheckbox('Show user(s) who did not order')}
 
             {this.renderHeader(this.state)}
 
-            <ReactCSSTransitionGroup transitionName="example">
-                {this.state.users.map(this.renderUser)}
-            </ReactCSSTransitionGroup>
+            {this.renderList(this.state.activeUsers, "Active")}
+            <br />
+            <br />
+            {this.renderList(this.state.unActiveUser, "Not Active")}
+
         </div>;
     }
 });

@@ -17,6 +17,7 @@ Place = ReactMeteor.createClass({
                     } else {
                         Session.set('totalVotes', Session.get('totalVotes') + 1);
                         console.log("voted");
+                        toastr.success("You voted!", "Voted!");
                     }
                 });
             else {
@@ -27,6 +28,7 @@ Place = ReactMeteor.createClass({
                     } else {
                         Session.set('totalVotes', Session.get('totalVotes') - 1);
                         console.log("removed vote");
+                        toastr.warning("You removed your vote!", "Warning!");
                     }
                 });
             }
