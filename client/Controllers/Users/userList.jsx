@@ -3,9 +3,10 @@ var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 UserList = ReactMeteor.createClass({
     startMeteorSubscriptions: function() {
        Meteor.subscribe('userData');
+       Meteor.subscribe('groups');
      },
     getMeteorState: function(){
-        var users = Meteor.users.find({}, {sort: {'profile.family_name': 1}}).fetch();
+        var users = Meteor.users.find({}, {sort: {'group': 1,'profile.family_name': 1}}).fetch();
         // var userRoles = _.groupBy(users, 'roles')
         // users: Meteor.users.find({}, {sort:{'roles': 1, 'profile.active': -1, 'profile.family_name': 1}}).fetch()
 
@@ -32,6 +33,7 @@ UserList = ReactMeteor.createClass({
                 role={model.roles}
                 active={model.profile.active}
                 voted={model.voted}
+                group={model.group}
                 ordered={model.ordered} />
           } else {
             return null;
@@ -45,6 +47,7 @@ UserList = ReactMeteor.createClass({
               role={model.roles}
               active={model.profile.active}
               voted={model.voted}
+              group={model.group}
               ordered={model.ordered} />
         }
     },
@@ -71,17 +74,23 @@ UserList = ReactMeteor.createClass({
       </div>
     },
     renderList: function(arr, title){
-      return <div>
-        <h4>{title}</h4>
-        {
-          arr
-        ?
-          <ReactCSSTransitionGroup transitionName="example">
-            {arr.map(this.renderUser)}
-          </ReactCSSTransitionGroup>
-        :
-          "List is empty"
-        }
+      return <div className="panel panel-default">
+        <div className='panel-heading clearfix'>
+            <h5>{title}</h5>
+        </div>
+
+        <div className="panel-body container-fluid">
+            {
+              arr
+            ?
+              <ReactCSSTransitionGroup transitionName="example">
+                {arr.map(this.renderUser)}
+              </ReactCSSTransitionGroup>
+            :
+              "List is empty"
+            }
+        </div>
+
       </div>
     },
     render: function(){

@@ -6,12 +6,7 @@ if (Meteor.isClient) {
     DesktopNotifications = new Meteor.Collection("desktopNotifications");
     Messages = new Meteor.Collection('messages');
     PastOrders = new Meteor.Collection('pastOrders');
-
-    // Deps.autorun(function(){
-    //     Meteor.subscribe('orders');
-    //     Meteor.subscribe('places');
-    //     Meteor.subscribe('urls');
-    // });
+    Groups = new Meteor.Collection('groups');
 
     Deps.autorun(function() {
         Meteor.subscribe('messages');
@@ -32,8 +27,6 @@ if (Meteor.isClient) {
             });
         }
     });
-
-    $.material.init();
 
     Meteor.startup(function() {
         $.material.init();

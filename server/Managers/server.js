@@ -4,7 +4,7 @@ Urls = new Meteor.Collection("urls");
 DesktopNotifications = new Meteor.Collection("desktopNotifications");
 Messages = new Meteor.Collection('messages');
 PastOrders = new Meteor.Collection('pastOrders');
-
+Groups = new Meteor.Collection('groups');
 
 if (Meteor.isServer) {
 

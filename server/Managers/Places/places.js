@@ -9,7 +9,7 @@ if (Meteor.isServer) {
         //     return places[random_num]._id;
         // },
         addPlace : function(username, name, menu){
-            if (Meteor.user().roles === 'admin'){
+            if (Meteor.user() &&  Meteor.user().roles === 'admin'){
                 if (name && menu){
                     var placeId = Places.insert({
                         'username' : username,
@@ -23,7 +23,20 @@ if (Meteor.isServer) {
                 }
                 throw new Meteor.Error(422, 'Name and menu missing.');
             }
-            throw new Meteor.Error(422, 'Must be an admin.');
+            else if(!Meteor.user()){
+                if (name && menu){
+                    Places.insert({
+                        'username' : username,
+                        'name' : name,
+                        'votes': 0,
+                        'upvoters': [],
+                        'menu': menu,
+                        'submittedOn' : new Date()
+                    });
+                }
+            } else {
+                throw new Meteor.Error(422, 'Must be an admin.');
+            }
         },
         getTotalVotes: function(){
             var totalVotes = 0;

@@ -1,23 +1,21 @@
-if (Meteor.isClient) {
 
-    Template.layout.events({
-        'click .closeMessage': function(){
-            console.log(this._id);
-            Meteor.call('userClosed', this._id, function(err){
-                if (err){
-                    toastr.error(err.reason, "Error!");
-                }
-            });
-        }
-    });
-
-    Template.layout.helpers({
-        messages : function(){
-            var user = Meteor.user();
-            if (user){
-              return Messages.find({'usersClosed' : {"$nin" : [user._id]}});
+Template.layout.events({
+    'click .closeMessage': function(){
+        console.log(this._id);
+        Meteor.call('userClosed', this._id, function(err){
+            if (err){
+                toastr.error(err.reason, "Error!");
             }
-            return Messages.find({});
+        });
+    }
+});
+
+Template.layout.helpers({
+    messages : function(){
+        var user = Meteor.user();
+        if (user){
+          return Messages.find({'usersClosed' : {"$nin" : [user._id]}});
         }
-    });
-}
+        return Messages.find({});
+    }
+});
