@@ -91,7 +91,7 @@ UserRow = ReactMeteor.createClass({
                     </div>
                 </div>
             </div>
-            
+
 
         </div>
     }

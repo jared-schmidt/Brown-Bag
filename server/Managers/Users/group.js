@@ -25,15 +25,17 @@ Meteor.methods({
         throw new Meteor.Error(422, 'Must be an admin.');
     },
     changeUserGroup: function(userID, groupID){
+        if (Meteor.user().roles === 'admin'){
+            var group = Groups.findOne({'_id': groupID});
 
-        var group = Groups.findOne({'_id': groupID});
-
-        if(group){
-            Meteor.users.update({'_id': userID}, {$set:{
-                'group': group._id
-            }}, {upsert: true});
-            return group.name;
+            if(group){
+                Meteor.users.update({'_id': userID}, {$set:{
+                    'group': group._id
+                }}, {upsert: true});
+                return group.name;
+            }
+            throw new Meteor.Error(422, 'Could not find that group.');
         }
-        throw new Meteor.Error(422, 'Could not find that group.');
+        throw new Meteor.Error(422, 'Must be an admin to change group.');
     }
 });
