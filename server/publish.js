@@ -33,6 +33,17 @@ if (Meteor.isServer) {
         }});
     });
 
+    // Publish data for single user "Meteor.user()"
+    Meteor.publish(null, function() {
+        return Meteor.users.find({_id: this.userId}, {fields: {
+            'group': 1,
+            'profile': 1,
+            'roles': 1,
+            'voted': 1,
+            'ordered': 1
+        }});
+    });
+
     Meteor.publish('messages', function(){
         return Messages.find({});
     });

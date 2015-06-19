@@ -71,3 +71,11 @@
     {{>frontPage}}
 </template>
 
+
+<template name="noLayout">
+    {{> yield}}
+
+    <!-- Used for react component -->
+    <div id='yield'></div>
+
+</template>

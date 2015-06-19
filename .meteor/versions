@@ -64,6 +64,7 @@ mongo-livedata@1.0.8
 mousetrap:mousetrap@1.4.6_1
 mrt:momentjs@2.1.0
 mystor:device-detection@0.2.0
+natestrauser:animate-css@3.2.6
 npm-bcrypt@0.7.8_2
 npm-container@1.0.0
 oauth@1.1.4

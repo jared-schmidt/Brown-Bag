@@ -61,3 +61,13 @@ Accounts.onCreateUser(function(options, user){
     }
     return user;
 });
+
+Accounts.onLogin(function(user){
+    user = user.user;
+    // var userGroup = Groups.findOne({'_id': user.group});
+    //
+    // if (userGroup.name.toLowerCase() !== 'johnstown'){
+    //     console.log("Can't let you log it!");
+    // }
+
+});

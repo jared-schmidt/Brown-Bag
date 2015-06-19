@@ -9,6 +9,16 @@ Groups = new Meteor.Collection('groups');
 if (Meteor.isServer) {
 
     Meteor.methods({
+        checkUserGroup: function(userid){
+            var isGood = true;
+            var user = Meteor.users.findOne({'_id': userid});
+            var userGroup = Groups.findOne({'_id': user.group});
+
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                isGood = false;
+            }
+            return isGood;
+        },
         changeLayout: function(userid, layout){
             Meteor.users.update({'_id':userid}, {$set:{'profile.layout': layout}});
         },
