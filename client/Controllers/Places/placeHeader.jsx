@@ -10,7 +10,7 @@ PlacesHeader = ReactMeteor.createClass({
             isAdmin: Meteor.user().roles === 'admin'
         }
     },
-    componentWillMount: function(){
+    getCounts: function(){
         Meteor.call('getTotalActiveUsers', function(err, result){
             if (err){
                 console.error(err);
@@ -24,6 +24,12 @@ PlacesHeader = ReactMeteor.createClass({
             }
             Session.set('totalVotes', result);
         });
+    },
+    componentWillMount: function(){
+        this.getCounts();
+    },
+    componentWillUpdate: function(){
+        this.getCounts();
     },
     componentDidMount: function () {
         $.material.input();

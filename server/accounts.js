@@ -19,7 +19,6 @@ Accounts.validateNewUser(function (user) {
 });
 
 Accounts.onCreateUser(function(options, user){
-    console.log(user);
     if(user.services.hasOwnProperty('google')){
 
         if (inArray(user.services.google.email, Meteor.settings.adminEmails)){

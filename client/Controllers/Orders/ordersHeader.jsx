@@ -41,7 +41,7 @@ OrdersHeader = ReactMeteor.createClass({
     renderWinner: function(){
         return <div>
             <h3>Winner is <i>{this.state.winningPlace ? this.state.winningPlace.name : null}</i></h3>
-            <a href='{this.state.winningPlace ? this.state.winningPlace.menu : null}'>Menu</a>
+            <a target='_blank' href={this.state.winningPlace ? this.state.winningPlace.menu : null}>Menu</a>
         </div>
     },
     renderOrderInput: function(){
