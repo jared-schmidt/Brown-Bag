@@ -1,7 +1,7 @@
 <template name='header'>
     {{#if $eq layout "1"}}
 
-    <!-- Side Nacv-->
+    <!-- Side Nav-->
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav navbar navbar-material-{{layoutColor}}">
             <li class="sidebar-brand">
@@ -23,6 +23,8 @@
             <!-- <li><a class='btn' style='width:215px;' href="http://pslinks.meteor.com/category/brown-bag" target="_blank"><i class="fa fa-video-camera fa-2x side-menu-icon">&nbsp;&nbsp;&nbsp;</i><b><span class='side-menu-text'>Talks</span></b></a> </li> -->
             <li><a class='btn' style='width:215px;' href="{{pathFor 'users'}}"><i class="fa fa-users fa-2x side-menu-icon">&nbsp;&nbsp;&nbsp;</i><b><span class='side-menu-text'>Users</span></b></a></li>
             <li><a class='btn' style='width:215px;' href="{{pathFor 'messages'}}"><i class="fa fa-bell fa-2x side-menu-icon">&nbsp;&nbsp;&nbsp;</i><b><span class='side-menu-text'>Alerts</span></b></a></li>
+            <li><a class='btn' style='width:215px;' href="{{pathFor 'releases'}}"><b><span class='side-menu-text'>Releases</span></b></a></li>
+
 
             {{#if isInRole 'admin'}}
               <li><hr /></li>
