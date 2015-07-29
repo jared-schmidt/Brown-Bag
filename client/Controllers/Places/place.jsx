@@ -43,7 +43,7 @@ Place = ReactMeteor.createClass({
         });
     },
     render: function(){
-        var {placeid, name, votes, isWinner, didVote, votedFor} = this.props;
+        var {placeid, name, menu, votes, isWinner, didVote, votedFor} = this.props;
         var cardClasses = cx({
             'panel': true,
             'panel-default': true,
@@ -75,11 +75,9 @@ Place = ReactMeteor.createClass({
                     <div className={cardClasses}>
                         <div className='panel-heading clearfix'>
                             <h3 className='panel-title pull-left'>
-                                {name}
+                                <a href={menu} _target='_blank'>{name}</a>
                             </h3>
-                            <h3 className='panel-title pull-right'>
-                                {votes}
-                            </h3>
+
                         </div>
                         <div className="panel-body">
                             {didVote && votedFor ?
@@ -98,6 +96,11 @@ Place = ReactMeteor.createClass({
                                 :
                                 null
                             }
+                        </div>
+                        <div className='panel-heading clearfix'>
+                            <h3 className='panel-title pull-right'>
+                                Votes: {this.state.isAdmin || this.state.hasWinner ? votes : '?'}
+                            </h3>
                         </div>
                     </div>
                 </div>
