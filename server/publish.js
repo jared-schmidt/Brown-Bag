@@ -12,6 +12,10 @@ if (Meteor.isServer) {
     });
 
     Meteor.publish('places', function(){
+        console.log("Publish places");
+        if (Roles.userIsInRole(this.userId, ['admin'])){
+            return Places.find({});
+        }
         return Places.find({}, {fields: {'votes': 0}});
     });
 

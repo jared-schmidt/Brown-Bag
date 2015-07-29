@@ -24,6 +24,7 @@ PlacesList = ReactMeteor.createClass({
             key={model._id}
             placeid = {model._id}
             name = {model.name}
+            votes = {model.votes}
             isWinner = {model.winner ? true : false}
             didVote = {didVote ? true : false}
             votedFor = {didVote && didVote._id === model._id} />
