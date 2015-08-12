@@ -20,6 +20,8 @@ isProdEnv = function(){
     var rv = false
     if (String(process.env.ROOT_URL).indexOf("http://brown-bag.meteor.com") >= 0){
         rv = true;
+    } else if (String(process.env.ROOT_URL).indexOf("http://brown-bag-pitt.meteor.com") >= 0){
+        rv = true;
     }
     console.log("isProd -> ", rv);
     return rv;
@@ -54,7 +56,7 @@ else if(isDevEnv()) {
         secret: Meteor.settings['google_dev_secret']
     });
 } else {
-    console.log('isDev -> ', isDevEnv());
-    console.log('isTest -> ', isTestEnv());
+    // console.log('isDev -> ', isDevEnv());
+    // console.log('isTest -> ', isTestEnv());
     console.error("ENV -> DID NOT SETUP A SERVICECONFIGURATION");
 }
