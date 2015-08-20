@@ -16,6 +16,7 @@ OrdersHeader = ReactMeteor.createClass({
     },
     componentDidMount: function () {
         $.material.input();
+        Raptorize();
     },
     addNewOrder: function(){
         var user = Meteor.user();
@@ -25,7 +26,6 @@ OrdersHeader = ReactMeteor.createClass({
         }
 
         var food = document.getElementById("food").value;
-        Raptorize();
         Meteor.call("addOrder", user.profile.name, food, function(err, order){
             if (err){
                 console.error(err);
