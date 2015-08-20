@@ -3,7 +3,7 @@ OrdersHeader = ReactMeteor.createClass({
         return {
             totalUsers: Session.get('totalUsers'),
             totalOrders: Orders.find({}).count(),
-            winningPlace: Places.findOne({'winner': 1})
+            winningPlace: true
         }
     },
     componentWillMount: function(){
@@ -51,7 +51,7 @@ OrdersHeader = ReactMeteor.createClass({
                     <input data-hint="" type='text' placeholder="what you want..." id="food" className="form-control floating-label"/>
                 </div>
                 <div className="col-sm-4">
-                    <input onClick={this.addNewOrder} type="button" className='btn btn-success' value="Submit" />
+                    <input onClick={this.addNewOrder} type="button" className='btn btn-success' id='raptorizeButton' value="Submit" />
                 </div>
             </div>
         </div>
