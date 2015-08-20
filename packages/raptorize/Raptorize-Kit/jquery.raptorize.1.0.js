@@ -19,7 +19,6 @@
 
             //Extend those options
             var options = $.extend(defaults, options);
-            console.log(options);
             return this.each(function() {
 
                 var _this = $(this);
@@ -50,8 +49,11 @@
 
                 // Animating Code
                 function init() {
+                    console.debug("INIT");
                     locked = true;
+                    console.debug("LOCKED => ", locked);
 
+                    console.debug("SOUND => ", audioSupported);
                     //Sound Hilarity
                     if (audioSupported) {
                         function playSound() {
@@ -67,15 +69,18 @@
                         $(this).animate({
                             "bottom": "-130px"
                         }, 100, function() {
+                            console.debug("START");
                             var offset = (($(this).position().left) + 400);
                             $(this).delay(300).animate({
                                 "right": offset
                             }, 2200, function() {
+                                console.debug("END");
                                 raptor = $('#elRaptor').css({
                                     "bottom": "-700px",
                                     "right": "0"
                                 })
                                 locked = false;
+                                console.debug("LOCKED => ", locked);
                             })
                         });
                     });
@@ -88,6 +93,7 @@
                 } else if (options.enterOn == 'click') {
                     _this.bind('click', function(e) {
                         e.preventDefault();
+                        console.debug("BTN CLICK");
                         if (!locked) {
                             init();
                         }
