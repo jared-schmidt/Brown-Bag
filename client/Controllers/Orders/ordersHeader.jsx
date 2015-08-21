@@ -16,9 +16,12 @@ OrdersHeader = ReactMeteor.createClass({
     },
     componentDidMount: function () {
         $.material.input();
-        Raptorize();
     },
     addNewOrder: function(){
+
+        // CALL THE RAPTOR!
+        Raptorize();
+
         var user = Meteor.user();
 
         if (!user){
@@ -51,7 +54,7 @@ OrdersHeader = ReactMeteor.createClass({
                     <input data-hint="" type='text' placeholder="what you want..." id="food" className="form-control floating-label"/>
                 </div>
                 <div className="col-sm-4">
-                    <input onClick={this.addNewOrder} type="button" className='btn btn-success' id='raptorizeButton' value="Submit" />
+                    <input onClick={this.addNewOrder} type="button" className='btn btn-success' value="Submit" />
                 </div>
             </div>
         </div>
