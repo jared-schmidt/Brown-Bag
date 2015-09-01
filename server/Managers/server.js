@@ -118,35 +118,11 @@ if (Meteor.isServer) {
                 DesktopNotifications.remove({}); //remove all again so we don't get pop ups when first loading
             }));
 
-            // TODO: changed to slack_message
-            var url = 'https://slack.com/api/chat.postMessage';
-            var slack_api_token = Meteor.settings['slack_api_token'];
-            var message = "Ordering soon-ish...";
-            var payload = {
-                "token":slack_api_token,
-                "channel":'G045PRA4A',
-                "text": message,
-                "icon_emoji": ':ghost:',
-                "username": "Draco (Ghost)",
-                'parse':"full"
-            }
-            var result = HTTP.call("GET", url, {params: payload});
-
+            slackMessage(message);
         },
         vote_Notification:function(){
-            // TODO: changed to slack_message
-            var url = 'https://slack.com/api/chat.postMessage';
-            var slack_api_token = Meteor.settings['slack_api_token'];
             var message = "Did YOU vote?! http://brown-bag.meteor.com/places";
-            var payload = {
-                "token":slack_api_token,
-                "channel":'G045PRA4A',
-                "text": message,
-                "icon_emoji": ':ghost:',
-                "username": "Draco (Ghost)",
-                'parse':"full"
-            }
-            var result = HTTP.call("GET", url, {params: payload});
+            slackMessage(message);
         },
         getUserInfo:function(){
             return Meteor.user();
@@ -155,7 +131,7 @@ if (Meteor.isServer) {
             console.log("In server");
             Meteor.users.update({'_id':userid}, {$set:{'api.confirmed': true}});
         },
-        slack_message:function(message){
+        slackMessage:function(message){
             var url = 'https://slack.com/api/chat.postMessage';
             var slack_api_token = Meteor.settings['slack_api_token'];
             var payload = {

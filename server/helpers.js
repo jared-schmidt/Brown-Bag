@@ -1,4 +1,5 @@
 if (Meteor.isServer) {
+    var slackChatID = 'G045PRA4A';
 
     //util that will return any url parameters.
     //in key value pairs (ex. ..?a=b&c=d will be in format of {a: b, c: d})
@@ -38,5 +39,22 @@ if (Meteor.isServer) {
             }
         }
     ];
+
+    slackMessage = function (message) {
+        var url = 'https://slack.com/api/chat.postMessage';
+        var payload = {
+            "token": Meteor.settings['slack_api_token'];,
+            "channel": slackChatID,
+            "text": message,
+            "icon_emoji": ':ghost:',
+            "username": "Draco (Ghost)",
+            'parse': "full"
+        };
+
+        if (isProdEnv()){
+            var result = HTTP.call("GET", url, {params: payload});
+        }
+    };
+
 
 }

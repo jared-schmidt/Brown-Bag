@@ -68,8 +68,8 @@ if (Meteor.isServer) {
                 });
                 return true;
             }
-            throw new Meteor.Error(422, 'That is not what was voted for.');
-            return false;
+
+            throw new Meteor.Error(422, 'That is not what you voted for.');
         },
         removePlace:function(placeid){
             Places.remove(placeid);

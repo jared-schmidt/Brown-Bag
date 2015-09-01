@@ -57,17 +57,7 @@ if (Meteor.isServer) {
             console.log("End Voting...");
             var message = "Voting has ended! The winner is " + place.name + ". Place your orders now! Here could be the menu " + place['menu'];
 
-            var url = 'https://slack.com/api/chat.postMessage';
-            var slack_api_token = Meteor.settings['slack_api_token'];
-            var payload = {
-                "token":slack_api_token,
-                "channel":'G045PRA4A',
-                "text": message,
-                "icon_emoji": ':ghost:',
-                "username": "Draco (Ghost)",
-                'parse':"full"
-            };
-            var result = HTTP.call("GET", url, {params: payload});
+            slackMessage(message);
 
             return place._id;
         },
@@ -96,18 +86,7 @@ if (Meteor.isServer) {
                 vote_message = "YouShallNotPass.gif";
 
                 var message = user.profile.name + " tried to cheat on the Brown-Bag site! \n YouShallNotPass.gif";
-
-                var url = 'https://slack.com/api/chat.postMessage';
-                var slack_api_token = Meteor.settings['slack_api_token'];
-                var payload = {
-                    "token":slack_api_token,
-                    "channel":'G045PRA4A',
-                    "text": message,
-                    "icon_emoji": ':ghost:',
-                    "username": "Draco (Ghost)",
-                    'parse':"full"
-                };
-                var result = HTTP.call("GET", url, {params: payload});
+                slackMessage(message);
             }
             return vote_message;
         },

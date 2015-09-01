@@ -1,24 +1,5 @@
 if (Meteor.isServer) {
 
-    var officeChatId = 'G045PRA4A';
-
-    function bot_talk(message, channel) {
-        var url = 'https://slack.com/api/chat.postMessage';
-        var slack_api_token = Meteor.settings['slack_api_token'];
-
-        var payload = {
-            "token": slack_api_token,
-            "channel": channel,
-            "text": message,
-            "icon_emoji": ':ghost:',
-            "username": "Draco (Ghost)",
-            'parse': "full"
-        };
-        var result = HTTP.call("GET", url, {
-            params: payload
-        });
-    }
-
 
     SyncedCron.config({
         // Log job run details to console
@@ -63,7 +44,7 @@ if (Meteor.isServer) {
         },
         job: function() {
             var message = '@Group: Voting is closing in 30 minutes.';
-            bot_talk(message, officeChatId);
+            slackMessage(message);
         }
     });
 
@@ -87,7 +68,7 @@ if (Meteor.isServer) {
                 }
             }
 
-            bot_talk(message, officeChatId);
+            slackMessage(message);
         }
     });
 
@@ -99,7 +80,7 @@ if (Meteor.isServer) {
         job: function() {
             Meteor.call("endPlaceVoting", function(err, placeId) {
                 var message = '@Group: Voting has ended!';
-                bot_talk(message, officeChatId);
+                slackMessage(message);
             });
         }
     });
@@ -116,6 +97,8 @@ if (Meteor.isServer) {
         }
     });
 
-    SyncedCron.start();
+    if (isProdEnv()){
+        SyncedCron.start();
+    }
 
 }
