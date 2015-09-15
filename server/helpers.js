@@ -43,7 +43,7 @@ if (Meteor.isServer) {
     slackMessage = function (message) {
         var url = 'https://slack.com/api/chat.postMessage';
         var payload = {
-            "token": Meteor.settings['slack_api_token'];,
+            "token": Meteor.settings['slack_api_token'],
             "channel": slackChatID,
             "text": message,
             "icon_emoji": ':ghost:',
