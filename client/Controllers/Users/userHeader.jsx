@@ -1,5 +1,6 @@
-UserHeader = ReactMeteor.createClass({
-    getMeteorState: function(){
+UserHeader = React.createClass({
+    mixins: [ReactMeteorData],
+    getMeteorData: function(){
         return {
             totalActiveUsers: Meteor.users.find({'profile.active': true}).count(),
             totalUsers: Meteor.users.find({}).count(),
@@ -68,9 +69,9 @@ UserHeader = ReactMeteor.createClass({
     render: function(){
         return <div className="group-header">
             <div className="title-bar row">
-                <span className="count col-sm-4">{this.state.totalActiveUsers ? this.state.totalActiveUsers : 0} of {this.state.totalUsers ? this.state.totalUsers : 0} User(s) Active</span>
+                <span className="count col-sm-4">{this.data.totalActiveUsers ? this.data.totalActiveUsers : 0} of {this.data.totalUsers ? this.data.totalUsers : 0} User(s) Active</span>
             </div>
-            {this.state.isAdmin ? this.renderGroupButton() : null}
+            {this.data.isAdmin ? this.renderGroupButton() : null}
         </div>
     }
 });

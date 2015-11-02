@@ -9,7 +9,8 @@ Template.releases.rendered = function(){
     }
 }
 
-Releases = ReactMeteor.createClass({
+Releases = React.createClass({
+    mixins: [ReactMeteorData],
     componentWillMount:function(){
         Meteor.call('getReleases', function(err, data){
             if (err){
@@ -19,7 +20,7 @@ Releases = ReactMeteor.createClass({
             }
         });
     },
-    getMeteorState:function(){
+    getMeteorData:function(){
         return {
             'data': Session.get('data')
         }
@@ -38,10 +39,10 @@ Releases = ReactMeteor.createClass({
         return <div className='container-fluid'>
 
             {
-                this.state.data
+                this.data.data
             ?
                 <ReactCSSTransitionGroup transitionName="example">
-                    {this.state.data.map(this.renderRelease)}
+                    {this.data.data.map(this.renderRelease)}
                 </ReactCSSTransitionGroup>
             :
                 "Loading..."
@@ -51,7 +52,7 @@ Releases = ReactMeteor.createClass({
     }
 });
 
-Release = ReactMeteor.createClass({
+Release = React.createClass({
     render: function(){
         var displayDate = moment(this.props.dateCreated).format('MMMM Do YYYY');
         var rawMarkup = marked(this.props.body.toString(), {sanitize: true});

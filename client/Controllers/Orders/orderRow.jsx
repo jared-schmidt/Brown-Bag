@@ -1,4 +1,5 @@
-OrderRow = ReactMeteor.createClass({
+OrderRow = React.createClass({
+    mixins: [ReactMeteorData],
     deleteOrder: function(id, userName){
         if (Meteor.user().profile.name === userName){
             Meteor.call("removeOrder", id, function(err){
@@ -11,7 +12,7 @@ OrderRow = ReactMeteor.createClass({
             });
         }
     },
-    getMeteorState: function () {
+    getMeteorData: function () {
         var userName = this.props.personName;
         return {
             showDeleteBtn: Meteor.user().profile.name === userName
@@ -29,7 +30,7 @@ OrderRow = ReactMeteor.createClass({
                     <div className='row'>
                         <div className="col-xs-4 col-md-4">{personName}</div>
                         <div className="col-xs-4 col-md-4">{foodOrder}</div>
-                        <div className="col-xs-4 col-md-4">{this.state.showDeleteBtn ? this.renderDeleteBtn(orderid, personName) : null}</div>
+                        <div className="col-xs-4 col-md-4">{this.data.showDeleteBtn ? this.renderDeleteBtn(orderid, personName) : null}</div>
                     </div>
                 </div>
         </div>

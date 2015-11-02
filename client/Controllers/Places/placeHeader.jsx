@@ -1,8 +1,9 @@
 var cx = React.addons.classSet;
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
-PlacesHeader = ReactMeteor.createClass({
-    getMeteorState: function(){
+PlacesHeader = React.createClass({
+    mixins: [ReactMeteorData],
+    getMeteorData: function(){
         return {
             placesCount: Places.find().count(),
             totalUsers: Session.get('totalUsers'),
@@ -73,10 +74,10 @@ PlacesHeader = ReactMeteor.createClass({
     render: function(){
         return <div className="group-header">
                     <div className="title-bar row">
-                        <span className="count col-sm-4">{this.state.placesCount} Place(s) Registered</span>
-                        <span className="count col-sm-4"> {this.state.totalVoted} of {this.state.totalUsers} Vote(s) </span>
+                        <span className="count col-sm-4">{this.data.placesCount} Place(s) Registered</span>
+                        <span className="count col-sm-4"> {this.data.totalVoted} of {this.data.totalUsers} Vote(s) </span>
                     </div>
-                    {this.state.isAdmin ? this.renderNewPlace() : null}
+                    {this.data.isAdmin ? this.renderNewPlace() : null}
                 <RandomWheel />
                 </div>
     }

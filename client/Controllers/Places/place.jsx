@@ -1,7 +1,8 @@
 var cx = React.addons.classSet;
 
-Place = ReactMeteor.createClass({
-    getMeteorState: function(){
+Place = React.createClass({
+    mixins: [ReactMeteorData],
+    getMeteorData: function(){
       return {
         hasWinner: Places.findOne({'winner': 1}) ? true : false,
         isAdmin: Meteor.user().roles === 'admin'
@@ -62,12 +63,12 @@ Place = ReactMeteor.createClass({
         });
 
         var upVoteDisabled = {};
-        if (didVote || this.state.hasWinner){
+        if (didVote || this.data.hasWinner){
             upVoteDisabled['disabled'] = 'disabled';
         }
 
         var downVoteDisabled = {}
-        if (this.state.hasWinner){
+        if (this.data.hasWinner){
             downVoteDisabled['disabled'] = 'disabled';
         }
 
@@ -89,7 +90,7 @@ Place = ReactMeteor.createClass({
                                     <span className='mdi-action-thumb-up'></span>
                                 </button>
                             }
-                            {this.state.isAdmin ?
+                            {this.data.isAdmin ?
                                 <button onClick={this.deletePlace.bind(this, placeid)} className="btn btn-danger">
                                     <span className='mdi-action-delete'></span>
                                 </button>
@@ -99,7 +100,7 @@ Place = ReactMeteor.createClass({
                         </div>
                         <div className='panel-heading clearfix'>
                             <h3 className='panel-title pull-right'>
-                                Votes: {this.state.isAdmin || this.state.hasWinner ? votes : '?'}
+                                Votes: {this.data.isAdmin || this.data.hasWinner ? votes : '?'}
                             </h3>
                         </div>
                     </div>

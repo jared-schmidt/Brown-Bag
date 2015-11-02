@@ -1,5 +1,6 @@
-MessagesHeader = ReactMeteor.createClass({
-    getMeteorState: function(){
+MessagesHeader = React.createClass({
+    mixins: [ReactMeteorData],
+    getMeteorData: function(){
         return {
             messageCount: Messages.find({}).count(),
             isAdmin: Meteor.user().roles === 'admin'
@@ -46,9 +47,9 @@ MessagesHeader = ReactMeteor.createClass({
     render: function(){
         return <div className='group-header'>
             <div className="title-bar row">
-                <span className="count col-sm-4">{this.state.messageCount} Message(s) created</span>
+                <span className="count col-sm-4">{this.data.messageCount} Message(s) created</span>
             </div>
-            {this.state.isAdmin ? this.renderInput() : null}
+            {this.data.isAdmin ? this.renderInput() : null}
         </div>
     }
 });

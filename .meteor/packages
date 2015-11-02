@@ -20,7 +20,6 @@ email
 meteorhacks:kadira
 mizzao:bootboxjs
 
-npm-container
 mystor:device-detection
 mousetrap:mousetrap
 
@@ -30,9 +29,13 @@ fortawesome:fontawesome
 houston:admin
 
 chrismbeckett:toastr
-reactjs:react
+react
 natestrauser:animate-css
 chuangbo:marked
 jschmidt:raptorize
 
 percolate:synced-cron
+standard-minifiers
+
+
+npm-container

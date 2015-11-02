@@ -1,11 +1,15 @@
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
-UserList = ReactMeteor.createClass({
-    startMeteorSubscriptions: function() {
-       Meteor.subscribe('userData');
-       Meteor.subscribe('groups');
-     },
-    getMeteorState: function(){
+UserList = React.createClass({
+    mixins: [ReactMeteorData],
+    getInitialState: function(){
+      return {
+        filter: false
+      }
+    },
+    getMeteorData: function(){
+        Meteor.subscribe('userData');
+        Meteor.subscribe('groups');
         var users = Meteor.users.find({}, {sort: {'group': 1,'profile.family_name': 1}}).fetch();
         // var userRoles = _.groupBy(users, 'roles')
         // users: Meteor.users.find({}, {sort:{'roles': 1, 'profile.active': -1, 'profile.family_name': 1}}).fetch()
@@ -16,7 +20,8 @@ UserList = ReactMeteor.createClass({
 
         return {
           activeUsers: activeUsers.true,
-          unActiveUser: activeUsers.false
+          unActiveUser: activeUsers.false,
+          filter: false
         }
     },
     componentDidMount: function () {
@@ -55,6 +60,7 @@ UserList = ReactMeteor.createClass({
         return <UserHeader />
     },
     filterList: function(){
+      console.log("Filter list");
       var current_state = this.state.filter;
 
       this.setState({
@@ -99,10 +105,10 @@ UserList = ReactMeteor.createClass({
 
             {this.renderHeader(this.state)}
 
-            {this.renderList(this.state.activeUsers, "Active")}
+            {this.renderList(this.data.activeUsers, "Active")}
             <br />
             <br />
-            {this.renderList(this.state.unActiveUser, "Not Active")}
+            {this.renderList(this.data.unActiveUser, "Not Active")}
 
         </div>;
     }

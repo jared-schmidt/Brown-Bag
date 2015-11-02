@@ -1,10 +1,9 @@
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
-MessagesList = ReactMeteor.createClass({
-    startMeteorSubscriptions: function(){
+MessagesList = React.createClass({
+    mixins: [ReactMeteorData],
+    getMeteorData: function(){
         Meteor.subscribe('messages');
-    },
-    getMeteorState: function(){
         return {
             messages: Messages.find({}).fetch()
         }
@@ -22,7 +21,7 @@ MessagesList = ReactMeteor.createClass({
         return <div>
             {this.renderHeader(this)}
             <ReactCSSTransitionGroup transitionName="example">
-                {this.state.messages.map(this.renderMessage)}
+                {this.data.messages.map(this.renderMessage)}
             </ReactCSSTransitionGroup>
 
         </div>

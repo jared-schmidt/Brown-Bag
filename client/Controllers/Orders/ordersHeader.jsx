@@ -1,5 +1,6 @@
-OrdersHeader = ReactMeteor.createClass({
-    getMeteorState: function(){
+OrdersHeader = React.createClass({
+    mixins: [ReactMeteorData],
+    getMeteorData: function(){
         return {
             totalUsers: Session.get('totalUsers'),
             totalOrders: Orders.find({}).count(),
@@ -43,8 +44,8 @@ OrdersHeader = ReactMeteor.createClass({
     },
     renderWinner: function(){
         return <div>
-            <h3>Winner is <i>{this.state.winningPlace ? this.state.winningPlace.name : null}</i></h3>
-            <a target='_blank' href={this.state.winningPlace ? this.state.winningPlace.menu : null}>Menu</a>
+            <h3>Winner is <i>{this.data.winningPlace ? this.data.winningPlace.name : null}</i></h3>
+            <a target='_blank' href={this.data.winningPlace ? this.data.winningPlace.menu : null}>Menu</a>
         </div>
     },
     renderOrderInput: function(){
@@ -63,10 +64,10 @@ OrdersHeader = ReactMeteor.createClass({
         return <div className='group-header'>
             <div className="title-bar row">
                 <span className="title col-sm-8">All Orders</span>
-                <span className="count col-sm-4">{this.state.totalOrders} of {this.state.totalUsers} Order(s) Placed</span>
+                <span className="count col-sm-4">{this.data.totalOrders} of {this.data.totalUsers} Order(s) Placed</span>
             </div>
-            {this.state.winningPlace ? this.renderOrderInput() : "Voting is still going on!"}
-            {this.state.winningPlace ? this.renderWinner() : null}
+            {this.data.winningPlace ? this.renderOrderInput() : "Voting is still going on!"}
+            {this.data.winningPlace ? this.renderWinner() : null}
         </div>
     }
 });

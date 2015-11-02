@@ -1,14 +1,12 @@
 var cx = React.addons.classSet;
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
-PlacesList = ReactMeteor.createClass({
+PlacesList = React.createClass({
     // Can't use this with iron router
     // templateName: "places",
-
-    startMeteorSubscriptions: function() {
-       Meteor.subscribe('places');
-     },
-    getMeteorState: function(){
+    mixins: [ReactMeteorData],
+    getMeteorData: function(){
+        Meteor.subscribe("places");
         return {
             places: Places.find({}, {sort: {name: 1}}).fetch(),
             didVote: Places.findOne({'upvoters' : {"$in" : [Meteor.user()._id]}})
@@ -18,7 +16,7 @@ PlacesList = ReactMeteor.createClass({
         return true;
     },
     renderPlace: function(model, index){
-        var didVote = this.state.didVote;
+        var didVote = this.data.didVote;
         return <Place
             key={model._id}
             placeid = {model._id}
@@ -37,7 +35,7 @@ PlacesList = ReactMeteor.createClass({
                     <div className="inner">
                         <div className='container-fluid'>
                             <ReactCSSTransitionGroup transitionName="example">
-                                {this.state.places.map(this.renderPlace)}
+                                {this.data.places.map(this.renderPlace)}
                             </ReactCSSTransitionGroup>
                         </div>
                     </div>

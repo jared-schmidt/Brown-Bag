@@ -1,11 +1,10 @@
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
-OrdersList = ReactMeteor.createClass({
-    startMeteorSubscriptions: function(){
+OrdersList = React.createClass({
+    mixins: [ReactMeteorData],
+    getMeteorData: function(){
         Meteor.subscribe('orders');
         Meteor.subscribe('winnerPlace');
-    },
-    getMeteorState: function(){
         return {
             orders: Orders.find({}, {sort: {name: 1}}).fetch()
         }
@@ -25,7 +24,7 @@ OrdersList = ReactMeteor.createClass({
             {this.renderHeader(this.state)}
 
             <ReactCSSTransitionGroup transitionName="example">
-                {this.state.orders.map(this.renderOrder)}
+                {this.data.orders.map(this.renderOrder)}
             </ReactCSSTransitionGroup>
 
         </div>

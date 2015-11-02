@@ -7,7 +7,7 @@ Template.no.rendered = function(){
     }
 }
 
-No = ReactMeteor.createClass({
+No = React.createClass({
     render: function(){
         return <div className="center-text">
             <h3 className="animated bounce">

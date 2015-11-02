@@ -1,4 +1,5 @@
-UserRow = ReactMeteor.createClass({
+UserRow = React.createClass({
+    mixins: [ReactMeteorData],
     toggleActiveUser: function(id){
         Meteor.call('activeUser', id, function(err, isActive){
             if (err){
@@ -37,7 +38,7 @@ UserRow = ReactMeteor.createClass({
             {checked ? "Yes" : "No"}
         </div>
     },
-    getMeteorState: function(){
+    getMeteorData: function(){
         return {
             groups: Groups.find({}).fetch()
         }
@@ -86,7 +87,7 @@ UserRow = ReactMeteor.createClass({
                         <span><b>Office:&nbsp;</b></span>
                         <select onChange={this.groupChange} value={group}>
                             <option value='0'>Select One</option>
-                            {this.state.groups.map(this.renderOption)}
+                            {this.data.groups.map(this.renderOption)}
                         </select>
                     </div>
                 </div>
