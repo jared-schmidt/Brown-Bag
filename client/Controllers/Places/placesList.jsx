@@ -17,6 +17,7 @@ PlacesList = React.createClass({
     },
     renderPlace: function(model, index){
         var didVote = this.data.didVote;
+        console.log(model);
         return <Place
             key={model._id}
             placeid = {model._id}

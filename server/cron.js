@@ -40,7 +40,19 @@ if (Meteor.isServer) {
     SyncedCron.add({
         name: 'almost closing time',
         schedule: function(parser) {
-            return parser.text('at 2:00pm on thurs');
+            return parser.text('at 2:00pm on wed');
+        },
+        job: function() {
+            var message = '@Group: Time to vote for the Brown Bag!';
+            slackMessage(message);
+        }
+    });
+
+
+    SyncedCron.add({
+        name: 'almost closing time',
+        schedule: function(parser) {
+            return parser.text('at 6:00pm on wed');
         },
         job: function() {
             var message = '@Group: Voting is closing in 30 minutes.';
@@ -51,7 +63,7 @@ if (Meteor.isServer) {
     SyncedCron.add({
         name: 'current standings',
         schedule: function(parser) {
-            return parser.text('at 2:20pm on thurs');
+            return parser.text('at 6:20pm on wed');
         },
         job: function() {
             var message = '@Group: Current standings.\n';
@@ -72,23 +84,23 @@ if (Meteor.isServer) {
         }
     });
 
-    SyncedCron.add({
-        name: 'closing time',
-        schedule: function(parser) {
-            return parser.text('at 2:30pm on thurs');
-        },
-        job: function() {
-            Meteor.call("endPlaceVoting", function(err, placeId) {
-                var message = '@Group: Voting has ended!';
-                slackMessage(message);
-            });
-        }
-    });
+    // SyncedCron.add({
+    //     name: 'closing time',
+    //     schedule: function(parser) {
+    //         return parser.text('at 6:30pm on wed');
+    //     },
+    //     job: function() {
+    //         Meteor.call("endPlaceVoting", function(err, placeId) {
+    //             var message = '@Group: Voting has ended!';
+    //             slackMessage(message);
+    //         });
+    //     }
+    // });
 
     SyncedCron.add({
         name: 'reset site',
         schedule: function(parser) {
-            return parser.text('at 8:00pm on thurs');
+            return parser.text('at 9:00pm on thurs');
         },
         job: function() {
             // var message = '@Group: Brown-bag site has been';

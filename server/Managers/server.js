@@ -5,6 +5,7 @@ DesktopNotifications = new Meteor.Collection("desktopNotifications");
 Messages = new Meteor.Collection('messages');
 PastOrders = new Meteor.Collection('pastOrders');
 Groups = new Meteor.Collection('groups');
+// Topics = new Meteor.Collection('topics');
 
 if (Meteor.isServer) {
 
@@ -121,7 +122,7 @@ if (Meteor.isServer) {
             slackMessage(message);
         },
         vote_Notification:function(){
-            var message = "Did YOU vote?! http://brown-bag.meteor.com/places";
+            var message = "@group Did YOU vote?! http://brown-bag.meteor.com/places";
             slackMessage(message);
         },
         getUserInfo:function(){
