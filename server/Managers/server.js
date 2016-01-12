@@ -5,7 +5,8 @@ DesktopNotifications = new Meteor.Collection("desktopNotifications");
 Messages = new Meteor.Collection('messages');
 PastOrders = new Meteor.Collection('pastOrders');
 Groups = new Meteor.Collection('groups');
-// Topics = new Meteor.Collection('topics');
+Topics = new Meteor.Collection('topics');
+PastTopics = new Meteor.Collection('pastTopics');
 
 if (Meteor.isServer) {
 
@@ -41,28 +42,6 @@ if (Meteor.isServer) {
             // Set the time to this, so duplicates won't be added
             date_picked.setHours(0,0,0,0)
             Places.update({'_id':place._id},{$addToSet : {'datePicked': date_picked} });
-
-            // Better way to do this?
-            // Places.find().forEach(function(place){
-            //     Places.update(place._id, {
-            //         $set : {"upvoters" : []}
-            //     });
-            // });
-
-            // Better way to do this?
-
-            // Orders.find().forEach(function(order){
-            //     Meteor.users.find().forEach(function(user){
-            //         //console.log(user);
-            //         if(order.name == user.profile.name){
-            //             Meteor.users.update({'_id': user._id},{
-            //                 $set:{'voted': false}
-            //                 // $addToSet:{'ordered' : {'place_id' : place._id, 'place': place.name, 'order' : order.food, 'datePicked' : date_picked}}
-            //             });
-            //         }
-            //     });
-            // });
-
 
 
             Orders.find().forEach(function(order){

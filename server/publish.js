@@ -11,6 +11,14 @@ if (Meteor.isServer) {
         return Orders.find({});
     });
 
+    Meteor.publish('topics', function(){
+        return Topics.find({});
+    });
+
+    Meteor.publish('pastTopics', function(){
+        return PastTopics.find({});
+    });
+
     Meteor.publish('places', function(){
         var hasWinner = Places.find({'winner': 1}, {fields: {'votes': 0}});
 
