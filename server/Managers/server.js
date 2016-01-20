@@ -139,6 +139,30 @@ if (Meteor.isServer) {
             var message = "@group Did YOU vote?! http://brown-bag.meteor.com/places";
             slackMessage(message);
         },
+        currectStandings: function(){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
+            var message = '@Group: Current standings.\n';
+            var places = Places.find({}, {
+                sort: {
+                    'votes': -1
+                }
+            }).fetch();
+            for (var p in places) {
+                var name = places[p].name;
+                var votes = places[p].votes;
+                if (votes > 0) {
+                    message += name + ' -> ' + votes + '\n';
+                }
+            }
+
+            slackMessage(message);
+        },
         getUserInfo:function(){
             var user = Meteor.user();
             if(user.hasOwnProperty('group')){

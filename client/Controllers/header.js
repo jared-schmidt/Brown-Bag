@@ -127,6 +127,9 @@ Template.header.events({
             }
         });
     },
+    'click #currentStandings': function(event){
+        Meteor.call('currectStandings');
+    },
     'click #endVotingTopics': function(event){
         event.preventDefault();
 
