@@ -24,12 +24,33 @@ if (Meteor.isServer) {
             return isGood;
         },
         changeLayout: function(userid, layout){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             Meteor.users.update({'_id':userid}, {$set:{'profile.layout': layout}});
         },
         changeColor: function(userid, color){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             Meteor.users.update({'_id':userid}, {$set:{'profile.color': color}});
         },
         clearAll : function() {
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             // Run in mongo to clear everyones orders
             //  // db.users.update({},{$set:{'ordered': []}})
 
@@ -92,6 +113,13 @@ if (Meteor.isServer) {
             return true;
         },
         publishNotification: function(notification){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             DesktopNotifications.remove({});
             DesktopNotifications.insert(notification);
             setTimeout(Meteor.bindEnvironment(function() {
@@ -101,17 +129,45 @@ if (Meteor.isServer) {
             slackMessage(message);
         },
         vote_Notification:function(){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             var message = "@group Did YOU vote?! http://brown-bag.meteor.com/places";
             slackMessage(message);
         },
         getUserInfo:function(){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             return Meteor.user();
         },
         confirmSlack:function(userid){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             console.log("In server");
             Meteor.users.update({'_id':userid}, {$set:{'api.confirmed': true}});
         },
         slackMessage:function(message){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             var url = 'https://slack.com/api/chat.postMessage';
             var slack_api_token = Meteor.settings['slack_api_token'];
             var payload = {

@@ -1,10 +1,24 @@
 if (Meteor.isServer) {
     Meteor.methods({
         changeOrderedFilter: function(state){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
           var me = Meteor.user();
           Meteor.users.update({'_id': me._id}, {$set:{'profile.order_filter': !state }});
         },
         activeUser: function(userid){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             var me = Meteor.user();
             var user = Meteor.users.findOne(userid);
 

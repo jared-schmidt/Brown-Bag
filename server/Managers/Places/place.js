@@ -17,6 +17,14 @@ if (Meteor.isServer) {
                 throw new Meteor.Error(422, 'Already upvoted');
             }
 
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
+
             var places = Places.find({}).fetch();
 
             for (var i=0;i<=places.length-1;i++){
@@ -47,6 +55,14 @@ if (Meteor.isServer) {
         removeVote:function(id){
             var user = Meteor.user();
 
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
+
             var places = Places.find({}).fetch();
             var voted = false;
 
@@ -72,6 +88,14 @@ if (Meteor.isServer) {
             throw new Meteor.Error(422, 'That is not what you voted for.');
         },
         removePlace:function(placeid){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
+
             Places.remove(placeid);
         },
     });

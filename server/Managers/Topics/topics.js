@@ -1,5 +1,13 @@
 Meteor.methods({
     getTotalVotesTopics: function(){
+        var user = Meteor.user();
+        if(user.hasOwnProperty('group')){
+            var userGroup = Groups.findOne({'_id': user.group});
+        }
+        if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+            throw new Meteor.Error(422, 'George the cat says NO!');
+        }
+
         var totalVotes = 0;
         Topics.find({}).map(function(doc){
             totalVotes += doc.votes;
@@ -7,6 +15,13 @@ Meteor.methods({
         return totalVotes;
     },
     addTopic : function(username, name, url){
+        var user = Meteor.user();
+        if(user.hasOwnProperty('group')){
+            var userGroup = Groups.findOne({'_id': user.group});
+        }
+        if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+            throw new Meteor.Error(422, 'George the cat says NO!');
+        }
         if (name){
             var topicId = Topics.insert({
                 'username' : username,
@@ -21,6 +36,13 @@ Meteor.methods({
         throw new Meteor.Error(422, 'Name missing.');
     },
     voteUpTopic : function(topicId){
+        var user = Meteor.user();
+        if(user.hasOwnProperty('group')){
+            var userGroup = Groups.findOne({'_id': user.group});
+        }
+        if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+            throw new Meteor.Error(422, 'George the cat says NO!');
+        }
         var user = Meteor.user();
         var voted = false;
 
@@ -66,6 +88,13 @@ Meteor.methods({
     },
     removeVoteTopic:function(id){
         var user = Meteor.user();
+        if(user.hasOwnProperty('group')){
+            var userGroup = Groups.findOne({'_id': user.group});
+        }
+        if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+            throw new Meteor.Error(422, 'George the cat says NO!');
+        }
+        var user = Meteor.user();
 
         var topics = Topics.find({}).fetch();
         var voted = false;
@@ -92,9 +121,23 @@ Meteor.methods({
         throw new Meteor.Error(422, 'That is not what you voted for.');
     },
     removeTopic:function(topicid){
+        var user = Meteor.user();
+        if(user.hasOwnProperty('group')){
+            var userGroup = Groups.findOne({'_id': user.group});
+        }
+        if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+            throw new Meteor.Error(422, 'George the cat says NO!');
+        }
         Topics.remove(topicid);
     },
     endVotingTopics: function(){
+        var user = Meteor.user();
+        if(user.hasOwnProperty('group')){
+            var userGroup = Groups.findOne({'_id': user.group});
+        }
+        if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+            throw new Meteor.Error(422, 'George the cat says NO!');
+        }
         topic = Topics.findOne({},{sort:{'votes': -1}});
         Topics.update(topic._id,{$set: {"winner": 1}});
 
@@ -106,6 +149,13 @@ Meteor.methods({
         return topic._id;
     },
     topicReset: function(){
+        var user = Meteor.user();
+        if(user.hasOwnProperty('group')){
+            var userGroup = Groups.findOne({'_id': user.group});
+        }
+        if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+            throw new Meteor.Error(422, 'George the cat says NO!');
+        }
         console.log("RESERT TOPIC")
         var winner = Topics.find({'winner': 1}).fetch();
 
