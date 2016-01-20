@@ -5,7 +5,8 @@ DesktopNotifications = new Meteor.Collection("desktopNotifications");
 Messages = new Meteor.Collection('messages');
 PastOrders = new Meteor.Collection('pastOrders');
 Groups = new Meteor.Collection('groups');
-// Topics = new Meteor.Collection('topics');
+Topics = new Meteor.Collection('topics');
+PastTopics = new Meteor.Collection('pastTopics');
 
 if (Meteor.isServer) {
 
@@ -23,12 +24,33 @@ if (Meteor.isServer) {
             return isGood;
         },
         changeLayout: function(userid, layout){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             Meteor.users.update({'_id':userid}, {$set:{'profile.layout': layout}});
         },
         changeColor: function(userid, color){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             Meteor.users.update({'_id':userid}, {$set:{'profile.color': color}});
         },
         clearAll : function() {
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             // Run in mongo to clear everyones orders
             //  // db.users.update({},{$set:{'ordered': []}})
 
@@ -41,28 +63,6 @@ if (Meteor.isServer) {
             // Set the time to this, so duplicates won't be added
             date_picked.setHours(0,0,0,0)
             Places.update({'_id':place._id},{$addToSet : {'datePicked': date_picked} });
-
-            // Better way to do this?
-            // Places.find().forEach(function(place){
-            //     Places.update(place._id, {
-            //         $set : {"upvoters" : []}
-            //     });
-            // });
-
-            // Better way to do this?
-
-            // Orders.find().forEach(function(order){
-            //     Meteor.users.find().forEach(function(user){
-            //         //console.log(user);
-            //         if(order.name == user.profile.name){
-            //             Meteor.users.update({'_id': user._id},{
-            //                 $set:{'voted': false}
-            //                 // $addToSet:{'ordered' : {'place_id' : place._id, 'place': place.name, 'order' : order.food, 'datePicked' : date_picked}}
-            //             });
-            //         }
-            //     });
-            // });
-
 
 
             Orders.find().forEach(function(order){
@@ -113,6 +113,13 @@ if (Meteor.isServer) {
             return true;
         },
         publishNotification: function(notification){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             DesktopNotifications.remove({});
             DesktopNotifications.insert(notification);
             setTimeout(Meteor.bindEnvironment(function() {
@@ -122,17 +129,69 @@ if (Meteor.isServer) {
             slackMessage(message);
         },
         vote_Notification:function(){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             var message = "@group Did YOU vote?! http://brown-bag.meteor.com/places";
             slackMessage(message);
         },
+        currectStandings: function(){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
+            var message = '@Group: Current standings.\n';
+            var places = Places.find({}, {
+                sort: {
+                    'votes': -1
+                }
+            }).fetch();
+            for (var p in places) {
+                var name = places[p].name;
+                var votes = places[p].votes;
+                if (votes > 0) {
+                    message += name + ' -> ' + votes + '\n';
+                }
+            }
+
+            slackMessage(message);
+        },
         getUserInfo:function(){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             return Meteor.user();
         },
         confirmSlack:function(userid){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             console.log("In server");
             Meteor.users.update({'_id':userid}, {$set:{'api.confirmed': true}});
         },
         slackMessage:function(message){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             var url = 'https://slack.com/api/chat.postMessage';
             var slack_api_token = Meteor.settings['slack_api_token'];
             var payload = {

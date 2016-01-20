@@ -7,7 +7,8 @@ if (Meteor.isClient) {
     Messages = new Meteor.Collection('messages');
     PastOrders = new Meteor.Collection('pastOrders');
     Groups = new Meteor.Collection('groups');
-    // Topics = new Meteor.Collection('topics');
+    Topics = new Meteor.Collection('topics');
+    PastTopics = new Meteor.Collection('pastTopics');
 
     Deps.autorun(function() {
         Meteor.subscribe('messages');

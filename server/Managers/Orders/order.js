@@ -3,6 +3,14 @@ if (Meteor.isServer) {
         removeOrder : function(orderId){
             var user = Meteor.user();
 
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
+
             Orders.remove(orderId);
 
             // Check if already Ordered
@@ -25,6 +33,14 @@ if (Meteor.isServer) {
         addOrder : function(name, food){
             if (!name){
                 throw new Meteor.Error(422, 'Not logged in');
+            }
+
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
             }
             if(!food){
                 throw new Meteor.Error(422, 'No food order entered');
@@ -58,6 +74,14 @@ if (Meteor.isServer) {
             };
         },
         getTotalOrders: function(){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
+
             return Orders.find({}).count();
         },
     });

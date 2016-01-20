@@ -2,6 +2,13 @@ if (Meteor.isServer) {
     Meteor.methods({
         upUrlVote : function(urlId){
             var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
+            var user = Meteor.user();
             if (!user){
                 throw new Meteor.Error(401, "You need to login to upvote");
             }
@@ -20,11 +27,25 @@ if (Meteor.isServer) {
             });
         },
         resetUrlVotes:function(urlId){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             Urls.update(urlId, {
                 $set : {"upvoters" : [],'votes':0},
             });
         },
         did:function(id){
+            var user = Meteor.user();
+            if(user.hasOwnProperty('group')){
+                var userGroup = Groups.findOne({'_id': user.group});
+            }
+            if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+                throw new Meteor.Error(422, 'George the cat says NO!');
+            }
             Urls.update(id, {$set:{"did":true}});
         },
     });

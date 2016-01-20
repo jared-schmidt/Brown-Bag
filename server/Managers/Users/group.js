@@ -5,6 +5,13 @@ function toTitleCase(str)
 
 Meteor.methods({
     createGroup: function(groupName){
+        var user = Meteor.user();
+        if(user.hasOwnProperty('group')){
+            var userGroup = Groups.findOne({'_id': user.group});
+        }
+        if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+            throw new Meteor.Error(422, 'George the cat says NO!');
+        }
         if (Meteor.user().roles === 'admin'){
             if (groupName){
 
@@ -25,6 +32,13 @@ Meteor.methods({
         throw new Meteor.Error(422, 'Must be an admin.');
     },
     changeUserGroup: function(userID, groupID){
+        var user = Meteor.user();
+        if(user.hasOwnProperty('group')){
+            var userGroup = Groups.findOne({'_id': user.group});
+        }
+        if (userGroup && userGroup.name.toLowerCase() !== 'johnstown'){
+            throw new Meteor.Error(422, 'George the cat says NO!');
+        }
         if (Meteor.user().roles === 'admin'){
             var group = Groups.findOne({'_id': groupID});
 

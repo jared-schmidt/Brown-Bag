@@ -126,6 +126,37 @@ Template.header.events({
                 }
             }
         });
+    },
+    'click #currentStandings': function(event){
+        Meteor.call('currectStandings');
+    },
+    'click #endVotingTopics': function(event){
+        event.preventDefault();
+
+        bootbox.dialog({
+            message: "This can not be undone until the whole site is reset.",
+            title : "Are you sure?!?!",
+            buttons:{
+                danger:{
+                    label: "Yes!",
+                    className:"btn-danger",
+                    callback: function(){
+                        console.log("ending voting...");
+                        Meteor.call("endVotingTopics", function(err, topicId) {
+                            if (err)
+                                console.log(err);
+                            console.log(topicId);
+                        });
+                    }
+                },
+                main:{
+                    label: "No!",
+                    className: "btn-primary",
+                    callback: function(){
+                    }
+                }
+            }
+        });
     }
 });
 
@@ -141,6 +172,33 @@ Template.clearAll.events({
                     className:"btn-danger",
                     callback: function(){
                         Meteor.call("clearAll", function(err){
+                            if (err){
+                                console.error(err);
+                                toastr.error(err.reason, "Error!");
+                            }
+                        });
+                    }
+                },
+                main:{
+                    label: "No!",
+                    className: "btn-primary",
+                    callback: function(){
+                    }
+                }
+            }
+        });
+    },
+    'click #topicReset': function(event){
+        console.log("reset topics");
+        bootbox.dialog({
+            message: "This will reset the topic voting",
+            title : "Are you sure?!?!",
+            buttons:{
+                danger:{
+                    label: "Yes!",
+                    className:"btn-danger",
+                    callback: function(){
+                        Meteor.call("topicReset", function(err){
                             if (err){
                                 console.error(err);
                                 toastr.error(err.reason, "Error!");
