@@ -40,7 +40,7 @@ if (Meteor.isServer) {
     SyncedCron.add({
         name: 'almost closing time',
         schedule: function(parser) {
-            return parser.text('at 2:00pm on wed');
+            return parser.text('at 2:00pm on tues');
         },
         job: function() {
             var message = '@Group: Time to vote for the Brown Bag!';
@@ -52,7 +52,7 @@ if (Meteor.isServer) {
     SyncedCron.add({
         name: 'almost closing time',
         schedule: function(parser) {
-            return parser.text('at 6:00pm on wed');
+            return parser.text('at 6:00pm on tues');
         },
         job: function() {
             var message = '@Group: Voting is closing in 30 minutes.';
@@ -63,7 +63,7 @@ if (Meteor.isServer) {
     SyncedCron.add({
         name: 'current standings',
         schedule: function(parser) {
-            return parser.text('at 6:20pm on wed');
+            return parser.text('at 6:20pm on tues');
         },
         job: function() {
             var message = '@Group: Current standings.\n';
