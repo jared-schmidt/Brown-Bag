@@ -18,6 +18,7 @@ isTestEnv = function(){
 
 isProdEnv = function(){
     var rv = false
+    console.log(process.env.ROOT_URL);
     if (String(process.env.ROOT_URL).indexOf("ps-brownbag.herokuapp.com") >= 0){
         rv = true;
     } else if (String(process.env.ROOT_URL).indexOf("http://brown-bag-pitt.meteor.com") >= 0){
