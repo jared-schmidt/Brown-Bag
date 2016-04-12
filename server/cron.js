@@ -110,7 +110,7 @@ if (Meteor.isServer) {
     });
 
     if (isProdEnv()){
-        SyncedCron.start();
+        // SyncedCron.start(); // do not start tasks at the moment
     }
 
 }
